@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <EditText
+            style="@style/AppTheme.EditText"
+            android:id="@+id/ed_selectproduct_find"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"/>
+
+        <Button
+            style="@style/StdButton"
+            android:background="@drawable/std_button"
+            android:id="@+id/bt_selectproduct_find"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/find"
+            android:layout_gravity="right"/>
+
+        <Button
+            style="@style/StdButton"
+            android:background="@drawable/std_button"
+            android:id="@+id/bt_selectproduct_newproduct"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/newproduct"
+            android:layout_gravity="right"/>
+    </LinearLayout>
+    <ListView
+        android:id="@+id/ls_selectproduct_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </ListView>
+
+</LinearLayout>

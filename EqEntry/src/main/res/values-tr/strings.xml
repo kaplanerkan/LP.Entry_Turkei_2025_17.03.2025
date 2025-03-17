@@ -1,0 +1,210 @@
+<resources>
+    <string name="title_activity_login">Lp.Entry</string>
+    <string name="ok">Tamam</string>
+    <string name="cancel">İptal</string>
+    <string name="min">Min.</string>
+    <string name="max">Maks.</string>
+    <string name="all">Tümü</string>
+
+    <!-- Strings related to login -->
+    <string name="prompt_password">Şifre</string>
+    <string name="action_sign_in">Giriş</string>
+    <string name="settings">Ayarlar</string>
+    <string name="error_incorrect_password">Şifre yanlış</string>
+
+
+    <!-- Strings related to MainMenu -->
+    <string name="changeprice">Fiyat Değiştir</string>
+    <string name="deliverynote">İrsaliye girişi</string>
+    <string name="editproduct">Ürünü düzenle</string>
+    <string name="info">İçerik</string>
+    <string name="senddatas">Gönder</string>
+    <string name="inventory">Stok</string>
+    <string name="inventorycount">Stok sayımı</string>
+    <string name="management">Yönetim</string>
+    <string name="printlabel">Etiket yazdır</string>
+    <string name="productlist">Ürünler</string>
+    <string name="purchaseorder">Satın alma siparişi</string>
+    <string name="removeprintlabel">Etiket listesinden sil</string>
+    <string name="reports">Raporlar</string>
+    <string name="stockentry">İrsaliye</string>
+    <string name="viewproduct">Ürünü göster</string>
+    <string name="shortcurrent">Stok</string>
+    <string name="shortdifference">Fark</string>
+    <string name="shortnewstock">Yeni</string>
+
+
+    <!-- Strings related to ProductList -->
+    <string name="search">Ara</string>
+    <string name="find">Bul</string>
+    <string name="filter">Filtrele</string>
+    <string name="options">Seçenekler</string>
+    <string name="barcode">Barkod</string>
+    <string name="plu">Plu</string>
+    <string name="origin">Mensei</string>
+    <string name="taxname">Vergi grubu</string>
+    <string name="taxrate">Vergi Oranı</string>
+    <string name="tax">Vergi</string>
+    <string name="groupname">Grup</string>
+    <string name="amount">Miktar</string>
+    <string name="amountperunit">Paket miktarı</string>
+    <string name="_package">Paket</string>
+    <string name="add">Ekle</string>
+    <string name="addtoorderlist">Siparişe ekle</string>
+    <string name="deposit">Depozito</string>
+    <string name="costprice">Alış fiyatı</string>
+    <string name="sellprice">Satış fiyatı</string>
+    <string name="stock">Stok</string>
+    <string name="sort">Sırala</string>
+    <string name="productname">Ürün adı</string>
+    <string name="currentprice">B.Fiyatı</string>
+    <string name="newprice">Yeni fiyatı</string>
+    <string name="cancelchangedprice">Yeni fiyatı iptal et</string>
+    <string name="change">Değiştir</string>
+    <string name="newproduct">Yeni Ürün</string>
+    <string name="removefromorderlist">Sipariş listesinden sil</string>
+    <array name="sortfield">
+        <item>Ürün adı</item>
+        <item>Fiyat</item>
+        <item>Stok</item>
+        <item>Grup</item>
+    </array>
+    <array name="sorttype">
+        <item>Artan</item>
+        <item>Azalan</item>
+    </array>
+
+    <!-- Edit/View Product -->
+    <string name="unitname">Birim</string>
+    <string name="gramaj">Gramaj</string>
+    <string name="save">Kaydet</string>
+    <string name="description">Açıklama</string>
+    <string name="delete">Sil</string>
+    <string name="product">Ürün</string>
+
+    <!-- Stockentry -->
+    <string name="newstockentry">Yeni İrsaliye</string>
+    <string name="documentnumber">Belge no</string>
+    <string name="documentdate">Tarih</string>
+    <string name="removedelivery">Irsaliyeyi sil</string>
+    <string name="editdelivery">Düzenle</string>
+    <string name="editamount">Miktarı değiştir</string>
+    <string name="removefromdelivery">Listeden sil</string>
+    <string name="supplier">Tedarikçi</string>
+    <string name="expirationdate">Son Kul.Tarihi</string>
+    <string name="partnumber">Parti no</string>
+
+    <string name="invoice">Faturalar</string>
+    <string name="newinvoice">Yeni fatura</string>
+    <string name="editinvoice">Faturayı düzenle</string>
+    <string name="deleteinvoice">Faturayı sil</string>
+    <string name="customer">Müşteri</string>
+    <string name="customers">Müşteriler</string>
+    <string name="number">No</string>
+    <string name="date">Tarih</string>
+    <string name="total">Toplam</string>
+    <string name="discount">İndirim</string>
+    <string name="subtotal">Ara Toplam</string>
+    <string name="print">Yazdir</string>
+    <string name="previousbalance">Önceki Bakiye</string>
+    <string name="newbalance">Fatura Bakiyesi</string>
+    <string name="totalbalance">Yeni Bakiye</string>
+    <string name="notfinancial">MALI DEGERI YOKTUR</string>
+
+    <!-- Strings related to Settings -->
+    <string name="serversettings">Sunucu ayarları</string>
+    <string name="language">Dil</string>
+    <string name="printtaxrowoninvoice">Faturada Vergi Yazdır</string>
+    <string name="portnumber">Port</string>
+    <string name="serveraddress">Sunucu IP</string>
+    <string name="device">Cihaz</string>
+    <string name="registerdevice">Cihazı kaydet</string>
+    <string name="serialnumber">Seri numarası</string>
+    <string name="sync">Verileri al</string>
+    <string name="connect">Bağlan</string>
+    <string name="printer">Yazıcı</string>
+    <string name="selectprinter">Yazıcı Seç</string>
+    <string name="othersettings">Diğer Ayarlar</string>
+    <string name="register_request_was_sent">Kayıt isteği gönderildi</string>
+    <string name="device_cannot_registered">Cihaz kaydedilemedi</string>
+    <string name="cannot_connect_to_the_server">Sunucuya bağlanılamadı</string>
+
+    <string name="msg_areyousure">Emin misiniz?</string>
+    <string name="msg_doubleclickforexit">Çıkmak için çift tıklayın</string>
+    <string name="msg_sendingdata">Verileri gönder</string>
+    <string name="updating_the_database">Veritabanı güncelleniyor</string>
+    <string name="msg_changed_the_product_price">Ürün fiyatı değiştirildi</string>
+    <string name="error_no_network_connection">Ağ bağlantısı yok</string>
+    <string name="error_couldnot_connect_to_the_server">Sunucuya bağlanılamadı</string>
+    <string name="error_unregistered_device">Cihaz kayıtlı değil</string>
+    <string name="error_couldnot_find_product">Ürün bulunamadı</string>
+    <string name="title_activity_products">Ürünler</string>
+    <string name="title_activity_edit_product">Ürünü düzenle</string>
+    <string name="msg_added_to_list">Listeye eklendi</string>
+    <string name="update_was_done">Güncelleme tamamlandı</string>
+    <string name="msg_dont_empty_name_group_tax">Ürün adı, grubu, birimi ve vergi türü boş olmamalıdır</string>
+    <string name="title_activity_select_product">Ürün Seç</string>
+    <string name="title_activity_inventur">Stok Sayımı</string>
+    <string name="app_name">Lp.Entry</string>
+    <string name="receiver">Teslim Alan</string>
+    <string name="newcustomer">Yeni Müşteri</string>
+    <string name="customercode">Müşteri Kodu</string>
+    <string name="phone1">Telefon 1</string>
+    <string name="phone2">Telefon 2</string>
+    <string name="customername">Müşteri Adı</string>
+    <string name="address">Adres</string>
+    <string name="owner">Yetkili</string>
+    <string name="email">E-Posta</string>
+    <string name="balance">Bakiye</string>
+    <string name="last_balance">Önceki Bakiye</string>
+    <string name="updating_the_customer">Müsteriler Güncelleniyor...</string>
+    <string name="collection">Tahsilat Yap</string>
+    <string name="paymentcash">Nakit</string>
+    <string name="paymentcard">Kredi Kartı</string>
+    <string name="editcustomer">Düzenle</string>
+    <string name="taxid">Vergi No</string>
+    <string name="taxoffice">Vergi Dairesi</string>
+    <string name="editcollect">Düzelt</string>
+    <string name="collects">Tahsilatlar</string>
+    <string name="signature">İmza</string>
+    <string name="currentinvoicetotal">Tutar</string>
+    <string name="user">Kullanıcı</string>
+
+    <string name="quantityprefix">Miktar Önek</string>
+    <string name="priceprefix">Fiyat Önek</string>
+    <string name="value">Deger</string>
+    <string name="barcodesettings">Barkod Ayarları</string>
+
+    <string name="sendproducts">Ürün listesini gönder</string>
+    <string name="sendchangedprices">Fiyatları gönder</string>
+    <string name="sendlabellist">Etiket listesini gönder</string>
+    <string name="sendpurchaselist">Sipariş listesini gönder</string>
+    <string name="senddeliveynotes">İrsaliyeleri gönder</string>
+    <string name="sendinvoices">Faturaları gönder</string>
+    <string name="sendcustomers">Müşterileri gönder</string>
+    <string name="sendcollets">Tahsilatları gönder</string>
+    <string name="sendstockcount">Stok sayımını gönder</string>
+    <string name="sendall">Tümünü gönder</string>
+
+    <array name="gramajfield">
+        <item>Gr</item>
+        <item>Kg</item>
+        <item>Lt</item>
+        <item>Ml</item>
+        <item>Cl</item>
+        <item>St</item>
+    </array>
+    <string name="title_activity_select_supplier">Tedarikçi Seç</string>
+    <string name="action_settings">Ayarlar</string>
+    <string name="stocktransfers">Stok Transfer</string>
+    <string name="newstocktransfer">Yeni Transfer</string>
+    <string name="edittransfer">Düzenle</string>
+    <string name="removetransfer">Sil</string>
+    <string name="targetwarehouse">Hedef Depo</string>
+    <string name="sendtransfers">Stok transferlerini gönder</string>
+    <string name="printbalanceoninvoice">Fatura üzerinde bakiyeyi yaz</string>
+    <string name="currency">Para Birimi</string>
+    <string name="showunitprice">Birim Fiyatı Göster</string>
+    <string name="menusettings">Menü Ayarları</string>
+    <string name="_select_customer">Lütfen müşteri seçin</string>
+</resources>

@@ -1,0 +1,212 @@
+<resources>
+    <string name="title_activity_login">Lp.Entry</string>
+    <string name="ok">Ok</string>
+    <string name="cancel">Abbruch</string>
+    <string name="min">Min.</string>
+    <string name="max">Max.</string>
+    <string name="all">Alles</string>
+
+    <!-- Strings related to login -->
+    <string name="prompt_password">Passwort</string>
+    <string name="action_sign_in">Log in</string>
+    <string name="settings">Einstellungen</string>
+    <string name="error_incorrect_password">Ungültiges Passwort</string>
+
+
+    <!-- Strings related to MainMenu -->
+    <string name="changeprice">Preise ändern</string>
+    <string name="deliverynote">Lieferscheine</string>
+    <string name="editproduct">Artikel bearbeiten</string>
+    <string name="info">Information</string>
+    <string name="senddatas">Senden</string>
+    <string name="inventory">Bestand</string>
+    <string name="inventorycount">Inventur</string>
+    <string name="management">Verwaltung</string>
+    <string name="printlabel">Etikett drucken</string>
+    <string name="productlist">Produkte</string>
+    <string name="purchaseorder">Einkaufsliste</string>
+    <string name="removeprintlabel">Vom Drucketikett entfernen</string>
+    <string name="reports">Berichte</string>
+    <string name="stockentry">Bestandsaufnahme</string>
+    <string name="viewproduct">Artikel anzeigen</string>
+    <string name="shortcurrent">Verf.</string>
+    <string name="shortdifference">Unter.</string>
+    <string name="shortnewstock">Neu</string>
+
+
+    <!-- Strings related to ProductList -->
+    <string name="search">Suche</string>
+    <string name="find">Finden</string>
+    <string name="filter">Filter</string>
+    <string name="options">Optionen</string>
+    <string name="barcode">Barcode</string>
+    <string name="plu">Plu</string>
+    <string name="origin">Origin</string>
+    <string name="taxname">Steuername</string>
+    <string name="taxrate">MwSt. %</string>
+    <string name="tax">MwSt.</string>
+    <string name="groupname">Gruppe</string>
+    <string name="amount">Anzahl</string>
+    <string name="amountperunit">Anzahl pro Einheit</string>
+    <string name="_package">Packet</string>
+    <string name="add">Hinzufügen</string>
+    <string name="addtoorderlist">Hinzufügen zur Einkaufsliste</string>
+    <string name="deposit">Anzahlung</string>
+    <string name="costprice">Einkaufspreis</string>
+    <string name="sellprice">Verkaufspreis</string>
+    <string name="stock">Bestand</string>
+    <string name="sort">Sortieren</string>
+    <string name="productname">Artikelname</string>
+    <string name="currentprice">Stückpreis</string>
+    <string name="newprice">Neuer Preis</string>
+    <string name="cancelchangedprice">Änderrungs Preis stonieren</string>
+    <string name="change">Ändern</string>
+    <string name="newproduct">Neuer Artikel</string>
+    <string name="removefromorderlist">Löschen von der Einkaufsliste</string>
+    <array name="sortfield">
+        <item>Artikelname</item>
+        <item>Preis</item>
+        <item>Bestand</item>
+        <item>Gruppe</item>
+    </array>
+    <array name="sorttype">
+        <item>Aufsteigend</item>
+        <item>Absteigend</item>
+    </array>
+
+    <!-- Edit/View Product -->
+    <string name="unitname">Einheit</string>
+    <string name="gramaj">Einheitsmenge</string>
+    <string name="save">Speichern</string>
+    <string name="description">Beschreibung</string>
+    <string name="delete">Löschen</string>
+    <string name="product">Artikel</string>
+
+    <!-- Stockentry -->
+    <string name="newstockentry">Neuer Wareneingang</string>
+    <string name="documentnumber">Lieferscheinnr.</string>
+    <string name="documentdate">Datum</string>
+    <string name="removedelivery">Lieferung entfernen</string>
+    <string name="editdelivery">Bearbeiten</string>
+    <string name="editamount">Stückzahl ändern</string>
+    <string name="removefromdelivery">Löschen von der Liste</string>
+    <string name="supplier">Lieferant</string>
+    <string name="expirationdate">MHD</string>
+    <string name="partnumber">Partynummer</string>
+
+    <string name="invoice">Rechnungs</string>
+    <string name="newinvoice">Neu Rechnung</string>
+    <string name="editinvoice">Bearbeiten Rechnung</string>
+    <string name="deleteinvoice">Löschen Rechnung</string>
+    <string name="customer">Kunde</string>
+    <string name="customers">Kunden</string>
+    <string name="number">Nummer</string>
+    <string name="date">Datum</string>
+    <string name="total">Gesamt</string>
+    <string name="discount">Rabatt</string>
+    <string name="subtotal">Unter Gesamt</string>
+    <string name="print">Drucken</string>
+    <string name="previousbalance">Vorheriger Kontostand</string>
+    <string name="newbalance">Neues Gleichgewicht</string>
+    <string name="totalbalance">Total Balance</string>
+    <string name="notfinancial">MALI DEGERI YOKTUR</string>
+
+    <!-- Strings related to Settings -->
+    <string name="serversettings">Servereinstellungen</string>
+    <string name="language">Sprache</string>
+    <string name="printtaxrowoninvoice">Steuer auf Rechnung drucken</string>
+    <string name="portnumber">Port</string>
+    <string name="serveraddress">Server-IP</string>
+    <string name="device">Gerät</string>
+    <string name="registerdevice">Gerät registrieren</string>
+    <string name="serialnumber">Seriennummer</string>
+    <string name="sync">Synchronisieren</string>
+    <string name="connect">Verbinden</string>
+    <string name="printer">Drucker</string>
+    <string name="selectprinter">Drucker auswählen</string>
+    <string name="othersettings">Sonstige Einstellungen</string>
+    <string name="register_request_was_sent">Registrierunsanfrage senden</string>
+    <string name="device_cannot_registered">Gerät kann nicht registriert werden</string>
+    <string name="cannot_connect_to_the_server">Keine Serververbindung möglich</string>
+
+
+    <string name="msg_areyousure">Sind Sie sicher?</string>
+    <string name="msg_doubleclickforexit">Doppelklick zum Verlassen</string>
+    <string name="msg_sendingdata">Daten senden</string>
+    <string name="updating_the_database">Aktualisiere Datenbank</string>
+    <string name="msg_changed_the_product_price">Artikelpreis wurde geändert</string>
+    <string name="error_no_network_connection">Keine Netzwerkverbindung</string>
+    <string name="error_couldnot_connect_to_the_server">Keine Serververbindung</string>
+    <string name="error_unregistered_device">Gerät ist nicht registriert</string>
+    <string name="error_couldnot_find_product">Artikel kann nicht gefunden werden</string>
+    <string name="title_activity_products">Artikel</string>
+    <string name="title_activity_edit_product">Artikel sortieren</string>
+    <string name="msg_added_to_list">Erfolgreich zur Liste hinzugefügt</string>
+    <string name="update_was_done">Aktuallisierung abgeschlossen</string>
+    <string name="msg_dont_empty_name_group_tax">Produktname, Gruppe, Einheit und Steuer müssen nicht leer sein.</string>
+    <string name="title_activity_select_product">Ausgewähltes Produkt</string>
+    <string name="title_activity_inventur">Inventurzählung</string>
+    <string name="app_name">Lp.Entry</string>
+    <string name="receiver">Empfänger</string>
+    <string name="newcustomer">Neu Kunde</string>
+    <string name="owner">Inhaber</string>
+    <string name="customercode">Code</string>
+    <string name="customername">Kundenname</string>
+    <string name="phone1">Telefon 1</string>
+    <string name="phone2">Telefon 2</string>
+    <string name="address">Adresse</string>
+    <string name="email">E-Mail</string>
+    <string name="balance">Gleichgewicht</string>
+    <string name="last_balance">Last Balance</string>
+    <string name="updating_the_customer">Updating the Customers</string>
+    <string name="collection">Sammel</string>
+    <string name="paymentcash">Bar</string>
+    <string name="paymentcard">Karte</string>
+    <string name="editcustomer">Bearbeiten</string>
+    <string name="taxid">Steuernummer</string>
+    <string name="taxoffice">Finansamt</string>
+    <string name="editcollect">Bearbeiten</string>
+    <string name="collects">Sammeln</string>
+    <string name="signature">Unterschrift</string>
+    <string name="currentinvoicetotal">Aktueller Beleg gesamt</string>
+    <string name="user">Benutzer</string>
+
+
+    <string name="quantityprefix">Menge Prefix</string>
+    <string name="priceprefix">Preis Prefix</string>
+    <string name="value">Value</string>
+    <string name="barcodesettings">Barcode Settings</string>
+
+    <string name="sendproducts">Produktliste Senden</string>
+    <string name="sendchangedprices">Preise Ändern Senden</string>
+    <string name="sendlabellist">Etikett Drucken Senden</string>
+    <string name="sendpurchaselist">Einkaufsliste Senden</string>
+    <string name="senddeliveynotes">Bestandsaufnahme Senden</string>
+    <string name="sendinvoices">Rechnungen Senden</string>
+    <string name="sendcustomers">Kunden Senden</string>
+    <string name="sendcollets">Sammeln Senden</string>
+    <string name="sendstockcount">Inventur senden</string>
+    <string name="sendall">ALL Senden</string>
+
+    <array name="gramajfield">
+        <item>Gr</item>
+        <item>Kg</item>
+        <item>Lt</item>
+        <item>Ml</item>
+        <item>Cl</item>
+        <item>St</item>
+    </array>
+    <string name="title_activity_select_supplier">Lieferantliste</string>
+    <string name="action_settings">Einstellungen</string>
+    <string name="stocktransfers">Bestand Transferen</string>
+    <string name="newstocktransfer">Neu Transfer</string>
+    <string name="edittransfer">Bearbeiten</string>
+    <string name="removetransfer">Löschen</string>
+    <string name="targetwarehouse">Ziellager</string>
+    <string name="sendtransfers">Send Bestand Transfers</string>
+    <string name="printbalanceoninvoice">Guthaben auf Rechnung drucken</string>
+    <string name="currency">Währungseinheit</string>
+    <string name="showunitprice">Stückpreis Anzeigen</string>
+    <string name="menusettings">Menüeinstellungen</string>
+    <string name="_select_customer">Please Select Customer</string>
+</resources>

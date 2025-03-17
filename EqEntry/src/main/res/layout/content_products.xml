@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            style="@style/StdButton"
+            android:background="@drawable/std_button"
+            android:id="@+id/bt_products_newproduct"
+            android:layout_width="wrap_content"
+            android:paddingRight="10dp"
+            android:paddingLeft="10dp"
+            android:layout_height="50dp"
+            android:text="@string/newproduct"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small" />
+
+        <Button
+            style="@style/StdButton"
+            android:background="@drawable/std_button"
+            android:id="@+id/bt_products_options"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:paddingRight="10dp"
+            android:paddingLeft="10dp"
+            android:text="@string/filter"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small" />
+
+        <Button
+            android:id="@+id/bt_products_search"
+            style="@style/StdButton"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:background="@drawable/std_button"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:text="@string/search"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small" />
+
+        <Button
+            style="@style/StdButton"
+            android:background="@drawable/std_button"
+            android:id="@+id/bt_products_send"
+            android:layout_width="wrap_content"
+            android:paddingRight="10dp"
+            android:paddingLeft="10dp"
+            android:layout_height="50dp"
+            android:text="@string/senddatas"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small" />
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="3dp"
+            android:text="@string/search" />
+
+        <EditText
+            style="@style/AppTheme.EditText"
+            android:id="@+id/ed_products_search"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:singleLine="true"/>
+
+        <Button
+            style="@style/StdButton"
+            android:background="@drawable/std_button"
+            android:id="@+id/bt_products_barcode"
+            android:layout_width="wrap_content"
+            android:paddingRight="10dp"
+            android:paddingLeft="10dp"
+            android:layout_height="42dp"
+            android:text="@string/barcode"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small" />
+
+        <Button
+            style="@style/StdButton"
+            android:background="@drawable/std_button"
+            android:id="@+id/bt_products_varcode"
+            android:layout_width="wrap_content"
+            android:paddingRight="10dp"
+            android:paddingLeft="10dp"
+            android:layout_height="42dp"
+            android:text="VariantCode"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </LinearLayout>
+
+    <com.baoyz.swipemenulistview.SwipeMenuListView
+        android:id="@+id/ls_products_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+</LinearLayout>

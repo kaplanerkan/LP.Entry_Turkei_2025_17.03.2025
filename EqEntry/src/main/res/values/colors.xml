@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#298BA4</color>
+    <color name="colorPrimaryDark">#298BA4</color>
+    <color name="colorAccent">#298BA4</color>
+    <color name="colorRed">#298BA4</color>
+    <color name="colorAqua">#00AAEE</color>
+    <color name="colorGreen">#298BA4</color>
+    <color name="colorBlack">#2f2f2f</color>
+    <color name="colorDarkGray">#5f5f5f</color>
+    <color name="colorPrintLabel">#f2f2f2</color>
+    <color name="colorChangePrice">#80bfff</color>
+    <color name="colorEditProduct">#298BA4</color>
+    <color name="colorRemove">#298BA4</color>
+    <color name="colorWhite">#ffffff</color>
+    <color name="Button_Click">#249EBE</color>
+    <color name="ProductGroup_Button_background_start">#00FFFF</color>
+    <color name="colorButtonBackground">#ffffff</color>
+    <color name="colorButtonBorder">#f0f0f0</color>
+</resources>

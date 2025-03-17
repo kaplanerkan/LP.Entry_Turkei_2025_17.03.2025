@@ -1,0 +1,325 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginLeft="2dp"
+        android:layout_marginRight="2dp"
+        android:layout_marginBottom="2dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.3"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:text="@string/customercode" />
+        <TextView
+            android:background="@drawable/std_button"
+            android:id="@+id/lbl_showcustomer_customercode"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.7"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:text="@string/customercode" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginLeft="2dp"
+        android:layout_marginRight="2dp"
+        android:layout_marginBottom="2dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.3"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:text="@string/customername" />
+        <TextView
+            android:background="@drawable/std_button"
+            android:id="@+id/lbl_showcustomer_customername"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.7"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:text="@string/customername" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginLeft="2dp"
+        android:layout_marginRight="2dp"
+        android:layout_marginBottom="2dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.3"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:text="@string/phone1" />
+        <TextView
+            android:background="@drawable/std_button"
+            android:id="@+id/lbl_showcustomer_phone1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.7"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:text="@string/phone1" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginLeft="2dp"
+        android:layout_marginRight="2dp"
+        android:layout_marginBottom="2dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.3"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:text="@string/phone2" />
+        <TextView
+            android:background="@drawable/std_button"
+            android:id="@+id/lbl_showcustomer_phone2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.7"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:text="@string/phone2" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginLeft="2dp"
+        android:layout_marginRight="2dp"
+        android:layout_marginBottom="2dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.3"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:text="@string/address" />
+        <TextView
+            android:background="@drawable/std_button"
+            android:id="@+id/lbl_showcustomer_address"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.7"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:text="@string/address" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginLeft="2dp"
+        android:layout_marginRight="2dp"
+        android:layout_marginBottom="2dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.3"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:text="@string/email" />
+        <TextView
+            android:background="@drawable/std_button"
+            android:id="@+id/lbl_showcustomer_email"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.7"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:text="@string/email" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginLeft="2dp"
+        android:layout_marginRight="2dp"
+        android:layout_marginBottom="2dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.3"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:text="@string/taxid" />
+        <TextView
+            android:background="@drawable/std_button"
+            android:id="@+id/lbl_showcustomer_taxid"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.7"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:text="@string/taxid" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginLeft="2dp"
+        android:layout_marginRight="2dp"
+        android:layout_marginBottom="2dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.3"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:text="@string/taxoffice" />
+        <TextView
+            android:background="@drawable/std_button"
+            android:id="@+id/lbl_showcustomer_taxoffice"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.7"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:text="@string/taxoffice" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginLeft="2dp"
+        android:layout_marginRight="2dp"
+        android:layout_marginBottom="2dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.3"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:text="@string/previousbalance" />
+        <TextView
+            android:background="@drawable/std_button"
+            android:id="@+id/lbl_showcustomer_previousbalance"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.7"
+            android:gravity="right"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:text="@string/balance" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginLeft="2dp"
+        android:layout_marginRight="2dp"
+        android:layout_marginBottom="2dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.3"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:text="@string/newbalance" />
+        <TextView
+            android:background="@drawable/std_button"
+            android:id="@+id/lbl_showcustomer_newbalance"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.7"
+            android:gravity="right"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:text="@string/newbalance" />
+    </LinearLayout>
+
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginLeft="2dp"
+        android:layout_marginRight="2dp"
+        android:layout_marginBottom="2dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.3"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:text="@string/totalbalance" />
+        <TextView
+            android:background="@drawable/std_button"
+            android:id="@+id/lblTotalBalance"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.7"
+            android:gravity="right"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:text="@string/totalbalance" />
+    </LinearLayout>
+
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="right"
+        android:gravity="right"
+        android:layout_marginLeft="2dp"
+        android:layout_marginBottom="2dp">
+
+        <Button
+            style="@style/StdButton"
+            android:background="@drawable/std_button"
+            android:id="@+id/bt_showcustomer_edit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@mipmap/img_edit"
+            android:text="@string/editcustomer" />
+
+        <Button
+            style="@style/StdButton"
+            android:background="@drawable/std_button"
+            android:id="@+id/bt_showcustomer_collection"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@mipmap/img_collection"
+            android:text="@string/collection" />
+    </LinearLayout>
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorWhite"
+        android:text="@string/collects"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+    <com.baoyz.swipemenulistview.SwipeMenuListView
+        android:id="@+id/lv_showcustomer_list"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+
+
+</LinearLayout>

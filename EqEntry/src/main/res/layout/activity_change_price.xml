@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorButtonBackground">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:text="@string/barcode"
+            android:textColor="@color/colorBlack" />
+
+        <EditText
+            android:id="@+id/ed_changeprice_find"
+            style="@style/AppTheme.EditText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <Button
+            android:id="@+id/bt_changeprice_find"
+            style="@style/StdButton"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:background="@drawable/std_button"
+            android:text="@string/find"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small" />
+
+        <Button
+            android:id="@+id/bt_changeprice_barcode"
+            style="@style/StdButton"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:background="@drawable/std_button"
+            android:text="@string/barcode"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small" />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:text="@string/productname" />
+
+    <TextView
+        android:id="@+id/lbl_changeprice_productname"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorButtonBackground"
+        android:padding="5dp"
+        android:text="Adan Zye ANDROID PROGRAMLAMA BAŞVURU KİTABI 123. BASKI Dursun ÇAKIR"
+        android:textAppearance="@style/TextAppearance.AppCompat"
+        android:textColor="@color/colorBlack" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.3"
+            android:padding="5dp"
+            android:text="@string/currentprice" />
+
+        <TextView
+            android:id="@+id/lbl_changeprice_currentprice"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.7"
+            android:gravity="right"
+            android:padding="5dp"
+            android:text="1,99€"
+            android:textColor="@color/colorRed"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.3"
+            android:padding="5dp"
+            android:text="@string/newprice" />
+
+        <EditText
+            style="@style/AppTheme.EditText"
+            android:id="@+id/ed_changeprice_newprice"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.7"
+            android:gravity="right"
+            android:digits="0123456789.,"
+            android:inputType="numberDecimal" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:text="@string/search" />
+
+        <EditText
+            style="@style/AppTheme.EditText"
+            android:id="@+id/ed_changeprice_search"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <Button
+            style="@style/StdButton"
+            android:background="@drawable/std_button"
+            android:id="@+id/bt_changeprice_search"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:text="@string/search"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small" />
+        <Button
+            style="@style/StdButton"
+            android:background="@drawable/std_button"
+            android:id="@+id/bt_changeprice_change"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_gravity="right"
+            android:text="@string/change" />
+
+
+    </LinearLayout>
+
+    <com.baoyz.swipemenulistview.SwipeMenuListView
+        android:id="@+id/ls_changeprices_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+</LinearLayout>

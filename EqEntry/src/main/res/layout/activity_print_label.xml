@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:text="@string/search" />
+
+        <EditText
+            style="@style/AppTheme.EditText"
+            android:id="@+id/ed_printlabel_search"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <Button
+            style="@style/StdButton"
+            android:background="@drawable/std_button"
+            android:id="@+id/bt_printlabel_search"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:text="@string/search"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small" />
+        <Button
+            style="@style/StdButton"
+            android:background="@drawable/std_button"
+            android:id="@+id/bt_printlabel_barcode"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:text="@string/barcode"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small" />
+
+
+    </LinearLayout>
+
+    <com.baoyz.swipemenulistview.SwipeMenuListView
+        android:id="@+id/ls_printlabel_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+</LinearLayout>

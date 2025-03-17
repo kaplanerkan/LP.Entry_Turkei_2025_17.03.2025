@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorButtonBorder"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="3dp"
+            android:text="@string/search"
+            android:textColor="@color/colorBlack" />
+
+        <EditText
+            android:id="@+id/ed_customers_search"
+            style="@style/AppTheme.EditText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:singleLine="true" />
+
+        <Button
+            android:id="@+id/bt_customers_search"
+            style="@style/StdButton"
+            android:layout_width="wrap_content"
+            android:layout_height="42dp"
+            android:layout_marginRight="2dp"
+            android:background="@drawable/std_button"
+            android:text="@string/search" />
+
+        <Button
+            android:id="@+id/bt_customers_new"
+            style="@style/StdButton"
+            android:layout_width="wrap_content"
+            android:layout_height="42dp"
+            android:background="@drawable/std_button"
+            android:text="@string/newcustomer" />
+
+    </LinearLayout>
+
+    <com.baoyz.swipemenulistview.SwipeMenuListView
+        android:id="@+id/lv_customers_list"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+</LinearLayout>

@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="3dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.3"
+            android:text="@string/groupname" />
+
+        <Spinner
+            style="@style/AppSpinnerTheme"
+            android:id="@+id/cmb_filter_productgroup"
+            android:layout_width="0dp"
+            android:layout_height="45dp"
+            android:layout_weight="0.7" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="3dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.3"
+            android:text="@string/taxname" />
+
+        <Spinner
+            style="@style/AppSpinnerTheme"
+            android:id="@+id/cmb_filter_taxname"
+            android:layout_width="0dp"
+            android:layout_height="45dp"
+            android:layout_weight="0.7" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="3dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.3"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/stock" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="3dp"
+                android:text="@string/min" />
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/ed_filter_stock"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.7"
+            android:digits="0123456789.,"
+            android:inputType="numberDecimal" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
+        android:background="@color/colorButtonBorder"
+        android:orientation="horizontal"
+        android:padding="5dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:text="@string/sort"
+            android:textColor="@color/colorBlack"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="3dp"
+        android:orientation="horizontal">
+
+        <Spinner
+            style="@style/AppSpinnerTheme"
+            android:id="@+id/cmb_filter_sortfield"
+            android:layout_width="0dp"
+            android:layout_height="45dp"
+            android:layout_weight="0.6"
+            android:entries="@array/sortfield"/>
+
+        <Spinner
+            style="@style/AppSpinnerTheme"
+            android:id="@+id/cmb_filter_sorttype"
+            android:layout_width="0dp"
+            android:layout_height="45dp"
+            android:layout_weight="0.4"
+            android:entries="@array/sorttype" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:gravity="right"
+        android:orientation="horizontal">
+
+        <Button
+            style="@style/StdButton"
+            android:background="@drawable/std_button"
+            android:id="@+id/bt_filter_sortok"
+            android:layout_width="120dp"
+            android:layout_height="50dp"
+            android:text="@string/ok"/>
+    </LinearLayout>
+</LinearLayout>

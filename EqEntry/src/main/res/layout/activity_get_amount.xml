@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent">
+
+    <TextView
+        android:id="@+id/lbl_getamount_productname"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorWhite"
+        android:padding="5dp"
+        android:text="Adan Zye ANDROID PROGRAMLAMA BAŞVURU KİTABI 123. BASKI Dursun ÇAKIR"
+        android:textAppearance="@style/TextAppearance.AppCompat"
+        android:textColor="@color/colorBlack" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="3dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.3"
+            android:text="@string/amount" />
+
+        <EditText
+            style="@style/AppTheme.EditText"
+            android:id="@+id/ed_getamount_amount"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.45"
+            android:digits="0123456789.,"
+            android:inputType="numberDecimal"/>
+
+        <ToggleButton
+            android:id="@+id/bt_getamount_package"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.25"
+            android:checked="true"
+            android:textOff="@string/_package"
+            android:textOn="@string/_package" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:gravity="right"
+        android:orientation="horizontal">
+
+        <Button
+            style="@style/StdButton"
+            android:background="@drawable/std_button"
+            android:id="@+id/bt_getamount_ok"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:text="@string/ok"/>
+    </LinearLayout>
+</LinearLayout>

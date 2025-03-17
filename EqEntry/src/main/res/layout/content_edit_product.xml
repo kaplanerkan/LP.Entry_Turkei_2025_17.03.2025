@@ -1,0 +1,336 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="1dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.3"
+            android:text="@string/barcode" />
+
+        <EditText
+            style="@style/AppTheme.EditText"
+            android:id="@+id/ed_editproduct_barcode"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.7"
+            android:maxLength="50" />
+        <Button
+            style="@style/StdButton"
+            android:background="@drawable/std_button"
+            android:id="@+id/bt_editproduct_barcode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/barcode"
+            android:layout_gravity="right"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="1dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.3"
+            android:text="@string/plu" />
+
+        <EditText
+            style="@style/AppTheme.EditText"
+            android:id="@+id/ed_editproduct_plu"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.7"
+            android:maxLength="50" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="1dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.3"
+            android:text="@string/origin" />
+
+        <EditText
+            style="@style/AppTheme.EditText"
+            android:id="@+id/ed_editproduct_origin"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.7"
+            android:maxLength="50" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="1dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.3"
+            android:text="@string/productname" />
+
+        <EditText
+            style="@style/AppTheme.EditText"
+            android:id="@+id/ed_editproduct_productname"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.7"
+            android:maxLines="2"
+            android:maxLength="150" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="1dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.3"
+            android:text="@string/groupname" />
+
+        <Spinner
+            android:id="@+id/cmb_editproduct_groupname"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.7" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="1dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.3"
+            android:text="@string/taxname" />
+
+        <Spinner
+            android:id="@+id/cmb_editproduct_taxname"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.7" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="1dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.3"
+            android:text="@string/unitname" />
+
+        <Spinner
+            android:id="@+id/cmb_editproduct_unitname"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.7" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="1dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.3"
+            android:text="@string/gramaj" />
+        <EditText
+            style="@style/AppTheme.EditText"
+            android:id="@+id/ed_editproduct_gramaj"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.4"
+            android:inputType="number"/>
+
+        <Spinner
+            android:id="@+id/cmb_editproduct_gramaj"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.3"
+            android:entries="@array/gramajfield"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="1dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.3"
+            android:text="@string/costprice" />
+
+        <EditText
+            style="@style/AppTheme.EditText"
+            android:id="@+id/ed_editproduct_costprice"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.7"
+            android:digits="0123456789.,"
+            android:inputType="numberDecimal"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="1dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.3"
+            android:text="@string/sellprice" />
+
+        <EditText
+            style="@style/AppTheme.EditText"
+            android:id="@+id/ed_editproduct_sellprice"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.7"
+            android:digits="0123456789.,"
+            android:inputType="numberDecimal"/>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="1dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.3"
+            android:text="@string/deposit" />
+
+        <Spinner
+            android:id="@+id/cmb_editproduct_deposite"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:padding="4dp"
+            android:layout_weight="0.7"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="1dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.3"
+            android:text="@string/description" />
+
+        <EditText
+            style="@style/AppTheme.EditText"
+            android:id="@+id/ed_editproduct_description"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.7"
+            android:maxLines="6"
+            android:maxLength="250"/>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_margin="5dp"
+        android:gravity="right">
+
+
+        <Button
+            style="@style/StdButton"
+            android:background="@drawable/std_button"
+            android:id="@+id/bt_editproduct_save"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@mipmap/img_save"
+            android:text="@string/save" />
+
+        <Button
+            android:id="@+id/bt_printproduct"
+            style="@style/StdButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/std_button"
+            android:drawableLeft="@mipmap/img_label"
+            android:text="@string/print"
+            android:visibility="gone" />
+            android:layout_gravity="right"/>
+
+        <Button
+            android:id="@+id/bt_editproduct_save_and_send"
+            style="@style/StdButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:background="@drawable/std_button"
+            android:drawableLeft="@mipmap/img_send"
+            android:text="@string/senddatas"
+            android:visibility="gone" />
+    </LinearLayout>
+</LinearLayout>

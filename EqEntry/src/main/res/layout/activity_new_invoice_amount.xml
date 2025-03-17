@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/lbl_newinvoice_get_row_productname"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorWhite"
+        android:text="@string/productname"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="2dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.3"
+            android:text="@string/amount"/>
+
+        <EditText
+            style="@style/AppTheme.EditText"
+            android:id="@+id/ed_newinvoice_get_row_amount"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.7"
+            android:gravity="right"
+            android:digits="0123456789.,"
+            android:inputType="numberDecimal"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="2dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.3"
+            android:text="@string/sellprice"/>
+
+        <EditText
+            style="@style/AppTheme.EditText"
+            android:id="@+id/ed_newinvoice_get_row_unitprice"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.7"
+            android:gravity="right"
+            android:digits="0123456789.,"
+            android:inputType="numberDecimal"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="2dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.3"
+            android:text="@string/discount"/>
+
+        <EditText
+            style="@style/AppTheme.EditText"
+            android:id="@+id/ed_newinvoice_get_row_discount_rate"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.35"
+            android:gravity="right"
+            android:digits="0123456789.,"
+            android:inputType="numberDecimal"/>
+
+
+        <EditText
+            style="@style/AppTheme.EditText"
+            android:id="@+id/ed_newinvoice_get_row_discount"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.35"
+            android:gravity="right"
+            android:digits="0123456789.,"
+            android:inputType="numberDecimal"/>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="2dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.3"
+            android:text="@string/subtotal"/>
+
+        <EditText
+            style="@style/AppTheme.EditText"
+            android:id="@+id/ed_newinvoice_get_row_subtotal"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.7"
+            android:gravity="right"
+            android:focusable="false"
+            android:inputType="none"/>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="2dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.3"
+            android:text="@string/taxrate"/>
+
+        <EditText
+            style="@style/AppTheme.EditText"
+            android:id="@+id/ed_newinvoice_get_row_taxrate"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.7"
+            android:gravity="right"
+            android:inputType="none"/>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="2dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.3"
+            android:text="@string/tax"/>
+
+        <EditText
+            style="@style/AppTheme.EditText"
+            android:id="@+id/ed_newinvoice_get_row_tax"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.7"
+            android:gravity="right"
+            android:focusable="false"
+            android:inputType="none"/>
+    </LinearLayout>
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="2dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.3"
+            android:text="@string/total"/>
+
+        <EditText
+            style="@style/AppTheme.EditText"
+            android:id="@+id/ed_newinvoice_get_row_total"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.7"
+            android:gravity="right"
+            android:digits="0123456789.,"
+            android:inputType="numberDecimal"/>
+    </LinearLayout>
+
+    <Button
+        style="@style/StdButton"
+        android:background="@drawable/std_button"
+        android:id="@+id/bt_newinvoice_get_row_ok"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="2dp"
+        android:text="@string/ok"/>
+</LinearLayout>

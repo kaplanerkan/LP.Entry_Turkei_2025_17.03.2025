@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:orientation="vertical"
+android:scrollbars="vertical">
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <Button
+        android:id="@+id/bt_menu_productlist"
+        style="@style/StdButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="3dp"
+        android:layout_weight="0.33"
+        android:background="@drawable/std_button"
+        android:drawableTop="@mipmap/img_products"
+        android:paddingTop="14dp"
+        android:text="@string/inventory"
+        android:visibility="visible" />
+
+
+    <Button
+        android:id="@+id/bt_menu_send"
+        style="@style/StdButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="3dp"
+        android:layout_weight="0.33"
+        android:background="@drawable/std_button"
+        android:drawableTop="@mipmap/img_send"
+        android:paddingTop="14dp"
+        android:text="@string/senddatas"
+        android:visibility="visible" />
+
+    <Button
+        android:id="@+id/bt_menu_inventory"
+        style="@style/StdButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="3dp"
+        android:layout_weight="0.33"
+        android:background="@drawable/std_button"
+        android:drawableTop="@mipmap/img_inventorycount"
+        android:paddingTop="14dp"
+        android:text="@string/inventorycount"
+        android:visibility="visible" />
+
+
+    <Button
+        android:id="@+id/bt_menu_stockentry"
+        style="@style/StdButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="3dp"
+        android:layout_weight="0.33"
+        android:background="@drawable/std_button"
+        android:drawableTop="@mipmap/img_inventory"
+        android:paddingTop="14dp"
+        android:text="@string/stockentry"
+        android:visibility="visible" />
+
+    <Button
+        android:id="@+id/bt_menu_purchaseorder"
+        style="@style/StdButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="3dp"
+        android:layout_weight="0.33"
+        android:background="@drawable/std_button"
+        android:drawableTop="@mipmap/img_order"
+        android:paddingTop="14dp"
+        android:text="@string/purchaseorder"
+        android:visibility="visible" />
+
+    <Button
+        android:id="@+id/bt_menu_printlabel"
+        style="@style/StdButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="3dp"
+        android:layout_weight="0.33"
+        android:background="@drawable/std_button"
+        android:drawableTop="@mipmap/img_label"
+        android:paddingTop="14dp"
+        android:text="@string/printlabel"
+        android:visibility="visible" />
+
+    <Button
+        android:id="@+id/bt_menu_invoice"
+        style="@style/StdButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="3dp"
+        android:layout_weight="0.33"
+        android:background="@drawable/std_button"
+        android:drawableTop="@mipmap/img_invoice"
+        android:paddingTop="14dp"
+        android:text="@string/invoice"
+        android:visibility="visible" />
+
+    android:layout_width="match_parent"
+    android:layout_height="110dp"
+    android:orientation="horizontal"
+    android:padding="2dp">
+
+    <Button
+        android:id="@+id/bt_menu_customers"
+        style="@style/StdButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="3dp"
+        android:layout_weight="0.33"
+        android:background="@drawable/std_button"
+        android:drawableTop="@mipmap/img_customers"
+        android:paddingTop="14dp"
+        android:text="@string/customers"
+        android:visibility="visible" />
+
+    <Button
+        android:id="@+id/bt_menu_stocktransfer"
+        style="@style/StdButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="3dp"
+        android:layout_weight="0.33"
+        android:background="@drawable/std_button"
+        android:drawableTop="@mipmap/img_products_transfer"
+        android:paddingTop="14dp"
+        android:text="@string/stocktransfers" />
+
+    <Button
+        android:id="@+id/bt_menu_changeprice"
+        style="@style/StdButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="3dp"
+        android:layout_weight="0.33"
+        android:background="@drawable/std_button"
+        android:drawableTop="@mipmap/img_changeprice"
+        android:paddingTop="14dp"
+        android:text="@string/changeprice"
+        android:visibility="visible" />
+
+    <Button
+        android:id="@+id/bt_menu_reports"
+        style="@style/StdButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="3dp"
+        android:layout_weight="0.33"
+        android:background="@drawable/std_button"
+        android:drawableTop="@mipmap/img_report"
+        android:paddingTop="14dp"
+        android:text="@string/reports"
+        android:visibility="gone" />
+
+    <Button
+        android:id="@+id/bt_menu_management"
+        style="@style/StdButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="3dp"
+        android:layout_weight="0.33"
+        android:background="@drawable/std_button"
+        android:drawableTop="@mipmap/img_settings"
+        android:paddingTop="14dp"
+        android:text="@string/management"
+        android:visibility="gone" />
+
+    android:layout_width="match_parent"
+    android:layout_height="fill_parent"
+    android:gravity="center_horizontal|bottom"
+    android:orientation="vertical"
+    android:padding="2dp">
+
+
+
+
+</LinearLayout>
+</ScrollView>
+

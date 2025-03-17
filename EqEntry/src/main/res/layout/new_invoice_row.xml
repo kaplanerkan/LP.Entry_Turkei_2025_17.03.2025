@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_marginLeft="2dp"
+    android:layout_marginRight="2dp" >
+
+    <TextView
+        android:id="@+id/lbl_newinvoice_row_productname"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="@string/productname"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="2dp" >
+
+
+        <TextView
+            android:id="@+id/lbl_newinvoice_row_amount"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.1"
+            android:gravity="right"
+            android:text="4" />
+
+        <TextView
+            android:id="@+id/lbl_newinvoice_row_unit"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.1"
+            android:text="st."/>
+
+        <TextView
+            android:id="@+id/lbl_newinvoice_row_unitprice"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.1"
+            android:gravity="right"
+            android:text="4545"/>
+
+        <TextView
+            android:id="@+id/lbl_newinvoice_row_total"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.2"
+            android:gravity="right"
+            android:text="4,545.99"/>
+
+        <TextView
+            android:id="@+id/lbl_newinvoice_row_discount"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.15"
+            android:gravity="right"
+            android:text="100,99"/>
+
+        <TextView
+            android:id="@+id/lbl_newinvoice_row_subtotal"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.3"
+            android:gravity="right"
+            android:text="4,445.00"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp" >
+
+
+        <TextView
+            android:id="@+id/lbl_newinvoice_row_packageamount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="left"
+            android:layout_marginLeft="5dp"
+            android:text="4" />
+    </LinearLayout>
+
+</LinearLayout>

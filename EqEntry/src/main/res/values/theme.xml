@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <style name="AppSpinnerTheme" parent="android:Theme.Light">
+        <item name="android:spinnerStyle">@style/SpinnerTheme</item>
+        <item name="android:dropDownSpinnerStyle">@style/SpinnerTheme.DropDown</item>
+        <item name="android:spinnerItemStyle">@style/SpinnerItemTheme</item>
+    </style>
+
+</resources>

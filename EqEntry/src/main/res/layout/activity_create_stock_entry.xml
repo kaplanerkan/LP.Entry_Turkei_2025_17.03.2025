@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.3"
+            android:padding="5dp"
+            android:text="@string/documentnumber" />
+
+        <EditText
+            style="@style/AppTheme.EditText"
+            android:id="@+id/ed_createstockentry_documentnumber"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:layout_weight="0.7" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.3"
+            android:padding="5dp"
+            android:text="@string/documentdate" />
+
+        <EditText
+            style="@style/AppTheme.EditText"
+            android:id="@+id/ed_createstockentry_documentdate"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.7"
+            android:inputType="none"
+            android:focusable="false"
+            android:clickable="true"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.3"
+            android:padding="5dp"
+            android:text="@string/supplier" />
+
+        <AutoCompleteTextView
+            style="@style/AppTheme.EditText"
+            android:id="@+id/ed_createstockentry_supplier"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:selectAllOnFocus="true"
+            android:layout_weight="0.7" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.3"
+            android:padding="5dp"
+            android:text="@string/receiver" />
+
+        <EditText
+            style="@style/AppTheme.EditText"
+            android:id="@+id/ed_createstockentry_receiver"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.7"
+            android:inputType="text"
+            android:maxLength="150"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:layout_marginTop="10dp"
+        android:gravity="right"
+        android:orientation="horizontal">
+
+        <Button
+            style="@style/StdButton"
+            android:background="@drawable/std_button"
+            android:id="@+id/bt_createstockentry_ok"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:text="@string/ok" />
+    </LinearLayout>
+</LinearLayout>

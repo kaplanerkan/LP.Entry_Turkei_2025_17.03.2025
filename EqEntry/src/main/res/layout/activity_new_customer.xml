@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="2dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/customername"
+            android:layout_weight="0.3"/>
+        <EditText
+            style="@style/AppTheme.EditText"
+            android:id="@+id/ed_newcustomer_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.7"
+            android:maxLines="1"
+            android:inputType="text"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="2dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/phone1"
+            android:layout_weight="0.3"/>
+        <EditText
+            style="@style/AppTheme.EditText"
+            android:id="@+id/ed_newcustomer_phone1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.7"
+            android:maxLines="1"
+            android:inputType="phone"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="2dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/phone2"
+            android:layout_weight="0.3"/>
+        <EditText
+            style="@style/AppTheme.EditText"
+            android:id="@+id/ed_newcustomer_phone2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.7"
+            android:maxLines="1"
+            android:inputType="phone"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="2dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.3"
+            android:text="@string/address" />
+
+        <EditText
+            style="@style/AppTheme.EditText"
+            android:id="@+id/ed_newcustomer_address"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.7"
+            android:maxLines="4" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="2dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/email"
+            android:layout_weight="0.3"/>
+        <EditText
+            style="@style/AppTheme.EditText"
+            android:id="@+id/ed_newcustomer_email"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:layout_weight="0.7"
+            android:inputType="textEmailAddress"/>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="2dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/taxid"
+            android:layout_weight="0.3"/>
+        <EditText
+            style="@style/AppTheme.EditText"
+            android:id="@+id/ed_newcustomer_taxid"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.7"
+            android:maxLines="1"
+            android:inputType="text"/>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="2dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/taxoffice"
+            android:layout_weight="0.3"/>
+        <EditText
+            style="@style/AppTheme.EditText"
+            android:id="@+id/ed_newcustomer_taxburo"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.7"
+            android:maxLines="1"
+            android:inputType="text"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="2dp"
+        android:gravity="right"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/bt_newcustomer_save"
+            style="@style/StdButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="3dp"
+            android:background="@drawable/std_button"
+            android:drawableLeft="@mipmap/img_save"
+            android:paddingLeft="1dp"
+            android:paddingRight="4dp"
+            android:text="@string/save" />
+    </LinearLayout>
+</LinearLayout>

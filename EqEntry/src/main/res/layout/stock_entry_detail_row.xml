@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="3dp"
+    >
+<TextView
+    android:id="@+id/lbl_stockentry_detail_row_productname"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="3dp"
+    android:layout_marginTop="10dp"
+    android:background="@color/colorPrintLabel"
+    android:text="ÜRÜN ADI"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="5dp">
+        <TextView
+            android:id="@+id/lbl_stockentry_detail_row_packageamount"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="3dp"
+            android:layout_weight="0.25"
+            android:text="4 Koli"/>
+        <TextView
+            android:id="@+id/lbl_stockentry_detail_row_amount"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="3dp"
+            android:layout_weight="0.25"
+            android:text="120"/>
+        <TextView
+            android:id="@+id/lbl_stockentry_detail_row_unitename"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="3dp"
+            android:layout_weight="0.15"
+            android:text="st."/>
+        <TextView
+            android:id="@+id/lbl_stockentry_detail_row_costprice"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:gravity="right"
+            android:layout_margin="3dp"
+            android:layout_weight="0.15"
+            android:text="12,99 EUR"/>
+        <TextView
+            android:id="@+id/lbl_stockentry_detail_row_total"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:gravity="right"
+            android:layout_margin="3dp"
+            android:layout_weight="0.2"
+            android:text="1558,80 EUR"/>
+    </LinearLayout>
+
+</LinearLayout>

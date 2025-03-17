@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/ly_stockentrydetailamount_partnumber"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.3"
+            android:padding="5dp"
+            android:text="@string/partnumber" />
+
+        <EditText
+            style="@style/AppTheme.EditText"
+            android:id="@+id/ed_stockentrydetailamount_partnumber"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.7" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ly_stockentrydetailamount_expirationdate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.3"
+            android:clickable="true"
+            android:focusable="false"
+            android:inputType="none"
+            android:padding="5dp"
+            android:text="@string/expirationdate" />
+
+        <EditText
+            style="@style/AppTheme.EditText"
+            android:id="@+id/ed_stockentrydetailamount_expirationdate"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.7"
+            android:inputType="date" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ly_stockentrydetailamount_costprice"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.3"
+            android:padding="5dp"
+            android:text="@string/costprice" />
+
+        <EditText
+            style="@style/AppTheme.EditText"
+            android:id="@+id/ed_stockentrydetailamount_costprice"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.7"
+            android:digits="0123456789.,"
+            android:inputType="numberDecimal" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.3"
+            android:padding="5dp"
+            android:text="@string/amount" />
+
+        <EditText
+            style="@style/AppTheme.EditText"
+            android:id="@+id/ed_stockentrydetailamount_amount"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.4"
+            android:digits="0123456789.,"
+            android:inputType="numberDecimal" />
+
+        <ToggleButton
+            android:id="@+id/bt_stockentrydetailamount_package"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.3"
+            android:textOff="@string/_package"
+            android:textOn="@string/_package" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.3"
+            android:padding="5dp"
+            android:text="@string/amountperunit" />
+
+        <EditText
+            style="@style/AppTheme.EditText"
+            android:id="@+id/ed_stockentrydetailamount_amountperunit"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.7"
+            android:inputType="numberDecimal" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:layout_marginTop="10dp"
+        android:gravity="right"
+        android:orientation="horizontal">
+
+        <Button
+            style="@style/StdButton"
+            android:background="@drawable/std_button"
+            android:id="@+id/bt_stockentrydetailamount_ok"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:text="@string/ok" />
+    </LinearLayout>
+</LinearLayout>

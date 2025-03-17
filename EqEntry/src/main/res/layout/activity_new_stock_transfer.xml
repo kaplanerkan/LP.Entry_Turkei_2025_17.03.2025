@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorWhite"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:text="@string/documentnumber"
+            android:textColor="@color/colorBlack" />
+
+        <EditText
+            android:id="@+id/ed_stocktransfer_documentnumber"
+            style="@style/AppTheme.EditText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.36"
+            android:maxLength="10" />
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="0.5" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:orientation="horizontal">
+
+        <Spinner
+            android:id="@+id/cmb_stocktransfer_target"
+            style="@style/AppSpinnerTheme"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorWhite"
+            android:enabled="false"
+            android:padding="10dp"
+            android:text="Warehouse"
+            android:textColor="#ffff" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorWhite">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:text="@string/barcode"
+            android:textColor="@color/colorBlack" />
+
+        <EditText
+            android:id="@+id/ed_stocktransfer_find"
+            style="@style/AppTheme.EditText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <Button
+            android:id="@+id/bt_stocktransfer_find"
+            style="@style/StdButton"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:background="@drawable/std_button"
+            android:text="@string/find"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small" />
+
+        <Button
+            android:id="@+id/bt_stocktransfer_barcode"
+            style="@style/StdButton"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:background="@drawable/std_button"
+            android:text="@string/barcode"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small" />
+    </LinearLayout>
+
+
+    <com.baoyz.swipemenulistview.SwipeMenuListView
+        android:id="@+id/ls_stocktransfer_list"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+
+    <TextView
+        android:id="@+id/lbl_stocktransfer_total_amount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"
+        android:gravity="center"/>
+</LinearLayout>
