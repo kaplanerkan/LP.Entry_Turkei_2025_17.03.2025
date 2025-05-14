@@ -139,6 +139,10 @@ public class ProductDao {
                 if (jData.has("stockcode")) {
                     lStockCode = jData.get("stockcode").getAsString();
                 }
+                int activmi = jData.get("active").getAsInt() ;
+                if (activmi == 0) {
+                    continue;
+                }
                 saveProduct(jData.get("id").getAsInt(), jData.get("grupid").getAsInt(),
                         jData.get("urunsira").getAsInt(), lStockCode, jData.get("barkod").getAsString(),
                         jData.get("urunkodu").getAsString(), jData.get("variantcode").getAsString(),
