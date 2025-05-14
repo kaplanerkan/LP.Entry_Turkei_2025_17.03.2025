@@ -139,6 +139,7 @@ public class ProductDao {
                 if (jData.has("stockcode")) {
                     lStockCode = jData.get("stockcode").getAsString();
                 }
+                // 14.05.2025:ERKAN: Sonerin istegi uzerine yapildi
                 int activmi = jData.get("active").getAsInt() ;
                 if (activmi == 0) {
                     continue;
