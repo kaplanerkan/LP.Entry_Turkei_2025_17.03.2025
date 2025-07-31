@@ -498,7 +498,8 @@ public class CustomerDao {
 
     }
 
-    public static void addCollect(int prId, long prCustomerId, String prDocumentNumber, String prDocumentDate, int prPaymentType, double prAmount, String prDescription) {
+    public static void addCollect(int prId, long prCustomerId, String prDocumentNumber, String prDocumentDate, int prPaymentType,
+                                  double prAmount, String prDescription, double yeniBakiye) {
 
         if (prId > 0 && prAmount == 0.0) {
             deleteCollect(prId);
@@ -539,7 +540,7 @@ public class CustomerDao {
             else
                 db.insert("collects", null, value);
 
-            changeCustomerBalance(prCustomerId, -1* prAmount);
+            changeCustomerBalanceErkan(prCustomerId, -1* prAmount, yeniBakiye);
         } catch (SQLException e) {
             Log.e("Collect Save Error 1", e.toString());
         }
@@ -718,6 +719,34 @@ public class CustomerDao {
         return lCustomerBalance;
     }
 
+
+
+
+
+    public static double changeCustomerBalanceErkan(long customerId, double total, double yeniBakiye) {
+        if (Db == null) {
+            Db = new Database();
+        }
+
+
+        SQLiteDatabase db = Db.getReadableDatabase();
+
+        double lCustomerBalance = 0.0;
+
+        Cursor cursor = db.rawQuery("select balance from customers where id=?", new String[]{String.valueOf(customerId)});
+        if (cursor.getCount() > 0) {
+            cursor.moveToFirst();
+            lCustomerBalance = cursor.getDouble(0);
+        }
+
+        db = Db.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values = new ContentValues();
+        values.put("balance", lCustomerBalance + total);
+        db.update("customers", values, "id=?", new String[]{String.valueOf(customerId)});
+
+        return lCustomerBalance + total;
+    }
 
 
     //

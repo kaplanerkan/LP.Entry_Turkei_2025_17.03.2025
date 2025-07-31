@@ -16,6 +16,8 @@ import com.eqpos.eqentry.DB.CustomerDao;
 import com.eqpos.eqentry.Models.Collect;
 import com.eqpos.eqentry.tools.Variables;
 
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
@@ -34,6 +36,7 @@ public class CollectActivity extends AppCompatActivity implements View.OnClickLi
     private int gCollectId;
     private DatePickerDialog.OnDateSetListener dateSetListener;
     private Calendar myCalendar;
+    private double yeniBakiye = 0.0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +60,11 @@ public class CollectActivity extends AppCompatActivity implements View.OnClickLi
         if (extra!=null) {
             gCustomerId = extra.getLong("customerid");
             gCollectId = extra.getInt("collectid");
+
+            // 30.07.2025 ERKAN
+            String newBakiye = extra.getString("yeni_bakiye", "0.0");
+            yeniBakiye = parseTurkishNumber(newBakiye);
+
             lblCustomer.setText(extra.getString("customername"));
         } else {
             finish();
@@ -101,15 +109,37 @@ public class CollectActivity extends AppCompatActivity implements View.OnClickLi
         };
     }
 
+
+    private double parseTurkishNumber(String numberStr) {
+        try {
+            // Türk formatı için DecimalFormatSymbols oluştur
+            DecimalFormatSymbols symbols = new DecimalFormatSymbols(new Locale("tr", "TR"));
+            symbols.setDecimalSeparator(','); // Ondalık ayraç: virgül
+            symbols.setGroupingSeparator('.'); // Binlik ayraç: nokta
+
+            // DecimalFormat ile format tanımla
+            DecimalFormat decimalFormat = new DecimalFormat("#,##0.00", symbols);
+            decimalFormat.setParseBigDecimal(true); // Büyük sayılar için hassasiyet
+
+            // String'i parse et ve double'a çevir
+            return decimalFormat.parse(numberStr).doubleValue();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return 0.0; // Hata durumunda varsayılan değer (veya hata işleme mantığınızı ekleyin)
+        }
+    }
+
+
+
     private void saveCollect(int paymentType) {
         double lAmount = 0.0;
         try {
             lAmount = Variables.strToDouble(edAmount.getText().toString());
         } catch (Exception ex) {
-            Log.e("Save collect", ex.getMessage());
+            Log.e("Save collect","saveCollect ::" + ex.getMessage());
         }
         CustomerDao.addCollect(gCollectId, gCustomerId, edNumber.getText().toString(), edDate.getText().toString(),
-                paymentType, lAmount, edDescription.getText().toString());
+                paymentType, lAmount, edDescription.getText().toString(), yeniBakiye);
 
         setResult(RESULT_OK);
         finish();

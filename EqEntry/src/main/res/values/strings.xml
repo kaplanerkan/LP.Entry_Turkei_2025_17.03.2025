@@ -230,5 +230,5 @@
 
 
     <string name="_select_customer">Please Select Customer</string>"
-
+    <string name="son_bakiye">Total Balance</string>
 </resources>

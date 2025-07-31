@@ -84,8 +84,8 @@ public class LoginActivity extends Activity  {
 
             SharedPrefUtil.init(LoginActivity.this);
 
-            Database.vtContext =
-            Variables.context =getApplicationContext(); getApplicationContext();
+            Database.vtContext =  getApplicationContext();
+            Variables.context =getApplicationContext();
             //deleteDatabase(Database.VERITABANI);
 
             Variables.hostIp = SettingsDao.getStrValue("ServerIP");

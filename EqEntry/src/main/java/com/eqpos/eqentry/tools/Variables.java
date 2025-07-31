@@ -100,6 +100,7 @@ public class Variables {
         cmdGetDeposites(35),
         cmdGetSuppliers(36),
         cmdGetCustomers(37),
+        cmdGetProductBarcodes(39),
         cmdGetFirmInfo(48),
         cmdRegisterDevice(50),
         cmdIsRegisteredDevice(51),

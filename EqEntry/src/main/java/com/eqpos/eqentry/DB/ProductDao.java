@@ -41,6 +41,7 @@ public class ProductDao {
         db.delete("invoice", "", null);
         db.delete("customers", "", null);
         db.delete("warehouses", "", null);
+        db.delete("urunbarcodes", "", null);
 
     }
 
@@ -481,6 +482,9 @@ public class ProductDao {
             lSql += lWhere + " COLLATE NOCASE order by " + sortField + " " + sortType;
         }
 
+        Log.e("ProductDao", "getProductList SQL: \n" + lSql);
+
+
         Cursor cursor = db.rawQuery(lSql, args);//FKILIC
 
         if (cursor.getCount() > 0) {
@@ -552,11 +556,12 @@ public class ProductDao {
         String lWhere = "where 1=1 "; //cursor = database.rawQuery(query, new String[]{"%" + searchTerm + "%"});//db.rawQuery(sql, selectionArgs)
         if (filterSearch.length() > 0) {
             if (filterType == 0) {
-                lWhere += " and (lower(productname) like '%" + filterSearch.toLowerCase() +
-                        "%' or barcode like ? or plu like ? or variantcode like ?)";
-                args = new String[] {"%" + filterSearch + "%",
-                        "%" + filterSearch + "%",
-                        "%" + filterSearch + "%"}; //FKILIC
+                //  " '%" + filterSearch + "%' "
+                lWhere += " and (lower(productname) like '%" + filterSearch.toLowerCase() + "%' " +
+                        "   or (barcode like "+ " '%" + filterSearch + "%'  or p.id in (select urunid from urunbarcodes where barcod like '%"+filterSearch+"%' ) )   " +
+                        "   or plu like "+ " '%" + filterSearch + "%' "+
+                        "   or variantcode like "+ " '%" + filterSearch + "%' "+")";
+
             } else if (filterType == 1) {
                 lWhere += " and (barcode='" + filterSearch + "')";
             } else if (filterType == 2) {
@@ -585,6 +590,8 @@ public class ProductDao {
         if (!sortField.equals("")) {
             lSql += lWhere + " COLLATE NOCASE order by " + sortField + " " + sortType;
         }
+
+        Log.e("ProductDao", "getProductList_Erkan SQL: \n" + lSql);
 
         Cursor cursor = db.rawQuery(lSql, args);//FKILIC
 

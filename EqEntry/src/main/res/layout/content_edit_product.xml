@@ -20,12 +20,14 @@
             android:text="@string/barcode" />
 
         <EditText
-            style="@style/AppTheme.EditText"
             android:id="@+id/ed_editproduct_barcode"
+            style="@style/AppTheme.EditText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.7"
-            android:maxLength="50" />
+            android:lines="1"
+            android:maxLength="50"
+            android:maxLines="1" />
         <Button
             style="@style/StdButton"
             android:background="@drawable/std_button"

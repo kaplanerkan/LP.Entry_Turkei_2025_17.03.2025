@@ -4,14 +4,15 @@ import android.content.Context;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 /**
  * Created by dursu on 22.02.2018.
  */
 
 public class Database extends SQLiteOpenHelper {
-    public static final String VERITABANI = "eqentrydb.db3";
-    private static final int SURUM = 6;
+    public static final String VERITABANI = "entry_db_tr.db3";
+    private static final int SURUM = 9;
     public static Context vtContext;
 
     public Database() {
@@ -37,6 +38,19 @@ public class Database extends SQLiteOpenHelper {
                 "consumption numeric(12,3), suppliers text, suppliersid integer, origin text, " +
                 "changed integer default 0, isnew integer default 0, printlabel integer default 0)");
         db.execSQL("create index idx_products_barcode on products(barcode)");
+
+
+        //30.05.2025::erkan  ::  urunbarcodes
+        Log.e("Database", "Creating urunbarcodes table");
+        db.execSQL("CREATE TABLE urunbarcodes (id INTEGER PRIMARY KEY AUTOINCREMENT, urunid integer, barcod text, miktar text, birimid integer)");
+        db.execSQL("create index idx_urunbarcodes_id on urunbarcodes(id)");
+        db.execSQL("create index idx_urunbarcodes_barcod on urunbarcodes(barcod)");
+        db.execSQL("create index idx_urunbarcodes_urunid on urunbarcodes(urunid)");
+        Log.e("Database", "Creating urunbarcodes TAMAM");
+
+
+
+
 //        db.execSQL("CREATE TRIGGER if not exists trg_products before UPDATE ON products for each row  " +
 //                "BEGIN " +
 //                " update products set changed=1 where changed=NEW.changed and id=NEW.id; " +

@@ -7,6 +7,8 @@ import android.content.DialogInterface;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -138,6 +140,7 @@ public class SyncDB {
                         syncSettings();
                         syncFirmInfo();
                         syncWarehouses();
+                        syncUrunBarcodes();
 
                     } else {
                         syncUnites();
@@ -152,30 +155,37 @@ public class SyncDB {
                         syncSettings();
                         syncFirmInfo();
                         syncWarehouses();
+                        syncUrunBarcodes();
                     }
 
                     SettingsDao.setStrValue("userpassword", "");
 
                 } catch (Exception e) {
-                    AlertDialog.Builder builder1 = new AlertDialog.Builder(SyncDB.context);
-                    builder1.setMessage(SyncDB.context.getString(R.string.cannot_connect_to_the_server));
-                    builder1.setCancelable(true);
-                    builder1.setPositiveButton("Ok",
-                            new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int id) {
-                                    dialog.cancel();
-                                }
-                            });
-                    AlertDialog alert11 = builder1.create();
-                    alert11.show();
-                    e.printStackTrace();
-                    try {
-                        SocketProcess.client.close();
-                    } catch (IOException e1) {
-                        e1.printStackTrace();
-                    }
-                    SocketProcess.client = null;
-                    e.printStackTrace();
+                    final Handler handler = new Handler(Looper.getMainLooper());
+                    handler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            AlertDialog.Builder builder1 = new AlertDialog.Builder(SyncDB.context);
+                            builder1.setMessage(SyncDB.context.getString(R.string.cannot_connect_to_the_server));
+                            builder1.setCancelable(true);
+                            builder1.setPositiveButton("Ok",
+                                    (dialog, id) -> dialog.cancel());
+                            AlertDialog alert11 = builder1.create();
+                            alert11.show();
+                            e.printStackTrace();
+                            try {
+                                SocketProcess.client.close();
+                            } catch (IOException e1) {
+                                e1.printStackTrace();
+                            }
+                            SocketProcess.client = null;
+                            e.printStackTrace();
+                        }
+                    });
+
+
+
+
                 }
 
                 prgDialog.dismiss();
@@ -445,6 +455,12 @@ public class SyncDB {
         } while (!rMsg.contains(Variables._EMPTY)||rMsg.contains(Variables._ERROR));
     }
 
+
+
+
+
+
+
     private void syncProductPrices() {
         int limit = 500;
         int offset = 0;
@@ -499,6 +515,73 @@ public class SyncDB {
             offset += 500;
         } while (!rMsg.contains(Variables._EMPTY));
     }
+
+
+
+    /**
+     * Urun barkodlarını senkronize eder
+     *  30.05.2025 :: Erkan
+     */
+    private void syncUrunBarcodes() {
+        int limit = 500;
+        int offset = 0;
+        String rMsg = "";
+        String msg = "";
+
+        JsonObject jHead = JSONProcess.getJSONHeader(Variables.ServerCommand.cmdGetProductBarcodes.getValue());
+        JsonObject jData;
+
+        int i = 0;
+        do {
+            i++;
+            jData = new JsonObject();
+            try {
+                jData.addProperty("groupid", 0);
+                jData.addProperty("limit", limit);
+                jData.addProperty("offset", offset);
+            } catch (JsonParseException e) {
+                e.printStackTrace();
+            }
+
+            msg = JSONProcess.jsonPack(jHead, jData);
+            if (jHead != null) {
+                rMsg = SocketProcess.sendMessage(msg);
+                if (rMsg.contains(Variables._ERROR)) {
+                    //hata oluştu
+                } else if (!rMsg.contains(Variables._EMPTY)) {
+                    //Veriler geldi Veritabanına yazılacak
+                    try {
+                        try {
+
+                            long start = System.currentTimeMillis();
+
+                            JsonParser parser = new JsonParser();
+                            JsonArray lArr = parser.parse(rMsg).getAsJsonArray();
+                            parser = null;
+                            UrunBarcodesDao.saveUrunBarcodes(lArr);
+                            Log.e("testtest", "lArr\n" + lArr.toString());
+                            lArr = null;
+
+                            long end = System.currentTimeMillis();
+                            Log.e("testtest", "UrunBarcodes tur   " + (i) + " (syncUrunBarcodes) dbye kaydetme -> " + ((end - start)) + " miliseconds");
+
+                        } catch (IllegalStateException e) {
+                            Log.e("Error syncProductPrices", "IllegalStateException" + e.toString());
+                        }
+                    } catch (JsonParseException e) {
+                        Log.e("Error syncProductPrices", "JsonParseException" + e.toString());
+                    }
+                }
+            }
+            jData = null;
+            offset += 500;
+        } while (!rMsg.contains(Variables._EMPTY));
+    }
+
+
+
+
+
 
     private void syncSuppliers() {
         JsonObject jHead = JSONProcess.getJSONHeader(Variables.ServerCommand.cmdGetSuppliers.getValue());

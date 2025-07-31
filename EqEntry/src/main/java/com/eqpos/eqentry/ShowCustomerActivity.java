@@ -139,9 +139,13 @@ public class ShowCustomerActivity extends AppCompatActivity {
         lblTaxId.setText(cus.getTaxId());
         lblTaxOffice.setText(cus.getTaxOffice());
 
-        lblPreviousBalance.setText(Variables.doubleToStr(cus.getOldBalance()+cus.getCollects(),2));
+        //lblPreviousBalance.setText(Variables.doubleToStr(cus.getOldBalance()+cus.getCollects(),2));               // DEPRACED: 30.07.2025 ERKAN
+        lblPreviousBalance.setText(Variables.doubleToStr(cus.getOldBalance(),2));
+
         lblNewBalance.setText(Variables.doubleToStr(cus.getNewBalance()+cus.getCollects(),2));
-        double getTotalBalance = cus.getOldBalance()+cus.getCollects() + cus.getNewBalance()+cus.getCollects();
+
+        //double getTotalBalance = cus.getOldBalance()+cus.getCollects() + cus.getNewBalance()+cus.getCollects();    // DEPRACED: 30.07.2025 ERKAN
+        double getTotalBalance = cus.getOldBalance()+cus.getCollects() + cus.getNewBalance();
         lblTotalBalance.setText(Variables.doubleToStr(getTotalBalance,2));
 
         if (cus.getIsNew()==0)
@@ -178,6 +182,10 @@ public class ShowCustomerActivity extends AppCompatActivity {
         intent.putExtra("customerid", gCustomerId);
         intent.putExtra("collectid", id);
         intent.putExtra("customername", lblCustomerName.getText().toString());
+
+        // 30.07.2025 ERKAN
+        intent.putExtra("yeni_bakiye",lblTotalBalance.getText().toString());
+
         startActivityForResult(intent, _COLLECT);
     }
 
