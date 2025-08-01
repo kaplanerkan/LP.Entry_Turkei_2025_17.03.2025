@@ -16,6 +16,7 @@ public class Customer {
     private String taxOffice;
     private double oldBalance;
     private double newBalance;
+    private double balance;
 
     private double collects;
     private int isNew;
@@ -120,5 +121,13 @@ public class Customer {
 
     public void setTaxOffice(String taxOffice) {
         this.taxOffice = taxOffice;
+    }
+
+    public double getBalance() {
+        return balance;
+    }
+
+    public void setBalance(double balance) {
+        this.balance = balance;
     }
 }

@@ -277,36 +277,55 @@
     </LinearLayout>
 
 
-
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_gravity="right"
-        android:gravity="right"
-        android:layout_marginLeft="2dp"
-        android:layout_marginBottom="2dp">
+        android:layout_gravity="end"
+        android:layout_marginStart="2dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="2dp"
+        android:gravity="end"
+        android:orientation="horizontal">
 
         <Button
+            android:id="@+id/btnTahsilatlariYazdir"
             style="@style/StdButton"
-            android:background="@drawable/std_button"
-            android:id="@+id/bt_showcustomer_edit"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:drawableLeft="@mipmap/img_edit"
+            android:layout_weight="1"
+            android:background="@drawable/std_button"
+            android:drawableStart="@drawable/outline_print_48"
+            android:textSize="10sp"
+            android:text="@string/print" />
+
+
+        <Button
+            android:id="@+id/bt_showcustomer_edit"
+            style="@style/StdButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/std_button"
+            android:drawableStart="@mipmap/img_edit"
+
+            android:textSize="10sp"
+
             android:text="@string/editcustomer" />
 
-        <Button
-            style="@style/StdButton"
-            android:background="@drawable/std_button"
-            android:id="@+id/bt_showcustomer_collection"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:drawableLeft="@mipmap/img_collection"
-            android:text="@string/collection" />
-    </LinearLayout>
 
+        <Button
+            android:id="@+id/bt_showcustomer_collection"
+            style="@style/StdButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+           android:gravity="center"
+            android:layout_weight="1"
+            android:background="@drawable/std_button"
+            android:drawableStart="@mipmap/img_collection"
+            android:textSize="10sp"
+            android:text="@string/collection" />
+
+    </LinearLayout>
 
     <TextView
         android:layout_width="match_parent"

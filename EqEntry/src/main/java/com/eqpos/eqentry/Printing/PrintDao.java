@@ -340,7 +340,15 @@ public class PrintDao {
             Log.e("PrintDao", "Printing ", e);
         }
     }
-
+    public static void printRowERKAN( String column3, String column4) {
+        try {
+            OutputStream os = Variables.mBluetoothSocket.getOutputStream();
+            os.write(String.format("%1$1s %2$-5s \n",  convertCharacters(column3),
+                    convertCharacters(column4)).getBytes("UTF8"));
+        } catch (Exception e) {
+            Log.e("PrintDao", "Printing ", e);
+        }
+    }
 
     public static void printRow(String column1, String column2, String column3, String column4, String column5) {
         try {

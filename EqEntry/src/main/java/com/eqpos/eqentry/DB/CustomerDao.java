@@ -468,6 +468,9 @@ public class CustomerDao {
             cus.setOldBalance(cursor.getDouble(cursor.getColumnIndexOrThrow("lastbalance")));
             cus.setNewBalance(getCustomerNewBalance(prCustomerId));
             cus.setCollects(getCustomerTotalCollects(prCustomerId));
+
+            cus.setBalance(cursor.getDouble(cursor.getColumnIndexOrThrow("balance")));          // 01.08.2025 ERKAN
+
         }
         return cus;
     }
@@ -596,6 +599,60 @@ public class CustomerDao {
         }
         return list;
     }
+
+
+    public static ArrayList<HashMap<String, String>> getAllCollectList(long prCustomerId) {
+        if (Db == null)
+            Db = new Database();
+
+        ArrayList<HashMap<String, String>> list = new ArrayList<HashMap<String, String>>();
+        HashMap<String, String> map;
+        SQLiteDatabase db = Db.getReadableDatabase();
+
+        Cursor cursor;
+        try {
+            if (prCustomerId > 0) {
+                cursor = db.rawQuery("select col.id, cus.customername, cus.balance, col.documentnumber, " +
+                                "col.collectdate, col.customerid, col.paymenttype, col.amount, col.description from collects as col " +
+                                "inner join customers as cus on col.customerid=cus.id " +
+                                "where col.customerid=? order by cus.customername ",
+                        new String[]{String.valueOf(prCustomerId)});
+            } else {
+                cursor = db.rawQuery("select col.id, cus.customername, cus.balance, col.documentnumber, " +
+                        "col.collectdate, col.customerid, col.paymenttype, col.amount, col.description from collects col " +
+                        "inner join customers cus on col.customerid=cus.id " +
+                        "order by col.collectdate desc", null);
+            }
+
+            if (cursor.getCount() > 0) {
+                while (cursor.moveToNext()) {
+                    map = new HashMap<String, String>();
+                    map.put("id", cursor.getString(cursor.getColumnIndexOrThrow("id")));
+                    map.put("customername", cursor.getString(cursor.getColumnIndexOrThrow("customername")));
+                    map.put("balance", Variables.doubleToStr(cursor.getDouble(cursor.getColumnIndexOrThrow("balance")),2));
+                    map.put("amount", Variables.doubleToStr(cursor.getDouble(cursor.getColumnIndexOrThrow("amount")),2));
+                    map.put("documentnumber", cursor.getString(cursor.getColumnIndexOrThrow("documentnumber")));
+                    map.put("collectdate", cursor.getString(cursor.getColumnIndexOrThrow("collectdate")));
+                    map.put("description", cursor.getString(cursor.getColumnIndexOrThrow("description")));
+                    map.put("customerid", cursor.getString(cursor.getColumnIndexOrThrow("customerid")));
+                    if (cursor.getInt(cursor.getColumnIndexOrThrow("paymenttype")) == 0) {
+                        map.put("paymenttype", Variables.context.getString(R.string.paymentcash));
+                    } else {
+                        map.put("paymenttype", Variables.context.getString(R.string.paymentcard));
+                    }
+
+                    list.add(map);
+                }
+                cursor.close();
+            }
+        } catch (SQLException ex) {
+            Log.d("Collect List", ex.getMessage());
+        }
+        return list;
+    }
+
+
+
 
     public static HashMap<String, String> getCollectForPrint(int prCollectId) {
         if (Db == null)

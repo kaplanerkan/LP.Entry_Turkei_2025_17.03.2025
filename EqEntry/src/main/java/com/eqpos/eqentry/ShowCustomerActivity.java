@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.baoyz.swipemenulistview.SwipeMenu;
 import com.baoyz.swipemenulistview.SwipeMenuCreator;
@@ -24,7 +25,7 @@ import java.util.HashMap;
 
 public class ShowCustomerActivity extends AppCompatActivity {
     private Button btCollection;
-    private Button btEdit;
+    private Button btEdit, btnTahsilatlariYazdir;
     private TextView lblCustomerCode;
     private TextView lblCustomerName;
     private TextView lblPhone1;
@@ -63,6 +64,8 @@ public class ShowCustomerActivity extends AppCompatActivity {
         lblTaxId = (TextView) findViewById(R.id.lbl_showcustomer_taxid);
         lblTaxOffice = (TextView) findViewById(R.id.lbl_showcustomer_taxoffice);
         lvList = (SwipeMenuListView) findViewById(R.id.lv_showcustomer_list);
+
+        btnTahsilatlariYazdir = (Button) findViewById(R.id.btnTahsilatlariYazdir);
 
         Bundle extra = getIntent().getExtras();
         if (extra != null) {
@@ -114,7 +117,20 @@ public class ShowCustomerActivity extends AppCompatActivity {
             }
         });
         createSwipeListview();
+
+        btnTahsilatlariYazdirOlaylari();
     }
+
+    private void btnTahsilatlariYazdirOlaylari() {
+        btnTahsilatlariYazdir.setOnClickListener(v -> {
+            if (gList != null && gList.size() > 0) {
+                PrintCollect.printAllCollects(gCustomerId);
+            } else {
+                Toast.makeText(ShowCustomerActivity.this, "Tahsilat Bulunamadi !", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
 
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -190,7 +206,8 @@ public class ShowCustomerActivity extends AppCompatActivity {
     }
 
     private void printCollect(int id){
-        PrintCollect.printInvoice(id);
+        //PrintCollect.printInvoice(id);
+        PrintCollect.printInvoiceERKAN(id);
     }
 
     private void createSwipeListview() {
