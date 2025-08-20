@@ -211,4 +211,6 @@
     <string name="_select_customer">Please Select Customer</string>
 
     <string name="son_bakiye">Total Balance</string>
+    <string name="product_already_exists">Product already exists</string>
+    <string name="save_and_senden">Save + Senden</string>
 </resources>

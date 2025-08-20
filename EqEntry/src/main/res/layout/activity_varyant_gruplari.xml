@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".views.varyants.VaryantGruplari">
+
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/llGrupEkleme"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="85dp"
+        android:layout_marginEnd="8dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <TextView
+            android:id="@+id/tvMainGrupIsmi"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-medium"
+            android:text="Varyant Adi"
+            android:textAlignment="center"
+            android:textAllCaps="true"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <com.google.android.material.textfield.TextInputLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="Grup ismi"
+                app:boxBackgroundColor="#FAFAFA"
+                app:boxBackgroundMode="outline"
+                app:boxStrokeColor="#B0BEC5"
+
+                app:hintTextColor="#757575">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/tvGrupIsmi"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-medium"
+                    android:inputType="text"
+                    android:padding="14dp"
+                    android:textColor="#212121"
+                    android:textSize="18sp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilTanim"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="Grup Türü"
+                app:boxBackgroundColor="#FAFAFA"
+                app:boxBackgroundMode="outline"
+                app:boxStrokeColor="#B0BEC5"
+
+                app:hintTextColor="#757575">
+
+                <AutoCompleteTextView
+                    android:id="@+id/tvGrupTuru"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-medium"
+                    android:inputType="text" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btnGeri"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/btn_rounded_red"
+                android:fontFamily="sans-serif-medium"
+                android:text="Geri"
+                android:textColor="@color/colorWhite"
+                android:textSize="20sp" />
+
+            <Button
+                android:id="@+id/btnAddVaryantGruplari"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/btn_rounded_blue"
+                android:fontFamily="sans-serif-medium"
+                android:text="GRUP EKLE"
+                android:textColor="@color/colorWhite"
+                android:textSize="20sp" />
+        </LinearLayout>
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvVaryantGruplari"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/llGrupEkleme" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

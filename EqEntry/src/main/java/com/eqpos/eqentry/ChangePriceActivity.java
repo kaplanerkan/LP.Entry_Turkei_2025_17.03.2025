@@ -2,8 +2,6 @@ package com.eqpos.eqentry;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,23 +16,19 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.baoyz.swipemenulistview.SwipeMenu;
 import com.baoyz.swipemenulistview.SwipeMenuCreator;
 import com.baoyz.swipemenulistview.SwipeMenuItem;
 import com.baoyz.swipemenulistview.SwipeMenuListView;
-import com.eqpos.eqentry.Adapters.ProductListAdapter;
-import com.eqpos.eqentry.DB.ProductDao;
-import com.eqpos.eqentry.Models.Product;
+import com.eqpos.eqentry.adapters.ProductListAdapter;
+import com.eqpos.eqentry.db.ProductDao;
+import com.eqpos.eqentry.models.Product;
 import com.eqpos.eqentry.tools.CaptureActivityPortrait;
 import com.eqpos.eqentry.tools.Variables;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.HashMap;

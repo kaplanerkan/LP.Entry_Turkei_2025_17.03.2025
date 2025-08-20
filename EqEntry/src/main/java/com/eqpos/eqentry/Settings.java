@@ -3,12 +3,9 @@ package com.eqpos.eqentry;
 import static android.Manifest.permission.BLUETOOTH_CONNECT;
 import static android.Manifest.permission.BLUETOOTH_SCAN;
 
-import android.Manifest;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.bluetooth.BluetoothAdapter;
-import android.bluetooth.BluetoothDevice;
-import android.bluetooth.BluetoothSocket;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
@@ -34,15 +31,12 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.eqpos.eqentry.DB.BarcodeDao;
-import com.eqpos.eqentry.DB.Dao;
-import com.eqpos.eqentry.DB.Database;
-import com.eqpos.eqentry.DB.InvoiceDao;
-import com.eqpos.eqentry.DB.SettingsDao;
-import com.eqpos.eqentry.DB.SyncDB;
-import com.eqpos.eqentry.Models.BarcodeSettings;
-import com.eqpos.eqentry.Printing.DeviceListActivity;
-import com.eqpos.eqentry.Printing.PrintDao;
+import com.eqpos.eqentry.db.BarcodeDao;
+import com.eqpos.eqentry.db.SettingsDao;
+import com.eqpos.eqentry.db.SyncDB;
+import com.eqpos.eqentry.models.BarcodeSettings;
+import com.eqpos.eqentry.printing.DeviceListActivity;
+import com.eqpos.eqentry.printing.PrintDao;
 import com.eqpos.eqentry.tools.Bluetooth;
 import com.eqpos.eqentry.tools.JSONProcess;
 import com.eqpos.eqentry.tools.SharedPrefUtil;
@@ -50,10 +44,7 @@ import com.eqpos.eqentry.tools.SocketProcess;
 import com.eqpos.eqentry.tools.Variables;
 import com.google.gson.JsonObject;
 
-import org.json.JSONObject;
-
 import java.io.IOException;
-import java.util.Set;
 
 import static com.eqpos.eqentry.tools.Bluetooth.closeSocket;
 import static com.eqpos.eqentry.tools.Bluetooth.connectToPrinter;

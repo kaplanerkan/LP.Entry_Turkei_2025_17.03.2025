@@ -1,28 +1,24 @@
 package com.eqpos.eqentry;
 
-import android.app.Application;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
+
 import androidx.appcompat.app.AppCompatActivity;
 //import android.support.annotation.Nullable;
 //import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.ContextMenu;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListView;
 
 import com.baoyz.swipemenulistview.SwipeMenu;
 import com.baoyz.swipemenulistview.SwipeMenuCreator;
 import com.baoyz.swipemenulistview.SwipeMenuItem;
 import com.baoyz.swipemenulistview.SwipeMenuListView;
-import com.eqpos.eqentry.Adapters.ProductListAdapter;
-import com.eqpos.eqentry.DB.ProductDao;
+import com.eqpos.eqentry.adapters.ProductListAdapter;
+import com.eqpos.eqentry.db.ProductDao;
 import com.eqpos.eqentry.tools.CaptureActivityPortrait;
 import com.eqpos.eqentry.tools.Variables;
 import com.google.zxing.integration.android.IntentIntegrator;
@@ -32,7 +28,7 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import com.eqpos.eqentry.Printing.PrintLabel;
+import com.eqpos.eqentry.printing.PrintLabel;
 
 public class PrintLabelActivity extends AppCompatActivity implements View.OnClickListener {
 

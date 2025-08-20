@@ -10,7 +10,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
-import com.eqpos.eqentry.DB.ProductDao;
 import com.eqpos.eqentry.tools.Variables;
 
 public class GetAmountActivity extends AppCompatActivity implements View.OnClickListener {

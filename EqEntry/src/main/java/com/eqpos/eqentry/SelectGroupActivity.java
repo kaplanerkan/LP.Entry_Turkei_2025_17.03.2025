@@ -7,8 +7,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.GridView;
 
-import com.eqpos.eqentry.Adapters.ButtonAdapter_ProductGroup;
-import com.eqpos.eqentry.DB.ProductDao;
+import com.eqpos.eqentry.adapters.ButtonAdapter_ProductGroup;
+import com.eqpos.eqentry.db.ProductDao;
 
 import java.util.ArrayList;
 import java.util.HashMap;

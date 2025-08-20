@@ -1,10 +1,6 @@
 package com.eqpos.eqentry;
 
 import android.content.Intent;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,20 +14,18 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.baoyz.swipemenulistview.SwipeMenu;
 import com.baoyz.swipemenulistview.SwipeMenuCreator;
 import com.baoyz.swipemenulistview.SwipeMenuItem;
 import com.baoyz.swipemenulistview.SwipeMenuListView;
-import com.eqpos.eqentry.Adapters.ProductListAdapter;
-import com.eqpos.eqentry.DB.CustomerDao;
-import com.eqpos.eqentry.DB.OrderDao;
-import com.eqpos.eqentry.DB.ProductDao;
-import com.eqpos.eqentry.DB.SendDao;
+import com.eqpos.eqentry.adapters.ProductListAdapter;
+import com.eqpos.eqentry.db.CustomerDao;
+import com.eqpos.eqentry.db.OrderDao;
+import com.eqpos.eqentry.db.ProductDao;
+import com.eqpos.eqentry.db.SendDao;
 import com.eqpos.eqentry.tools.CaptureActivityPortrait;
 import com.eqpos.eqentry.tools.Variables;
 import com.google.zxing.integration.android.IntentIntegrator;
@@ -42,9 +36,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import static com.eqpos.eqentry.Printing.PrintLabel.*;
-
-import static com.eqpos.eqentry.DB.ProductDao.getProductList;
+import static com.eqpos.eqentry.printing.PrintLabel.*;
 
 public class ProductsActivity extends AppCompatActivity implements View.OnClickListener, View.OnCreateContextMenuListener {
     private ArrayList<HashMap<String, String>> gProductList;

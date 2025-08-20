@@ -3,7 +3,6 @@ package com.eqpos.eqentry;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,15 +13,11 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
-import com.eqpos.eqentry.DB.CustomerDao;
-import com.eqpos.eqentry.DB.Dao;
-import com.eqpos.eqentry.DB.ProductDao;
-import com.eqpos.eqentry.DB.SendDao;
-import com.eqpos.eqentry.DB.SettingsDao;
-import com.eqpos.eqentry.DB.SyncDB;
-import com.eqpos.eqentry.tools.SocketProcess;
-
-import java.io.IOException;
+import com.eqpos.eqentry.db.CustomerDao;
+import com.eqpos.eqentry.db.Dao;
+import com.eqpos.eqentry.db.ProductDao;
+import com.eqpos.eqentry.db.SendDao;
+import com.eqpos.eqentry.db.SyncDB;
 
 public class SendDataActivity extends AppCompatActivity implements View.OnClickListener {
     private Button btSendChangePrices;

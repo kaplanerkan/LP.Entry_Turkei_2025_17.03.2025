@@ -208,4 +208,7 @@
     <string name="menusettings">Menü Ayarları</string>
     <string name="_select_customer">Lütfen müşteri seçin</string>
     <string name="son_bakiye">Son Bakiye</string>
+
+    <string name="product_already_exists">Ürün önceden kayıtlı</string>
+    <string name="save_and_senden">Kaydet ve gönder</string>
 </resources>

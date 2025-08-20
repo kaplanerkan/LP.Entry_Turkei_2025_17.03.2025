@@ -300,39 +300,42 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_margin="5dp"
+        android:layout_margin="10dp"
         android:gravity="right">
 
 
         <Button
-            style="@style/StdButton"
-            android:background="@drawable/std_button"
             android:id="@+id/bt_editproduct_save"
+            style="@style/StdButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:drawableLeft="@mipmap/img_save"
-            android:text="@string/save" />
+            android:background="@drawable/std_button"
+            android:drawableStart="@mipmap/img_save"
+            android:text="@string/save"
+            android:visibility="gone" />
 
         <Button
             android:id="@+id/bt_printproduct"
             style="@style/StdButton"
-            android:layout_width="wrap_content"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:background="@drawable/std_button"
-            android:drawableLeft="@mipmap/img_label"
+            android:drawableStart="@mipmap/img_label"
             android:text="@string/print"
-            android:visibility="gone" />
-            android:layout_gravity="right"/>
+            android:visibility="visible" />
+           />
 
         <Button
             android:id="@+id/bt_editproduct_save_and_send"
             style="@style/StdButton"
-            android:layout_width="wrap_content"
+            android:layout_weight="1"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_gravity="right"
             android:background="@drawable/std_button"
-            android:drawableLeft="@mipmap/img_send"
-            android:text="@string/senddatas"
-            android:visibility="gone" />
+            android:drawableStart="@mipmap/img_send"
+            android:text="@string/save_and_senden"
+            android:visibility="visible" />
     </LinearLayout>
 </LinearLayout>

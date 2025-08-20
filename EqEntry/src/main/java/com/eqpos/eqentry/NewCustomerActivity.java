@@ -7,8 +7,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.eqpos.eqentry.DB.CustomerDao;
-import com.eqpos.eqentry.Models.Customer;
+import com.eqpos.eqentry.db.CustomerDao;
+import com.eqpos.eqentry.models.Customer;
 import com.eqpos.eqentry.tools.Variables;
 
 public class NewCustomerActivity extends AppCompatActivity {

@@ -17,4 +17,11 @@
     <color name="ProductGroup_Button_background_start">#00FFFF</color>
     <color name="colorButtonBackground">#ffffff</color>
     <color name="colorButtonBorder">#f0f0f0</color>
+
+
+    <color name="Secili_Button_background_start">#3BF72B</color>
+    <color name="Secili_Button_background_end">#217718</color>
+    <color name="turkuaz">#008CA6</color>
+    <color name="red_700">#D32F2F</color>
+    <color name="green_700">#388E3C</color>
 </resources>

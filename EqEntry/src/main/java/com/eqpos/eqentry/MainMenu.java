@@ -2,7 +2,6 @@ package com.eqpos.eqentry;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.media.Image;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,146 +13,118 @@ import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.view.View;
-import android.widget.ImageButton;
 
-import com.eqpos.eqentry.DB.Dao;
-import com.eqpos.eqentry.DB.Database;
-import com.eqpos.eqentry.DB.ProductDao;
-import com.eqpos.eqentry.Models.StockTransfer;
+import com.eqpos.eqentry.databinding.ActivityMainMenuBinding;
+import com.eqpos.eqentry.db.Dao;
+import com.eqpos.eqentry.db.Database;
 import com.eqpos.eqentry.tools.JSONProcess;
 import com.eqpos.eqentry.tools.SocketProcess;
 import com.eqpos.eqentry.tools.Variables;
+import com.eqpos.eqentry.views.varyants.Varyants;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
 import static android.view.View.GONE;
 
 public class MainMenu extends AppCompatActivity implements View.OnClickListener {
-    Button btPrintLabel;
-    Button btProducts;
-    Button btChangePrice;
-    Button btPurchaseOrder;
-    Button btStockEntry;
-    Button btSendDatas;
-    Button btInventory;
-    Button btInvoices;
-    Button btCustomers;
-    Button btTransfers;
-    Button btManagement;
-    Button btReports;
-    //ImageButton btMainLogo;
-
     private String m_Text = "";
     private int _SELECTUSER=100;
+
+    private ActivityMainMenuBinding binding;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main_menu);
+
+        //setContentView(R.layout.activity_main_menu);
+        binding = ActivityMainMenuBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+
         this.setTitle(R.string.app_name);
 
         Database.vtContext = this;
+        initViews();
 
-        btProducts = (Button) findViewById(R.id.bt_menu_productlist);
-        btChangePrice = (Button) findViewById(R.id.bt_menu_changeprice);
-        btPrintLabel = (Button) findViewById(R.id.bt_menu_printlabel);
-        btPurchaseOrder = (Button) findViewById(R.id.bt_menu_purchaseorder);
-        btStockEntry = (Button) findViewById(R.id.bt_menu_stockentry);
-        btSendDatas = (Button) findViewById(R.id.bt_menu_send);
-        btInventory = (Button) findViewById(R.id.bt_menu_inventory);
-        btInvoices = (Button) findViewById(R.id.bt_menu_invoice);
-        btCustomers = (Button) findViewById(R.id.bt_menu_customers);
-        btTransfers = (Button) findViewById(R.id.bt_menu_stocktransfer);
-        btManagement = (Button) findViewById(R.id.bt_menu_management);
-        btReports = (Button) findViewById(R.id.bt_menu_reports);
+        binding.btTransfers.setEnabled(Dao.Language == "tr");
 
-        btProducts.setOnClickListener(this);
-        btChangePrice.setOnClickListener(this);
-        btPrintLabel.setOnClickListener(this);
-        btPurchaseOrder.setOnClickListener(this);
-        btStockEntry.setOnClickListener(this);
-        btSendDatas.setOnClickListener(this);
-        btInventory.setOnClickListener(this);
-        btInvoices.setOnClickListener(this);
-        btCustomers.setOnClickListener(this);
-        btTransfers.setOnClickListener(this);
+        binding.btProducts.setVisibility((Variables.showbtProducts) ? View.VISIBLE  : GONE );
+        binding.btChangePrice.setVisibility((Variables.showbtChangePrice) ? View.VISIBLE  : GONE );
+        binding.btPrintLabel.setVisibility((Variables.showbtPrintLabel) ? View.VISIBLE  : GONE );
+        binding.btPurchaseOrder.setVisibility((Variables.showbtPurchaseOrder) ? View.VISIBLE  : GONE );
+        binding.btStockEntry.setVisibility((Variables.showbtStockEntry) ? View.VISIBLE  : GONE );
+        binding.btSendDatas.setVisibility((Variables.showbtSendDatas) ? View.VISIBLE  : GONE );
+        binding.btInventory.setVisibility((Variables.showbtInventory) ? View.VISIBLE  : GONE );
+        binding.btInvoices.setVisibility((Variables.showbtInvoices) ? View.VISIBLE  : GONE );
+        binding.btCustomers.setVisibility((Variables.showbtCustomers) ? View.VISIBLE  : GONE );
+        binding.btTransfers.setVisibility((Variables.showbtTransfers) ? View.VISIBLE  : GONE );
+        binding.btManagement.setVisibility((Variables.showbtManagement) ? View.VISIBLE  : GONE );
+        binding.btReports.setVisibility((Variables.showbtReports) ? View.VISIBLE  : GONE );
 
-        btTransfers.setEnabled(Dao.Language == "tr");
-
-        btProducts.setVisibility((Variables.showbtProducts) ? View.VISIBLE  : GONE );
-        btChangePrice.setVisibility((Variables.showbtChangePrice) ? View.VISIBLE  : GONE );
-        btPrintLabel.setVisibility((Variables.showbtPrintLabel) ? View.VISIBLE  : GONE );
-        btPurchaseOrder.setVisibility((Variables.showbtPurchaseOrder) ? View.VISIBLE  : GONE );
-        btStockEntry.setVisibility((Variables.showbtStockEntry) ? View.VISIBLE  : GONE );
-        btSendDatas.setVisibility((Variables.showbtSendDatas) ? View.VISIBLE  : GONE );
-        btInventory.setVisibility((Variables.showbtInventory) ? View.VISIBLE  : GONE );
-        btInvoices.setVisibility((Variables.showbtInvoices) ? View.VISIBLE  : GONE );
-        btCustomers.setVisibility((Variables.showbtCustomers) ? View.VISIBLE  : GONE );
-        btTransfers.setVisibility((Variables.showbtTransfers) ? View.VISIBLE  : GONE );
-        btManagement.setVisibility((Variables.showbtManagement) ? View.VISIBLE  : GONE );
-        btReports.setVisibility((Variables.showbtReports) ? View.VISIBLE  : GONE );
-
-
-
-
-        if (BuildConfig.DEBUG) {
-            //btMainLogo.setOnClickListener(this);
-        }
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-//        if (resultCode == RESULT_OK && requestCode == _SELECTUSER) {
-//
-//            if (data.getIntExtra("authority", 1) == 0) {
-//
-//                Intent sendDatasIntent = new Intent(this, SendDataActivity.class);
-//                startActivity(sendDatasIntent);
-//            }
-//        }
+    private void initViews() {
+
+        binding.btProducts.setOnClickListener(view -> {
+            Intent productsintent = new Intent(MainMenu.this, ProductsActivity.class);
+            startActivity(productsintent);
+        });
+
+        binding.btChangePrice.setOnClickListener(this);
+        binding.btPrintLabel.setOnClickListener(this);
+        binding.btPurchaseOrder.setOnClickListener(this);
+        binding.btStockEntry.setOnClickListener(this);
+        binding.btSendDatas.setOnClickListener(this);
+        binding.btInventory.setOnClickListener(this);
+        binding.btInvoices.setOnClickListener(this);
+        binding.btCustomers.setOnClickListener(this);
+        binding.btTransfers.setOnClickListener(this);
+
+        binding.btnAddVaryants.setOnClickListener(view -> {
+            Intent varyants = new Intent(MainMenu.this, Varyants.class);
+            startActivity(varyants);
+        });
     }
+
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.bt_menu_productlist:
-                Intent productsintent = new Intent(this, ProductsActivity.class);
-                startActivity(productsintent);
-                break;
-            case R.id.bt_menu_changeprice:
+
+            case R.id.btChangePrice:
                 Intent changePriceIntent = new Intent(this, ChangePriceActivity.class);
                 startActivity(changePriceIntent);
                 break;
-            case R.id.bt_menu_printlabel:
+            case R.id.btPrintLabel:
                 Intent printLabelIntent = new Intent(this, PrintLabelActivity.class);
                 startActivity(printLabelIntent);
                 break;
-            case R.id.bt_menu_purchaseorder:
+            case R.id.btPurchaseOrder:
                 Intent purchaseOrderIntent = new Intent(this, PurchaseOrderActivity.class);
                 startActivity(purchaseOrderIntent);
                 break;
-            case R.id.bt_menu_stockentry:
+            case R.id.btStockEntry:
                 Intent stockEntryListIntent = new Intent(this, StockEntryListActivity.class);
                 startActivity(stockEntryListIntent);
                 break;
-            case R.id.bt_menu_inventory:
+            case R.id.btInventory:
                 Intent inventoryIntent = new Intent(this, InventurActivity.class);
                 startActivity(inventoryIntent);
                 break;
-            case R.id.bt_menu_invoice:
+            case R.id.btInvoices:
                 Intent invoiceIntent = new Intent(this, InvoiceActivity.class);
                 startActivity(invoiceIntent);
                 break;
-            case R.id.bt_menu_customers:
+            case R.id.btCustomers:
                 Intent customersIntent = new Intent(this, CustomersActivity.class);
                 startActivity(customersIntent);
                 break;
-            case R.id.bt_menu_stocktransfer:
+            case R.id.btTransfers:
                 Intent TransferIntent = new Intent(this, StockTransferListActivity.class);
                 startActivity(TransferIntent);
                 break;
 
-            case R.id.bt_menu_send:
+            case R.id.btSendDatas:
                 //burada admin şifresi istenecek
                 final AlertDialog.Builder builder = new AlertDialog.Builder(this);
                 builder.setTitle(getString(R.string.prompt_password));
@@ -162,27 +133,21 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener 
                 input.setInputType(InputType.TYPE_CLASS_NUMBER| InputType.TYPE_NUMBER_VARIATION_PASSWORD);
                 builder.setView(input);
 
-                builder.setPositiveButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        m_Text = input.getText().toString();
+                builder.setPositiveButton(getString(R.string.ok), (dialog, which) -> {
+                    m_Text = input.getText().toString();
 
-                        if (m_Text.length() > 0) {
-                            if (isAdmin(m_Text)) {
+                    if (!m_Text.isEmpty()) {
+                        if (isAdmin(m_Text)) {
 
-                                Intent sendDatasIntent = new Intent(builder.getContext(), SendDataActivity.class);
-                                startActivity(sendDatasIntent);
-                            }
-                            m_Text = "";
+                            Intent sendDatasIntent = new Intent(builder.getContext(), SendDataActivity.class);
+                            startActivity(sendDatasIntent);
                         }
-                    }
-                });
-                builder.setNegativeButton(getString(R.string.cancel), new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.cancel();
                         m_Text = "";
                     }
+                });
+                builder.setNegativeButton(getString(R.string.cancel), (dialog, which) -> {
+                    dialog.cancel();
+                    m_Text = "";
                 });
 
                 builder.show();
@@ -216,11 +181,7 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener 
                 builder1.setMessage(getString(R.string.error_incorrect_password));
                 builder1.setCancelable(true);
                 builder1.setPositiveButton("Ok",
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                dialog.cancel();
-                            }
-                        });
+                        (dialog, id) -> dialog.cancel());
                 AlertDialog alert11 = builder1.create();
                 alert11.show();
                 Log.e("admin password ", e.getMessage());

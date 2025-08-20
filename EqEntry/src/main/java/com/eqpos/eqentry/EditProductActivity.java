@@ -5,7 +5,6 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 //import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -13,9 +12,9 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.eqpos.eqentry.DB.ProductDao;
-import com.eqpos.eqentry.DB.SendDao;
-import com.eqpos.eqentry.Models.Product;
+import com.eqpos.eqentry.db.ProductDao;
+import com.eqpos.eqentry.db.SendDao;
+import com.eqpos.eqentry.models.Product;
 import com.eqpos.eqentry.tools.CaptureActivityPortrait;
 import com.eqpos.eqentry.tools.Variables;
 import com.google.zxing.integration.android.IntentIntegrator;
@@ -24,7 +23,7 @@ import com.google.zxing.integration.android.IntentResult;
 import java.text.ParseException;
 import java.util.List;
 
-import static com.eqpos.eqentry.Printing.PrintLabel.printLabel;
+import static com.eqpos.eqentry.printing.PrintLabel.printLabel;
 
 public class EditProductActivity extends AppCompatActivity implements View.OnClickListener {
     private List<String> gTaxList;
@@ -182,11 +181,18 @@ public class EditProductActivity extends AppCompatActivity implements View.OnCli
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.bt_editproduct_save:
-                saveProduct();
-                Toast.makeText(EditProductActivity.this, R.string.update_was_done, Toast.LENGTH_SHORT).show();
-                btPrint.setVisibility(View.VISIBLE);
-                btSend.setVisibility(View.VISIBLE);
-                btKaydet.setVisibility(View.INVISIBLE);
+
+                boolean isOncedenKayitliUrunmu =urunOncedenKayitliUrunmu();
+                if (isOncedenKayitliUrunmu) {
+                    Toast.makeText(EditProductActivity.this, R.string.product_already_exists, Toast.LENGTH_SHORT).show();
+                }else {
+                    saveProduct();
+
+//                    btPrint.setVisibility(View.VISIBLE);
+//                    btSend.setVisibility(View.VISIBLE);
+//                    btKaydet.setVisibility(View.INVISIBLE);
+                }
+
 
                 break;
 
@@ -209,27 +215,58 @@ public class EditProductActivity extends AppCompatActivity implements View.OnCli
                 break;
             case R.id.bt_editproduct_save_and_send:
                 //saveProduct();
-                if (ProductDao.isThereNewOrUpdatedProduct())
-                    SendDao.sendProducts();
-                SendDao.sendChangedPrices();
 
-                if(!isFinishing())
-                {
-                    Toast.makeText(EditProductActivity.this, R.string.update_was_done, Toast.LENGTH_SHORT).show();
+                boolean isOncedenKayitliUrunmu2 =urunOncedenKayitliUrunmu();
+                if (isOncedenKayitliUrunmu2) {
+                    Toast.makeText(EditProductActivity.this, R.string.product_already_exists, Toast.LENGTH_SHORT).show();
+                }else {
+                    saveProduct();
+                    if (ProductDao.isThereNewOrUpdatedProduct())
+                        SendDao.sendProducts();
+                    SendDao.sendChangedPrices();
+
+                    if(!isFinishing()) {
+                        Toast.makeText(EditProductActivity.this, R.string.update_was_done, Toast.LENGTH_SHORT).show();
+                    }
+
+                    finish();
+
+
                 }
-                finish();
+
+
                 break;
         }
     }
 
-    private void saveProduct()
-    {
+
+    private boolean urunOncedenKayitliUrunmu() {
+        String barcode = edBarcode.getText().toString();
+        String urunAdi = edProductName.getText().toString();
+
+        if (edProductName.getText().toString().isEmpty() || cmbGroup.getSelectedItemPosition()<=0 ||
+                cmbTax.getSelectedItemPosition()<=0 || cmbUnit.getSelectedItemPosition()<=0) {
+            Toast.makeText(this, R.string.msg_dont_empty_name_group_tax, Toast.LENGTH_LONG).show();
+
+        return false;
+        }
+
+        return ProductDao.checUrunMevcutmu(barcode, urunAdi);
+    }
+
+
+    private void saveProduct() {
         if (edProductName.getText().toString().isEmpty() || cmbGroup.getSelectedItemPosition()<=0 ||
                 cmbTax.getSelectedItemPosition()<=0 || cmbUnit.getSelectedItemPosition()<=0) {
             Toast.makeText(this, R.string.msg_dont_empty_name_group_tax, Toast.LENGTH_LONG).show();
 
             return;
         }
+
+//        btPrint.setVisibility(View.VISIBLE);
+//        btSend.setVisibility(View.VISIBLE);
+//        btKaydet.setVisibility(View.INVISIBLE);
+
 
         gProduct.setId(gProductId);
         gProduct.setUniteName(cmbUnit.getSelectedItem().toString());
@@ -288,8 +325,11 @@ public class EditProductActivity extends AppCompatActivity implements View.OnCli
 
         try {
             ProductDao.saveProduct(gProduct);
-            Intent out = new Intent();
 
+
+            Toast.makeText(EditProductActivity.this, R.string.update_was_done, Toast.LENGTH_SHORT).show();
+
+            Intent out = new Intent();
             out.putExtra("productname", gProduct.getProductName());
             setResult(RESULT_OK, out);
 

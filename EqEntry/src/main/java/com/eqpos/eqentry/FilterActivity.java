@@ -1,25 +1,18 @@
 package com.eqpos.eqentry;
 
 import android.content.Intent;
-import android.database.Cursor;
-import android.database.DataSetObserver;
+
 import androidx.appcompat.app.AppCompatActivity;
 //import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListAdapter;
-import android.widget.SimpleAdapter;
-import android.widget.SimpleCursorAdapter;
 import android.widget.Spinner;
-import android.widget.SpinnerAdapter;
 
-import com.eqpos.eqentry.DB.ProductDao;
+import com.eqpos.eqentry.db.ProductDao;
 
-import java.util.HashMap;
 import java.util.List;
 
 public class FilterActivity extends AppCompatActivity {

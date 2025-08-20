@@ -15,11 +15,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.SearchView;
 import android.widget.Toast;
 
-import com.eqpos.eqentry.Adapters.InventurAdapter;
-import com.eqpos.eqentry.DB.SendDao;
+import com.eqpos.eqentry.adapters.InventurAdapter;
+import com.eqpos.eqentry.db.SendDao;
 import com.eqpos.eqentry.tools.CaptureActivityPortrait;
 import com.eqpos.eqentry.tools.JSONProcess;
 import com.eqpos.eqentry.tools.SocketProcess;
@@ -32,9 +31,8 @@ import com.google.zxing.integration.android.IntentResult;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import static android.widget.Toast.*;
-import static com.eqpos.eqentry.DB.InventurDao.addNewProductsToInventur;
-import static com.eqpos.eqentry.DB.InventurDao.getInventurList;
+import static com.eqpos.eqentry.db.InventurDao.addNewProductsToInventur;
+import static com.eqpos.eqentry.db.InventurDao.getInventurList;
 
 public class InventurActivity extends AppCompatActivity implements View.OnClickListener {
 

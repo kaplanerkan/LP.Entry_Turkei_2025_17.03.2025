@@ -12,14 +12,9 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.TextView;
 
-import com.eqpos.eqentry.Adapters.ProductListAdapter;
-import com.eqpos.eqentry.DB.InvoiceDao;
-import com.eqpos.eqentry.DB.ProductDao;
-import com.eqpos.eqentry.tools.Variables;
-import com.google.zxing.integration.android.IntentIntegrator;
-import com.google.zxing.integration.android.IntentResult;
+import com.eqpos.eqentry.adapters.ProductListAdapter;
+import com.eqpos.eqentry.db.ProductDao;
 
 import java.util.ArrayList;
 import java.util.HashMap;

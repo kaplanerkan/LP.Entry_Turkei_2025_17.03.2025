@@ -6,16 +6,14 @@ import androidx.appcompat.app.AppCompatActivity;
 //import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 
-import com.eqpos.eqentry.DB.ProductDao;
-import com.eqpos.eqentry.DB.StockEntryDao;
-import com.eqpos.eqentry.Models.Delivery;
+import com.eqpos.eqentry.db.StockEntryDao;
+import com.eqpos.eqentry.models.Delivery;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;

@@ -21,8 +21,8 @@ import com.baoyz.swipemenulistview.SwipeMenu;
 import com.baoyz.swipemenulistview.SwipeMenuCreator;
 import com.baoyz.swipemenulistview.SwipeMenuItem;
 import com.baoyz.swipemenulistview.SwipeMenuListView;
-import com.eqpos.eqentry.DB.StockEntryDao;
-import com.eqpos.eqentry.Printing.PrintStockEntry;
+import com.eqpos.eqentry.db.StockEntryDao;
+import com.eqpos.eqentry.printing.PrintStockEntry;
 import com.eqpos.eqentry.tools.Variables;
 
 import java.util.ArrayList;

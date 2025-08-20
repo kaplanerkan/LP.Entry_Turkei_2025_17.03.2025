@@ -28,21 +28,19 @@ import com.baoyz.swipemenulistview.SwipeMenu;
 import com.baoyz.swipemenulistview.SwipeMenuCreator;
 import com.baoyz.swipemenulistview.SwipeMenuItem;
 import com.baoyz.swipemenulistview.SwipeMenuListView;
-import com.eqpos.eqentry.DB.BarcodeDao;
-import com.eqpos.eqentry.DB.ProductDao;
-import com.eqpos.eqentry.DB.StockEntryDao;
-import com.eqpos.eqentry.Models.BarcodeSettings;
-import com.eqpos.eqentry.Models.Delivery;
-import com.eqpos.eqentry.Models.Product;
+import com.eqpos.eqentry.db.BarcodeDao;
+import com.eqpos.eqentry.db.ProductDao;
+import com.eqpos.eqentry.db.StockEntryDao;
+import com.eqpos.eqentry.models.BarcodeSettings;
+import com.eqpos.eqentry.models.Delivery;
+import com.eqpos.eqentry.models.Product;
 import com.eqpos.eqentry.tools.CaptureActivityPortrait;
 import com.eqpos.eqentry.tools.Variables;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
-import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Locale;
 
 public class NewStockEntryActivity extends AppCompatActivity implements View.OnClickListener {
     private Button btBarcode;

@@ -12,7 +12,7 @@ import com.baoyz.swipemenulistview.SwipeMenu;
 import com.baoyz.swipemenulistview.SwipeMenuCreator;
 import com.baoyz.swipemenulistview.SwipeMenuItem;
 import com.baoyz.swipemenulistview.SwipeMenuListView;
-import com.eqpos.eqentry.DB.StockTransferDao;
+import com.eqpos.eqentry.db.StockTransferDao;
 import com.eqpos.eqentry.tools.Variables;
 
 import java.util.ArrayList;

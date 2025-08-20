@@ -1,27 +1,20 @@
 package com.eqpos.eqentry.tools;
 
-import android.app.ProgressDialog;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.DisplayMetrics;
-import android.util.TypedValue;
-import android.view.View;
 
-import com.eqpos.eqentry.DB.Database;
-import com.eqpos.eqentry.Models.Product;
+import com.eqpos.eqentry.db.Database;
 
-import java.io.OutputStream;
 import java.text.DateFormat;
 import java.text.DecimalFormatSymbols;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Locale;
 import java.util.UUID;
 
 /**
@@ -109,6 +102,9 @@ public class Variables {
         cmdInputDelivery(80),
         cmdPrintLabel(90),
         cmdSaveProducts(100),
+
+        cmdGetVariants(101),
+        cmdSaveVariants(102),
         cmdSaveOrder(110),
         cmdSaveInventur(120),
         cmdSaveInvoice(130),

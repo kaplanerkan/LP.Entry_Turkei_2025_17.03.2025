@@ -14,7 +14,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
-import com.eqpos.eqentry.DB.CustomerDao;
+import com.eqpos.eqentry.db.CustomerDao;
 
 import java.util.ArrayList;
 import java.util.HashMap;

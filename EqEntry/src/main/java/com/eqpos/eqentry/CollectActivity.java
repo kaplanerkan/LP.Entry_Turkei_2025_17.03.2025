@@ -1,7 +1,7 @@
 package com.eqpos.eqentry;
 
 import android.app.DatePickerDialog;
-import android.content.Intent;
+
 import androidx.appcompat.app.AppCompatActivity;
 //import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -12,8 +12,8 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.eqpos.eqentry.DB.CustomerDao;
-import com.eqpos.eqentry.Models.Collect;
+import com.eqpos.eqentry.db.CustomerDao;
+import com.eqpos.eqentry.models.Collect;
 import com.eqpos.eqentry.tools.Variables;
 
 import java.text.DecimalFormat;

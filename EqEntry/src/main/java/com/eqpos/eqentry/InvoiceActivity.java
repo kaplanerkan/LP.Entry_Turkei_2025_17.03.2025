@@ -12,8 +12,8 @@ import com.baoyz.swipemenulistview.SwipeMenu;
 import com.baoyz.swipemenulistview.SwipeMenuCreator;
 import com.baoyz.swipemenulistview.SwipeMenuItem;
 import com.baoyz.swipemenulistview.SwipeMenuListView;
-import com.eqpos.eqentry.DB.InvoiceDao;
-import com.eqpos.eqentry.Printing.PrintInvoice;
+import com.eqpos.eqentry.db.InvoiceDao;
+import com.eqpos.eqentry.printing.PrintInvoice;
 import com.eqpos.eqentry.tools.Variables;
 
 import java.util.ArrayList;
