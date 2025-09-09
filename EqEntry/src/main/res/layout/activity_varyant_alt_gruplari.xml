@@ -43,7 +43,6 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:hint="Alt Grup ismi"
-                app:boxBackgroundColor="#FAFAFA"
                 app:boxBackgroundMode="outline"
                 app:boxStrokeColor="#B0BEC5"
 
@@ -67,7 +66,6 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:hint="Alt Grup Türü"
-                app:boxBackgroundColor="#FAFAFA"
                 app:boxBackgroundMode="outline"
                 app:boxStrokeColor="#B0BEC5"
 

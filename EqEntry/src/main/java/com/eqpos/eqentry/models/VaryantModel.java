@@ -8,7 +8,7 @@ public class VaryantModel {
     private int rowcell;
     private String aciklama;
     private int parentid;
-
+    private boolean isSelected = false; // Yeni alan: Seçili olup olmadığını tutar
 
 
     public VaryantModel() {
@@ -69,5 +69,13 @@ public class VaryantModel {
 
     public void setParentid(int parentid) {
         this.parentid = parentid;
+    }
+
+    public boolean isSelected() {
+        return isSelected;
+    }
+
+    public void setSelected(boolean selected) {
+        isSelected = selected;
     }
 }

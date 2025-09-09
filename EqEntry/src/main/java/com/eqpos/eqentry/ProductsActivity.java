@@ -1,10 +1,10 @@
 package com.eqpos.eqentry;
 
+import static com.eqpos.eqentry.printing.PrintLabel.printLabel;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import androidx.appcompat.app.AppCompatActivity;
-//import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.ContextMenu;
 import android.view.KeyEvent;
@@ -16,6 +16,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.baoyz.swipemenulistview.SwipeMenu;
 import com.baoyz.swipemenulistview.SwipeMenuCreator;
@@ -35,8 +37,6 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-
-import static com.eqpos.eqentry.printing.PrintLabel.*;
 
 public class ProductsActivity extends AppCompatActivity implements View.OnClickListener, View.OnCreateContextMenuListener {
     private ArrayList<HashMap<String, String>> gProductList;
@@ -172,12 +172,12 @@ public class ProductsActivity extends AppCompatActivity implements View.OnClickL
             }
         });
 
-      //  13.08.2024: Erkan  Otokatik olarak FilterActivity penceresinin acilmasini engelliyoruz
-     //   btOptions.performClick();
+        //  13.08.2024: Erkan  Otokatik olarak FilterActivity penceresinin acilmasini engelliyoruz
+        //   btOptions.performClick();
 
         List<String> gGroupList = ProductDao.getGroupListForSpinner(getString(R.string.all));
         if (gGroupList.size() > 2) {
-            gFilterGroupName =  gGroupList.get(1); // data.getStringExtra("groupname");
+            gFilterGroupName = gGroupList.get(1); // data.getStringExtra("groupname");
             //edSearch.setText(gFilterGroupName);
             gFilterTaxName = ""; // data.getStringExtra("taxname");
             gSortField = "productname"; // data.getStringExtra("sortfield");
@@ -239,7 +239,7 @@ public class ProductsActivity extends AppCompatActivity implements View.OnClickL
                         addProductBarcode(edSearch.getText().toString());
 
                     }
-                }catch (Exception e) {
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
 
@@ -248,7 +248,6 @@ public class ProductsActivity extends AppCompatActivity implements View.OnClickL
             return true;
         });
     }
-
 
 
     @Override
@@ -287,9 +286,9 @@ public class ProductsActivity extends AppCompatActivity implements View.OnClickL
 
         this.filitretipi = 0;
 
-       if(gProductList.isEmpty()) return false ;
+        if (gProductList.isEmpty()) return false;
 
-       return true;
+        return true;
     }
 
     private boolean getProductList_Erkan(int filterType) {
@@ -300,11 +299,10 @@ public class ProductsActivity extends AppCompatActivity implements View.OnClickL
 
         this.filitretipi = 0;
 
-        if(gProductList.isEmpty()) return false ;
+        if (gProductList.isEmpty()) return false;
 
         return true;
     }
-
 
 
     private void editProduct(int productId) {
@@ -342,14 +340,14 @@ public class ProductsActivity extends AppCompatActivity implements View.OnClickL
     }
 
     private void removeFromLabelList(int productId, int priceOrder) {
-        ProductDao.removeFromLabelList(productId,priceOrder);
+        ProductDao.removeFromLabelList(productId, priceOrder);
         getProductList(0);
         listProducts();
         lsList.setSelection(lastPosition);
     }
 
-    private void printLabelDirectly(String productname,String price,String barcode, String unitamount, String amountunite) throws ParseException {
-        printLabel(productname, price, barcode, unitamount, amountunite );
+    private void printLabelDirectly(String productname, String price, String barcode, String unitamount, String amountunite) throws ParseException {
+        printLabel(productname, price, barcode, unitamount, amountunite);
         getProductList(0);
         listProducts();
         lsList.setSelection(lastPosition);
@@ -385,7 +383,7 @@ public class ProductsActivity extends AppCompatActivity implements View.OnClickL
                 try {
                     getProductList_Erkan(0);
                     this.listProducts();
-                }catch (Exception ex){
+                } catch (Exception ex) {
                     Log.e("Error", ex.getMessage());
                 }
 
@@ -400,8 +398,7 @@ public class ProductsActivity extends AppCompatActivity implements View.OnClickL
                 if (ProductDao.isThereNewOrUpdatedProduct())
                     SendDao.sendProducts();
                 SendDao.sendChangedPrices();
-                if(!isFinishing())
-                {
+                if (!isFinishing()) {
                     Toast.makeText(ProductsActivity.this, R.string.update_was_done, Toast.LENGTH_SHORT).show();
                 }
 
@@ -418,6 +415,7 @@ public class ProductsActivity extends AppCompatActivity implements View.OnClickL
 
     @Override
     public void onBackPressed() {
+        super.onBackPressed();
 
         Intent siparis = new Intent(this, MainMenu.class);
         startActivity(siparis);
@@ -466,10 +464,10 @@ public class ProductsActivity extends AppCompatActivity implements View.OnClickL
                 edSearch.setText(contents);
                 getProductList(this.filitretipi);
 
-                boolean result =  this.getProductList(this.filitretipi);
-                if(!result){
+                boolean result = this.getProductList(this.filitretipi);
+                if (!result) {
                     addProductBarcode(edSearch.getText().toString());
-                }else {
+                } else {
                     listProducts();
                 }
             }
@@ -536,8 +534,7 @@ public class ProductsActivity extends AppCompatActivity implements View.OnClickL
 
                 case 5:
                     sendProduct();
-                    if(!isFinishing())
-                    {
+                    if (!isFinishing()) {
                         Toast.makeText(ProductsActivity.this, R.string.update_was_done, Toast.LENGTH_SHORT).show();
                     }
                     break;

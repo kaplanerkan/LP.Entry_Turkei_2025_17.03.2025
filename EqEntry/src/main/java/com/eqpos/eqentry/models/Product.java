@@ -50,6 +50,11 @@ public class Product {
     private int priceOrder = 1;
     private String stockCode="";
 
+    private int varyant_anagrupid=0;
+    private int varyant_alt_grupid=0;
+
+
+
     public int getId() {
         return id;
     }
@@ -399,4 +404,20 @@ public class Product {
         this.stockCode = stockCode;
     }
 
+
+    public int getVaryant_anagrupid() {
+        return varyant_anagrupid;
+    }
+
+    public void setVaryant_anagrupid(int varyant_anagrupid) {
+        this.varyant_anagrupid = varyant_anagrupid;
+    }
+
+    public int getVaryant_alt_grupid() {
+        return varyant_alt_grupid;
+    }
+
+    public void setVaryant_alt_grupid(int varyant_alt_grupid) {
+        this.varyant_alt_grupid = varyant_alt_grupid;
+    }
 }

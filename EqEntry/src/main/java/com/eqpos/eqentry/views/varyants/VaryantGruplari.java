@@ -10,7 +10,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.eqpos.eqentry.databinding.ActivityVaryantGruplariBinding;
 import com.eqpos.eqentry.db.VaryantsDao;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
@@ -18,10 +17,11 @@ public class VaryantGruplari extends AppCompatActivity {
 
     private int mainParentGrupId = 0;
     private String mainGrupIsmi = "";
+    private int sira = 0;
     private ActivityVaryantGruplariBinding binding;
     private VaryantAdapterGruplar adapter;
     private VaryantViewModelGruplar viewModel;
-    private int sira = 0;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +46,7 @@ public class VaryantGruplari extends AppCompatActivity {
         otomatikVeriDoldurmaIsmeleri();
     }
 
-    private void otomatikVeriDoldurmaIsmeleri(){
+    private void otomatikVeriDoldurmaIsmeleri() {
         // Veritabanından çekilen verileri simüle eden bir liste
         List<String> veriListesi = VaryantsDao.getAllGrupTurleri(1, mainParentGrupId);  // 1, ana grup türlerini temsil ediyor
 

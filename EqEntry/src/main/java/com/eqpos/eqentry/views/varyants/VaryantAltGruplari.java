@@ -16,10 +16,11 @@ import java.util.Locale;
 public class VaryantAltGruplari extends AppCompatActivity {
     private int mainParentGrupId = 0;
     private String mainGrupIsmi = "";
+    private int sira = 0;
     private ActivityVaryantAltGruplariBinding binding;
     private VaryantAdapterAltGruplar adapter;
     private VaryantViewModelAltGruplar viewModel;
-    private int sira = 0;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

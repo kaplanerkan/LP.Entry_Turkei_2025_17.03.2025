@@ -25,6 +25,15 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".views.varyants_add_to_product.VaryantsEkleAltGruplari"
+            android:exported="false" />
+        <activity
+            android:name=".views.varyants_add_to_product.VaryantsEkleGruplari"
+            android:exported="false" />
+        <activity
+            android:name=".views.varyants_add_to_product.VaryantsEkle"
+            android:exported="false" />
+        <activity
             android:name=".views.varyants.VaryantAltGruplari"
             android:exported="false" />
         <activity

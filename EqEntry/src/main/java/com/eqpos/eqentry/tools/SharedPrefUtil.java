@@ -16,6 +16,7 @@ import java.lang.reflect.Method;
 public class SharedPrefUtil {
 
     public static final String KEY_BLE_PRINTER_STATUS = "KEY_BLE_PRINTER_STATUS";
+    public static final String KEY_VARYANT_SATIS_FIYATI = "KEY_VARYANT_SATIS_FIYATI";
 
     private static final String PREFER_NAME = "Reg";
     private static SharedPrefUtil instance;

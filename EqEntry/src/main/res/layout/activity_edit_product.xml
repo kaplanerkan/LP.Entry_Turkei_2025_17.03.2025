@@ -1,12 +1,374 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.eqpos.eqentry.EditProductActivity">
+    android:fillViewport="true">
 
-    <include layout="@layout/content_edit_product" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="10dp">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="1dp"
+            android:layout_marginRight="5dp"
+            android:orientation="horizontal">
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.3"
+                android:text="@string/barcode" />
+
+            <EditText
+                android:id="@+id/edEditproductBarcode"
+                style="@style/AppTheme.EditText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.7"
+                android:lines="1"
+                android:maxLength="50"
+                android:maxLines="1" />
+
+            <Button
+                android:id="@+id/bt_editproduct_barcode"
+                style="@style/StdButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:background="@drawable/std_button"
+                android:text="@string/barcode" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="1dp"
+            android:layout_marginRight="5dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.3"
+                android:text="@string/plu" />
+
+            <EditText
+                android:id="@+id/edEditproductPlu"
+                style="@style/AppTheme.EditText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.7"
+                android:maxLength="50" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="1dp"
+            android:layout_marginRight="5dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.3"
+                android:text="@string/origin" />
+
+            <EditText
+                android:id="@+id/edEditproductOrigin"
+                style="@style/AppTheme.EditText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.7"
+                android:maxLength="50" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="1dp"
+            android:layout_marginRight="5dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.3"
+                android:text="@string/productname" />
+
+            <EditText
+                android:id="@+id/edEditproductProductname"
+                style="@style/AppTheme.EditText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.7"
+                android:maxLength="150"
+                android:maxLines="2" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="1dp"
+            android:layout_marginRight="5dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.3"
+                android:text="@string/groupname" />
+
+            <Spinner
+                android:id="@+id/cmbEditproductGroupname"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.7" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="1dp"
+            android:layout_marginRight="5dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.3"
+                android:text="@string/taxname" />
+
+            <Spinner
+                android:id="@+id/cmbEditproductTaxname"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.7" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="1dp"
+            android:layout_marginRight="5dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.3"
+                android:text="@string/unitname" />
+
+            <Spinner
+                android:id="@+id/cmbEditproductUnitname"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.7" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="1dp"
+            android:layout_marginRight="5dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.3"
+                android:text="@string/gramaj" />
+
+            <EditText
+                android:id="@+id/edEditproductGramaj"
+                style="@style/AppTheme.EditText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.4"
+                android:inputType="number" />
+
+            <Spinner
+                android:id="@+id/cmbEditproductGramaj"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.3"
+                android:entries="@array/gramajfield" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="1dp"
+            android:layout_marginRight="5dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.3"
+                android:text="@string/costprice" />
+
+            <EditText
+                android:id="@+id/edEditproductCostprice"
+                style="@style/AppTheme.EditText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.7"
+                android:digits="0123456789.,"
+                android:inputType="numberDecimal" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="1dp"
+            android:layout_marginRight="5dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.3"
+                android:text="@string/sellprice" />
+
+            <EditText
+                android:id="@+id/edEditproductSellprice"
+                style="@style/AppTheme.EditText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.7"
+                android:digits="0123456789.,"
+                android:inputType="numberDecimal" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="1dp"
+            android:layout_marginRight="5dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.3"
+                android:text="@string/deposit" />
+
+            <Spinner
+                android:id="@+id/cmbEditproductDeposite"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.7"
+                android:padding="4dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="1dp"
+            android:layout_marginRight="5dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.3"
+                android:text="@string/description" />
+
+            <EditText
+                android:id="@+id/edEditproductDescription"
+                style="@style/AppTheme.EditText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.7"
+                android:maxLength="250"
+                android:maxLines="6" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:padding="5dp">
+
+            <Button
+                android:id="@+id/btnAddVaryants"
+                style="@style/StdButton2"
+                android:layout_width="150dp"
+                android:layout_height="80dp"
+                android:layout_weight="1"
+                android:background="@drawable/std_button"
+                android:drawableTop="@drawable/varyants"
+                android:paddingTop="5dp"
+                android:text="Varyants Ekle"
+                android:textSize="12sp"
+                android:visibility="visible" />
+
+            <Button
+                android:id="@+id/bt_editproduct_save"
+                style="@style/StdButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/std_button"
+                android:drawableStart="@mipmap/img_save"
+                android:text="@string/save"
+                android:visibility="gone" />
+
+            <Button
+                android:id="@+id/bt_printproduct"
+                style="@style/StdButton2"
+                android:layout_width="150dp"
+                android:layout_height="80dp"
+                android:layout_weight="1"
+                android:background="@drawable/std_button"
+                android:drawableTop="@mipmap/img_label"
+                android:paddingTop="5dp"
+                android:text="@string/print"
+                android:textSize="12sp"
+                android:visibility="visible" />
+
+            <Button
+                android:id="@+id/bt_editproduct_save_and_send"
+                style="@style/StdButton2"
+                android:layout_width="150dp"
+                android:layout_height="80dp"
+                android:layout_weight="1"
+                android:background="@drawable/std_button"
+                android:drawableTop="@mipmap/img_send"
+                android:paddingTop="5dp"
+                android:text="@string/save_and_senden"
+                android:textSize="12sp"
+                android:visibility="visible" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:padding="5dp">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvVaryantsListesi"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>

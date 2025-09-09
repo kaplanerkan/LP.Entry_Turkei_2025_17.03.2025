@@ -1,341 +1,374 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:fillViewport="true">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="1dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp">
+        android:orientation="vertical"
+        android:padding="10dp">
 
-        <TextView
-            android:layout_width="0dp"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="0.3"
-            android:text="@string/barcode" />
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="1dp"
+            android:layout_marginRight="5dp"
+            android:orientation="horizontal">
 
-        <EditText
-            android:id="@+id/ed_editproduct_barcode"
-            style="@style/AppTheme.EditText"
-            android:layout_width="0dp"
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.3"
+                android:text="@string/barcode" />
+
+            <EditText
+                android:id="@+id/ed_editproduct_barcode"
+                style="@style/AppTheme.EditText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.7"
+                android:lines="1"
+                android:maxLength="50"
+                android:maxLines="1" />
+
+            <Button
+                android:id="@+id/bt_editproduct_barcode"
+                style="@style/StdButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:background="@drawable/std_button"
+                android:text="@string/barcode" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="0.7"
-            android:lines="1"
-            android:maxLength="50"
-            android:maxLines="1" />
-        <Button
-            style="@style/StdButton"
-            android:background="@drawable/std_button"
-            android:id="@+id/bt_editproduct_barcode"
-            android:layout_width="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="1dp"
+            android:layout_marginRight="5dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.3"
+                android:text="@string/plu" />
+
+            <EditText
+                android:id="@+id/ed_editproduct_plu"
+                style="@style/AppTheme.EditText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.7"
+                android:maxLength="50" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/barcode"
-            android:layout_gravity="right"/>
-    </LinearLayout>
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="1dp"
+            android:layout_marginRight="5dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.3"
+                android:text="@string/origin" />
+
+            <EditText
+                android:id="@+id/ed_editproduct_origin"
+                style="@style/AppTheme.EditText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.7"
+                android:maxLength="50" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="1dp"
+            android:layout_marginRight="5dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.3"
+                android:text="@string/productname" />
+
+            <EditText
+                android:id="@+id/ed_editproduct_productname"
+                style="@style/AppTheme.EditText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.7"
+                android:maxLength="150"
+                android:maxLines="2" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="1dp"
+            android:layout_marginRight="5dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.3"
+                android:text="@string/groupname" />
+
+            <Spinner
+                android:id="@+id/cmb_editproduct_groupname"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.7" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="1dp"
+            android:layout_marginRight="5dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.3"
+                android:text="@string/taxname" />
+
+            <Spinner
+                android:id="@+id/cmb_editproduct_taxname"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.7" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="1dp"
+            android:layout_marginRight="5dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.3"
+                android:text="@string/unitname" />
+
+            <Spinner
+                android:id="@+id/cmb_editproduct_unitname"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.7" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="1dp"
+            android:layout_marginRight="5dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.3"
+                android:text="@string/gramaj" />
+
+            <EditText
+                android:id="@+id/ed_editproduct_gramaj"
+                style="@style/AppTheme.EditText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.4"
+                android:inputType="number" />
+
+            <Spinner
+                android:id="@+id/cmb_editproduct_gramaj"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.3"
+                android:entries="@array/gramajfield" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="1dp"
+            android:layout_marginRight="5dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.3"
+                android:text="@string/costprice" />
+
+            <EditText
+                android:id="@+id/ed_editproduct_costprice"
+                style="@style/AppTheme.EditText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.7"
+                android:digits="0123456789.,"
+                android:inputType="numberDecimal" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="1dp"
+            android:layout_marginRight="5dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.3"
+                android:text="@string/sellprice" />
+
+            <EditText
+                android:id="@+id/ed_editproduct_sellprice"
+                style="@style/AppTheme.EditText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.7"
+                android:digits="0123456789.,"
+                android:inputType="numberDecimal" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="1dp"
+            android:layout_marginRight="5dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.3"
+                android:text="@string/deposit" />
+
+            <Spinner
+                android:id="@+id/cmb_editproduct_deposite"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.7"
+                android:padding="4dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="1dp"
+            android:layout_marginRight="5dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.3"
+                android:text="@string/description" />
+
+            <EditText
+                android:id="@+id/ed_editproduct_description"
+                style="@style/AppTheme.EditText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.7"
+                android:maxLength="250"
+                android:maxLines="6" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="5dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btnAddVaryants"
+                style="@style/StdButton2"
+                android:layout_width="150dp"
+                android:layout_height="80dp"
+                android:layout_weight="1"
+                android:background="@drawable/std_button"
+                android:drawableTop="@drawable/varyants"
+                android:paddingTop="5dp"
+                android:text="Varyants"
+                android:textSize="12sp"
+                android:visibility="visible" />
+
+            <Button
+                android:id="@+id/bt_editproduct_save"
+                style="@style/StdButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/std_button"
+                android:drawableStart="@mipmap/img_save"
+                android:text="@string/save"
+                android:visibility="gone" />
+
+            <Button
+                android:id="@+id/bt_printproduct"
+                style="@style/StdButton2"
+                android:layout_width="150dp"
+                android:layout_height="80dp"
+                android:layout_weight="1"
+                android:background="@drawable/std_button"
+                android:drawableTop="@mipmap/img_label"
+                android:paddingTop="5dp"
+                android:text="@string/print"
+                android:textSize="12sp"
+                android:visibility="visible" />
+
+            <Button
+                android:id="@+id/bt_editproduct_save_and_send"
+                style="@style/StdButton2"
+                android:layout_width="150dp"
+                android:layout_height="80dp"
+                android:layout_weight="1"
+                android:background="@drawable/std_button"
+                android:drawableTop="@mipmap/img_send"
+                android:paddingTop="5dp"
+                android:text="@string/save_and_senden"
+                android:textSize="12sp"
+                android:visibility="visible" />
+        </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="1dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp">
+        android:gravity="center"
+        android:padding="5dp"
+        android:orientation="horizontal">
 
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.3"
-            android:text="@string/plu" />
-
-        <EditText
-            style="@style/AppTheme.EditText"
-            android:id="@+id/ed_editproduct_plu"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.7"
-            android:maxLength="50" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvVaryantsListesi"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
     </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="1dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp">
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.3"
-            android:text="@string/origin" />
-
-        <EditText
-            style="@style/AppTheme.EditText"
-            android:id="@+id/ed_editproduct_origin"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.7"
-            android:maxLength="50" />
     </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="1dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp">
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.3"
-            android:text="@string/productname" />
-
-        <EditText
-            style="@style/AppTheme.EditText"
-            android:id="@+id/ed_editproduct_productname"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.7"
-            android:maxLines="2"
-            android:maxLength="150" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="1dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp">
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.3"
-            android:text="@string/groupname" />
-
-        <Spinner
-            android:id="@+id/cmb_editproduct_groupname"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.7" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="1dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp">
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.3"
-            android:text="@string/taxname" />
-
-        <Spinner
-            android:id="@+id/cmb_editproduct_taxname"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.7" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="1dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp">
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.3"
-            android:text="@string/unitname" />
-
-        <Spinner
-            android:id="@+id/cmb_editproduct_unitname"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.7" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="1dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp">
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.3"
-            android:text="@string/gramaj" />
-        <EditText
-            style="@style/AppTheme.EditText"
-            android:id="@+id/ed_editproduct_gramaj"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.4"
-            android:inputType="number"/>
-
-        <Spinner
-            android:id="@+id/cmb_editproduct_gramaj"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.3"
-            android:entries="@array/gramajfield"/>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="1dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp">
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.3"
-            android:text="@string/costprice" />
-
-        <EditText
-            style="@style/AppTheme.EditText"
-            android:id="@+id/ed_editproduct_costprice"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.7"
-            android:digits="0123456789.,"
-            android:inputType="numberDecimal"/>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="1dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp">
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.3"
-            android:text="@string/sellprice" />
-
-        <EditText
-            style="@style/AppTheme.EditText"
-            android:id="@+id/ed_editproduct_sellprice"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.7"
-            android:digits="0123456789.,"
-            android:inputType="numberDecimal"/>
-    </LinearLayout>
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="1dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp">
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.3"
-            android:text="@string/deposit" />
-
-        <Spinner
-            android:id="@+id/cmb_editproduct_deposite"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:padding="4dp"
-            android:layout_weight="0.7"/>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="1dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp">
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.3"
-            android:text="@string/description" />
-
-        <EditText
-            style="@style/AppTheme.EditText"
-            android:id="@+id/ed_editproduct_description"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.7"
-            android:maxLines="6"
-            android:maxLength="250"/>
-    </LinearLayout>
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_margin="10dp"
-        android:gravity="right">
-
-
-        <Button
-            android:id="@+id/bt_editproduct_save"
-            style="@style/StdButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/std_button"
-            android:drawableStart="@mipmap/img_save"
-            android:text="@string/save"
-            android:visibility="gone" />
-
-        <Button
-            android:id="@+id/bt_printproduct"
-            style="@style/StdButton"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@drawable/std_button"
-            android:drawableStart="@mipmap/img_label"
-            android:text="@string/print"
-            android:visibility="visible" />
-           />
-
-        <Button
-            android:id="@+id/bt_editproduct_save_and_send"
-            style="@style/StdButton"
-            android:layout_weight="1"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="right"
-            android:background="@drawable/std_button"
-            android:drawableStart="@mipmap/img_send"
-            android:text="@string/save_and_senden"
-            android:visibility="visible" />
-    </LinearLayout>
-</LinearLayout>
+</androidx.core.widget.NestedScrollView>

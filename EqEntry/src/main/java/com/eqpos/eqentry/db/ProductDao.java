@@ -57,7 +57,9 @@ public class ProductDao {
                                   int active, double inputstock, double outputstock, int producttype,
                                   double criticalstock, double inputreturn, double production, double returns,
                                   double wastages, double consumption, String suppliers, int suppliersid,
-                                  String origin, int changed, boolean isSync) {
+                                  String origin, int changed, boolean isSync,
+                                  int anagrupid, int alt_grupid
+                                  ) {
         if (Db == null) {
             Db = new Database();
         }
@@ -70,6 +72,13 @@ public class ProductDao {
         } else {
             value.put("isnew", 1);
         }
+
+//        if (anagrupid>0) {
+//            value.put("isnew", 1);
+//        }
+
+
+
         value.put("groupid", groupid);
         value.put("rownumber", rownumber);
         value.put("barcode", barcode.trim());
@@ -103,15 +112,23 @@ public class ProductDao {
         value.put("origin", origin);
         value.put("changed", changed);
         value.put("stockcode", stockCode);
+        value.put("varyant_anagrupid", anagrupid); // varyant_anagrupid
+        value.put("varyant_altgrupid", alt_grupid); // varyant_alt_grupid
 
         SQLiteDatabase db = Db.getWritableDatabase();
 
         try {
             if (id > 0 && !isSync) {
+                db.beginTransaction();
                 db.update("products", value, "id=?", new String[]{String.valueOf(id)});
+                db.setTransactionSuccessful();
+                db.endTransaction();
             } else {
-
+                db.beginTransaction();
                 db.insert("products", null, value);
+                db.setTransactionSuccessful();
+                db.endTransaction();
+
                 Cursor cursor = db.rawQuery("select last_insert_rowid()", null);
                 cursor.moveToNext();
                 productId = cursor.getInt(0);
@@ -141,8 +158,16 @@ public class ProductDao {
         }
 
         SQLiteDatabase db = Db.getReadableDatabase();
-        Cursor cursor = db.rawQuery("select id from products where barcode=? OR LOWER(productname) = LOWER(?)",
-                new String[]{barcode, urunIsmi});
+        Cursor cursor = null;
+
+        String sql = "";
+        if (barcode.isEmpty()){
+            cursor = db.rawQuery("SELECT  id FROM products WHERE LOWER(productname) = LOWER(?)",
+                    new String[]{urunIsmi});
+        }else{
+            cursor = db.rawQuery("SELECT  id FROM products WHERE barcode=? OR LOWER(productname) = LOWER(?)",
+                    new String[]{barcode, urunIsmi});
+        }
 
         boolean isExists = false;
         if (cursor.getCount() > 0) {
@@ -186,7 +211,12 @@ public class ProductDao {
                         jData.get("uretim").getAsDouble(), jData.get("iadeler").getAsDouble(),
                         jData.get("fireler").getAsDouble(), jData.get("sarf").getAsDouble(),
                         jData.get("tedarikci").getAsString(), jData.get("tedarikciid").getAsInt(),
-                        jData.get("uretimyeri").getAsString(),0, true);
+                        jData.get("uretimyeri").getAsString(),0, true,
+                        jData.get("variant_anagrupid").getAsInt(), // varyant_anagrupid
+                        jData.get("variant_altgrupid").getAsInt() // varyant_alt_grupid
+
+                );
+
             }
 
             db.setTransactionSuccessful();
@@ -211,7 +241,10 @@ public class ProductDao {
                         value.getProductype(), value.getCriticalStock(), value.getInputReturn(),
                         value.getProductions(), value.getReturns(), value.getWastages(),
                         value.getConsumption(), value.getSuppliers(), value.getSupplierId(),
-                        value.getOrigin(), value.getChanged(), false);
+                        value.getOrigin(), value.getChanged(), false
+                        ,value.getVaryant_anagrupid()
+                        ,value.getVaryant_alt_grupid()
+                        );
                 if (lId > 0) {
                     value.setId(lId);
                     changePrice(lId, 1, value.getPrice());
@@ -833,8 +866,10 @@ public class ProductDao {
             if (lCount == 0) {
                 if (isNewProduct)
                     value.put("isnew", 1);
+                db.beginTransaction();
                 db.insert("productprices", null, value);
-
+                db.setTransactionSuccessful();
+                db.endTransaction();
             }
             //value.clear();
             //value.put("printlabel", 1);
@@ -1232,5 +1267,36 @@ public class ProductDao {
         }
 
         return lStock;
+    }
+
+
+
+    public static int getLastInsertedProductId() {
+        if (Db == null) {
+            Db = new Database();
+        }
+
+
+        SQLiteDatabase db = Db.getReadableDatabase();
+        Cursor cursor = null;
+        int lastId = -1;
+
+        try {
+            // En yüksek ID'yi al
+            cursor = db.rawQuery("SELECT MAX(id) FROM products", null);
+
+            if (cursor != null && cursor.moveToFirst()) {
+                lastId = cursor.getInt(0);
+            }
+
+        } catch (Exception e) {
+            Log.e("ProductDao", "Son eklenen ID alma hatası: " + e.getMessage());
+        } finally {
+            if (cursor != null) {
+                cursor.close();
+            }
+        }
+
+        return lastId;
     }
 }

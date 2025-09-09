@@ -11,6 +11,7 @@ import android.util.Log;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import com.eqpos.eqentry.models.AddedVaryantsModel;
 import com.eqpos.eqentry.models.VaryantModel;
 
 import java.util.ArrayList;
@@ -22,8 +23,8 @@ import java.util.Random;
  */
 
 public class Database extends SQLiteOpenHelper {
-    public static final String VERITABANI = "entry_db_tr_11.db3";
-    private static final int SURUM = 11;
+    public static final String VERITABANI = "entry_db_tr_13.db3";
+    private static final int SURUM = 13;
     public static Context vtContext;
 
     public Database() {
@@ -52,7 +53,8 @@ public class Database extends SQLiteOpenHelper {
                 "criticalstock numeric(12,3), inputreturn numeric(12,3), " +
                 "production numeric(12,3), returns numeric(12,3), wastages numeric(12,3), " +
                 "consumption numeric(12,3), suppliers text, suppliersid integer, origin text, " +
-                "changed integer default 0, isnew integer default 0, printlabel integer default 0)");
+                "changed integer default 0, isnew integer default 0, printlabel integer default 0, " +
+                "varyant_anagrupid integer default 0, varyant_altgrupid integer default 0)");
         db.execSQL("create index idx_products_barcode on products(barcode)");
 
 
@@ -73,6 +75,20 @@ public class Database extends SQLiteOpenHelper {
 
 
         Log.e("Database", "Creating varyants TAMAM");
+
+
+        //18.08.2025::erkan  ::  Varyants
+        Log.e("Database", "Creating varyantsadded table");
+        db.execSQL("create table varyants_added (internid INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                "id integer, " +
+                "barcode text , " +
+                "plu integer default 0 , " +
+                "urunadi text, " +
+                "price numeric(12,2), " +
+                "anagrupid integer, " +
+                "altgrupid integer)");
+
+
 
 
 
@@ -222,6 +238,15 @@ public class Database extends SQLiteOpenHelper {
     private final MutableLiveData<List<VaryantModel>> varyantsGruplarLiveData = new MutableLiveData<>();
     private final MutableLiveData<List<VaryantModel>> varyantsAltGruplarLiveData = new MutableLiveData<>();
 
+    private final MutableLiveData<List<AddedVaryantsModel>> addedVaryantsLiveData = new MutableLiveData<>();
+
+    // Tüm eklenen varyantları LiveData olarak döndür
+    public LiveData<List<AddedVaryantsModel>> getAllAddedVaryantsLiveData() {
+        loadAddedVaryants(); // İlk yükleme
+        return addedVaryantsLiveData;
+    }
+
+
 
 
     // Tüm varyantları LiveData olarak döndür
@@ -332,6 +357,38 @@ public class Database extends SQLiteOpenHelper {
         varyantsLiveData.postValue(varyantList); // LiveData'yı güncelle
     }
 
+    private void loadAddedVaryants() {
+        List<AddedVaryantsModel> varyantList = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "SELECT * FROM varyants_added ORDER BY id ASC;";
+        Cursor cursor = db.rawQuery(query, null);
+
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    int id = cursor.getInt(cursor.getColumnIndexOrThrow("id"));
+                    String barcode = cursor.getString(cursor.getColumnIndexOrThrow("barcode"));
+                    int plu = cursor.getInt(cursor.getColumnIndexOrThrow("plu"));
+                    String urunadi = cursor.getString(cursor.getColumnIndexOrThrow("urunadi"));
+                    double price = cursor.getDouble(cursor.getColumnIndexOrThrow("price"));
+                    int anagrupid = cursor.getInt(cursor.getColumnIndexOrThrow("anagrupid"));
+                    int altgrupid = cursor.getInt(cursor.getColumnIndexOrThrow("altgrupid"));
+
+                    //int id, int sira, String tanim, int rowcell, String aciklama, int parentid
+                    AddedVaryantsModel varyant = new AddedVaryantsModel(id, barcode, plu, urunadi, price, anagrupid, altgrupid);
+                    varyantList.add(varyant);
+                } while (cursor.moveToNext());
+            }
+        } catch (Exception e) {
+            Log.e("DatabaseHelper", "Veri çekme hatası: " + e.toString());
+        } finally {
+            cursor.close();
+            db.close();
+        }
+        addedVaryantsLiveData.postValue(varyantList); // LiveData'yı güncelle
+    }
+
+
 
 
 
@@ -354,7 +411,6 @@ public class Database extends SQLiteOpenHelper {
         // Yeni veri eklendikten sonra LiveData'yı güncelle
         loadVaryants();
     }
-
 
     // Ortadaki Grup
     public void addNewGroupVaryant(String tanim, int sira, String aciklama, int parentid) {
@@ -388,11 +444,83 @@ public class Database extends SQLiteOpenHelper {
         values.put("rowcell", 2);
         values.put("parentid", parentid);
 
+
         db.insert("varyants", null, values);
         db.close();
 
         // Yeni veri eklendikten sonra LiveData'yı güncelle
         loadVaryantsAltGruplar(parentid); // parentid'ye göre güncelleme yapılıyor
     }
+
+
+    // Yeni seçilen varyantı ekle ve LiveData'yı güncelle
+    public void addNewSelected(int id, String barcode, String urunadi, double price, int anagrupid, int altgrupid) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("id", id);
+        values.put("barcode", barcode);
+        values.put("urunadi", urunadi);
+        values.put("price", price);
+        values.put("anagrupid", anagrupid);
+        values.put("altgrupid", altgrupid);
+
+        db.beginTransaction();
+        db.insert("varyants_added", null, values);
+        db.setTransactionSuccessful();
+        db.endTransaction();
+        db.close();
+        // Yeni veri eklendikten sonra LiveData'yı güncelle
+        loadAddedVaryants();
+    }
+
+    public void addNewAddedSelected(int id, String barcode, String urunadi, double price, int anagrupid, int altgrupid, int plu) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("id", id);
+        values.put("barcode", barcode);
+        values.put("plu", plu);
+        values.put("urunadi", urunadi);
+        values.put("price", price);
+        values.put("anagrupid", anagrupid);
+        values.put("altgrupid", altgrupid);
+
+        db.beginTransaction();
+        db.insert("varyants_added", null, values);
+        db.setTransactionSuccessful();
+        db.endTransaction();
+        db.close();
+
+    }
+
+    public void deleteAddedSelected(String urunAdi) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        db.beginTransaction();
+        db.delete("varyants_added", "urunadi = ?", new String[]{urunAdi});
+        db.setTransactionSuccessful();
+        db.endTransaction();
+        db.close();
+
+        // Veri silindikten sonra LiveData'yı güncelle
+        loadAddedVaryants();
+    }
+
+    public void updateAddedVaryant(String urunadi, String barcode, int plu) {
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("plu", plu);
+        values.put("barcode", barcode);
+        db.beginTransaction();
+        db.update("varyants_added", values, "urunadi= ?", new String[]{urunadi});
+        db.setTransactionSuccessful();
+        db.endTransaction();
+        db.close();
+
+        // Veri güncellendikten sonra LiveData'yı güncelle
+        loadAddedVaryants();
+    }
+
+
 
 }

@@ -211,4 +211,5 @@
 
     <string name="product_already_exists">Ürün önceden kayıtlı</string>
     <string name="save_and_senden">Kaydet ve gönder</string>
+    <string name="please_wait">Lütfen bekleyin...</string>
 </resources>

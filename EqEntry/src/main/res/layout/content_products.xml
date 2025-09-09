@@ -2,32 +2,36 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:padding="10dp">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <Button
-            style="@style/StdButton"
-            android:background="@drawable/std_button"
             android:id="@+id/bt_products_newproduct"
+            style="@style/StdButton"
             android:layout_width="wrap_content"
-            android:paddingRight="10dp"
-            android:paddingLeft="10dp"
             android:layout_height="50dp"
+            android:background="@drawable/std_button"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
             android:text="@string/newproduct"
-            android:textAppearance="@style/TextAppearance.AppCompat.Small" />
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textSize="12sp" />
 
         <Button
-            style="@style/StdButton"
-            android:background="@drawable/std_button"
             android:id="@+id/bt_products_options"
+            style="@style/StdButton"
             android:layout_width="wrap_content"
             android:layout_height="50dp"
-            android:paddingRight="10dp"
+            android:background="@drawable/std_button"
             android:paddingLeft="10dp"
+            android:paddingRight="10dp"
             android:text="@string/filter"
-            android:textAppearance="@style/TextAppearance.AppCompat.Small" />
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textSize="12sp" />
 
         <Button
             android:id="@+id/bt_products_search"
@@ -38,21 +42,24 @@
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
             android:text="@string/search"
-            android:textAppearance="@style/TextAppearance.AppCompat.Small" />
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textSize="12sp" />
 
         <Button
-            style="@style/StdButton"
-            android:background="@drawable/std_button"
             android:id="@+id/bt_products_send"
+            style="@style/StdButton"
             android:layout_width="wrap_content"
-            android:paddingRight="10dp"
-            android:paddingLeft="10dp"
             android:layout_height="50dp"
+            android:background="@drawable/std_button"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
             android:text="@string/senddatas"
-            android:textAppearance="@style/TextAppearance.AppCompat.Small" />
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textSize="12sp" />
 
 
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -61,39 +68,43 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="3dp"
-            android:text="@string/search" />
+            android:text="@string/search"
+            android:textSize="12sp" />
 
         <EditText
-            style="@style/AppTheme.EditText"
             android:id="@+id/ed_products_search"
+            style="@style/AppTheme.EditText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:singleLine="true"/>
+            android:singleLine="true" />
 
         <Button
-            style="@style/StdButton"
-            android:background="@drawable/std_button"
             android:id="@+id/bt_products_barcode"
+            style="@style/StdButton"
             android:layout_width="wrap_content"
-            android:paddingRight="10dp"
-            android:paddingLeft="10dp"
             android:layout_height="42dp"
+            android:background="@drawable/std_button"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
             android:text="@string/barcode"
-            android:textAppearance="@style/TextAppearance.AppCompat.Small" />
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textSize="12sp" />
 
         <Button
-            style="@style/StdButton"
-            android:background="@drawable/std_button"
             android:id="@+id/bt_products_varcode"
+            style="@style/StdButton"
             android:layout_width="wrap_content"
-            android:paddingRight="10dp"
-            android:paddingLeft="10dp"
             android:layout_height="42dp"
+            android:background="@drawable/std_button"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
             android:text="VariantCode"
-            android:textAppearance="@style/TextAppearance.AppCompat.Small" />
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:visibility="gone" />
 
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">

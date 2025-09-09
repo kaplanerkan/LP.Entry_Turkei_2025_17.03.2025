@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.constraintlayout.widget.ConstraintLayout android:id="@+id/main"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".views.varyants.Varyants"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <TextView
+        android:id="@+id/tvTitel"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:text="Titel"
+        android:textAlignment="center"
+        android:textAllCaps="true"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="@+id/recyclerViewVaryants"
+        app:layout_constraintStart_toStartOf="@+id/recyclerViewVaryants"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewVaryants"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/btnVazgec"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvTitel" />
+
+    <Button
+        android:id="@+id/btnVazgec"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="100dp"
+        android:text="Vazgec"
+        android:background="@drawable/btn_rounded_red"
+        android:textColor="@color/colorWhite"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

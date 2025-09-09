@@ -43,7 +43,7 @@ public class SendDao {
         SQLiteDatabase db;
         Cursor cursor;
         int offset = 0;
-        int limit = 10;
+        int limit = 100;
         int lSayi = 0;
         do {
             jData = null;
@@ -54,7 +54,8 @@ public class SendDao {
 
             db = Db.getReadableDatabase();
             String lSql = "select p.id, groupid, priceorder, stockcode, barcode, plu, productname, costprice, " +
-                    "taxid, depositeid, uniteid, p.isnew, f.newprice, p.description, p.unitamount, p.amountunite, p.origin "+
+                    "taxid, depositeid, uniteid, p.isnew, f.newprice, p.description, p.unitamount, p.amountunite, p.origin " +
+                    ",p.varyant_anagrupid AS variant_anagrupid, p.varyant_altgrupid AS variant_altgrupid "+
                     "from products p " +
                     "left join productprices f on f.productid=p.id and f.priceorder=1 " +
                     "where p.changed=1 or p.isnew=1 order by p.id limit " + String.valueOf(limit);// + " offset " + String.valueOf(offset);
@@ -80,7 +81,8 @@ public class SendDao {
                     jElement.addProperty("unitamount", cursor.getDouble(14));
                     jElement.addProperty("amountunite", cursor.getString(15));
                     jElement.addProperty("origin", cursor.getString(16));
-
+                    jElement.addProperty("variant_anagrupid", cursor.getInt(17));
+                    jElement.addProperty("variant_altgrupid", cursor.getInt(18));
                     jArr.add(jElement);
                 }
             } else return;
@@ -163,7 +165,10 @@ public class SendDao {
                 }
             }
 
-            offset += 10;
+            offset += 100;
+
+
+
         } while (cursor.getCount() > 0);
 
         //       db = Db.getWritableDatabase();
@@ -174,6 +179,136 @@ public class SendDao {
         jHead = null;
         jArr = null;
     }
+
+
+
+    public static boolean sendProductsVaryants() {
+        JsonObject jHead = JSONProcess.getJSONHeader(Variables.ServerCommand.cmdSaveProducts.getValue());
+        JsonObject jData = new JsonObject();
+        JsonArray jArr = new JsonArray();
+
+        Database Db = new Database();
+        SQLiteDatabase db = Db.getReadableDatabase();
+        Cursor cursor = null;
+
+        try {
+            // SQL sorgusu
+            String lSql = "select p.id, groupid, priceorder, stockcode, barcode, plu, productname, costprice, " +
+                    "taxid, depositeid, uniteid, p.isnew, f.newprice, p.description, p.unitamount, p.amountunite, p.origin, " +
+                    "p.varyant_anagrupid AS variant_anagrupid, p.varyant_altgrupid AS variant_altgrupid " +
+                    "from products p " +
+                    "left join productprices f on f.productid=p.id and f.priceorder=1 " +
+                    "where p.changed=1 or p.isnew=1 order by p.id limit 100";
+
+            cursor = db.rawQuery(lSql, null);
+
+            // Veriler varsa JSON dizisine ekle
+            if (cursor.getCount() > 0) {
+                while (cursor.moveToNext()) {
+                    JsonObject jElement = new JsonObject();
+                    jElement.addProperty("id", cursor.getInt(0));
+                    jElement.addProperty("groupid", cursor.getInt(1));
+                    jElement.addProperty("priceorder", cursor.getInt(2));
+                    jElement.addProperty("stockcode", cursor.getString(3));
+                    jElement.addProperty("barcode", cursor.getString(4));
+                    jElement.addProperty("plu", cursor.getString(5));
+                    jElement.addProperty("productname", cursor.getString(6));
+                    jElement.addProperty("costprice", cursor.getDouble(7));
+                    jElement.addProperty("taxid", cursor.getInt(8));
+                    jElement.addProperty("depositeid", cursor.getInt(9));
+                    jElement.addProperty("uniteid", cursor.getInt(10));
+                    jElement.addProperty("isnew", cursor.getInt(11));
+                    jElement.addProperty("sellprice", cursor.getDouble(12));
+                    jElement.addProperty("description", cursor.getString(13));
+                    jElement.addProperty("unitamount", cursor.getDouble(14));
+                    jElement.addProperty("amountunite", cursor.getString(15));
+                    jElement.addProperty("origin", cursor.getString(16));
+                    jElement.addProperty("variant_anagrupid", cursor.getInt(17));
+                    jElement.addProperty("variant_altgrupid", cursor.getInt(18));
+                    jArr.add(jElement);
+                }
+            } else {
+                // Veri yoksa false döndür
+                return false;
+            }
+
+            jData.addProperty("datas", jArr.toString());
+            String msg = JSONProcess.jsonPack(jHead, jData);
+
+            if (jHead != null) {
+                String rMsg = SocketProcess.sendMessage(msg);
+                if (!rMsg.contains(Variables._RETURNFAULT)) {
+                    // Başarılı yanıt alındı, yeni ID'leri işle
+                    JsonParser parser = new JsonParser();
+                    try {
+                        JsonArray lArr = parser.parse(rMsg).getAsJsonArray();
+                        db = Db.getWritableDatabase();
+                        ContentValues value = new ContentValues();
+
+                        for (int i = 0; i < lArr.size(); i++) {
+                            JsonObject jDataItem = lArr.get(i).getAsJsonObject();
+                            int lNewId = jDataItem.get("newid").getAsInt();
+                            int lOldId = jDataItem.get("oldid").getAsInt();
+                            String lCode = jDataItem.has("stockcode") ? jDataItem.get("stockcode").getAsString() : "";
+
+                            // products tablosunu güncelle
+                            value.clear();
+                            value.put("id", lNewId);
+                            value.put("stockcode", lCode);
+                            value.put("changed", 0);
+                            value.put("isnew", 0);
+                            value.put("printlabel", 0);
+                            db.update("products", value, "id=?", new String[]{String.valueOf(lOldId)});
+
+                            // productprices tablosunu güncelle
+                            db.execSQL("update productprices set price=newprice, isnew=0, changed=0, productid=" + lNewId +
+                                    " where productid=? and priceorder=1", new String[]{String.valueOf(lOldId)});
+
+                            // Diğer tabloları güncelle
+                            value.clear();
+                            value.put("productid", lNewId);
+                            db.update("invoicedetail", value, "productid=?", new String[]{String.valueOf(lOldId)});
+                            db.update("deliverydetail", value, "productid=?", new String[]{String.valueOf(lOldId)});
+                            db.update("purchaseorder", value, "productid=?", new String[]{String.valueOf(lOldId)});
+                        }
+
+                        // products tablosunda changed=0 yap
+                        if (cursor.moveToFirst()) {
+                            do {
+                                value.clear();
+                                value.put("changed", 0);
+                                db.update("products", value, "id=?", new String[]{cursor.getString(0)});
+                            } while (cursor.moveToNext());
+                        }
+
+                        return true; // İşlem başarılı
+                    } catch (JsonParseException e) {
+                        e.printStackTrace();
+                        return false; // JSON parse hatası
+                    } finally {
+                        parser = null;
+                    }
+                } else {
+                    return false; // Sunucudan hata yanıtı alındı
+                }
+            } else {
+                return false; // JSON başlığı null
+            }
+        } finally {
+            if (cursor != null) {
+                cursor.close();
+            }
+            if (db != null) {
+                db.close();
+            }
+            Db.close();
+        }
+
+    }
+
+
+
+
 
 
     public static void sendChangedPrices() {

@@ -233,6 +233,6 @@
 
     <string name="product_already_exists">Product already exists</string>
     <string name="save_and_senden">Save + Senden</string>
-
+    <string name="please_wait">Please wait…</string>
 
 </resources>

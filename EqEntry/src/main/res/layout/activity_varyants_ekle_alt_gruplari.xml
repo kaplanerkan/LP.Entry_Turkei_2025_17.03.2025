@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:orientation="vertical"
+        android:padding="8dp">
+
+        <!-- Üst Başlık Bölümü -->
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/llGrupEkleme"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="16dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tvTitel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:fontFamily="sans-serif-medium"
+                android:text="Varyant Adi"
+                android:textAlignment="center"
+                android:textAllCaps="true"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvMainAltGrupIsmi"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-medium"
+                android:text="Varyant Adi"
+                android:textAlignment="center"
+                android:textAllCaps="true"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:orientation="vertical">
+
+            <!-- Üst Kontroller (EditText ve CheckBox'lar) -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/edPrefix"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:hint="Ön ek"
+
+                    android:inputType="phone"
+                    android:maxLength="5"
+                    android:selectAllOnFocus="true"
+                    android:textSize="24sp" />
+
+                <CheckBox
+                    android:id="@+id/cbBarcodeOlustur"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="Barcode olustur"
+                    android:textSize="12sp" />
+
+                <CheckBox
+                    android:id="@+id/cbPluOlustur"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="PLU olustur"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <!-- Orta Butonlar -->
+            <LinearLayout
+                android:id="@+id/llBottomButtons"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <Button
+                    android:id="@+id/btnHepsiniKaldir"
+                    style="@style/StdButton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:layout_weight="1"
+                    android:text="Hepsini Kaldir" />
+
+                <Button
+                    android:id="@+id/btnHepsiniEkle"
+                    style="@style/StdButton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Hepsini EKLE" />
+            </LinearLayout>
+
+            <!-- Alt Butonlar -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <Button
+                    android:id="@+id/btnAltGrupGeri"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/btn_rounded_red"
+                    android:fontFamily="sans-serif-medium"
+                    android:text="Geri"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="20sp" />
+
+                <Button
+                    android:id="@+id/btnVaryantAddNow"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/btn_rounded_blue"
+                    android:fontFamily="sans-serif-medium"
+                    android:text="Secileni Ekle"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="20sp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvVaryantGruplari"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp" />
+
+        <!-- RecyclerView Bölümü -->
+
+        <!-- Alt Kontrol Bölümü -->
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>

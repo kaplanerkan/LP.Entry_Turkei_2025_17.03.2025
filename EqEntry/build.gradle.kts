@@ -38,7 +38,7 @@ android {
         testInstrumentationRunner = "android.support.test.runner.AndroidJUnitRunner"
 
         versionCode = 4
-        versionName = "1.3.18"
+        versionName = "1.3.19"
         versionNameSuffix = "_tr"
     }
 
@@ -92,6 +92,7 @@ dependencies {
 
     //implementation ("androidx.activity:activity:1.10.1")
     implementation(libs.activity)
+    implementation(libs.recyclerview)
 
     testImplementation(libs.junit)
 //    androidTestImplementation 'com.android.support.test:runner:1.0.1'
