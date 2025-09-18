@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -23,6 +24,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Toast;
+import android.window.OnBackInvokedDispatcher;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
@@ -45,7 +47,6 @@ import com.eqpos.eqentry.views.varyants_add_to_product.VaryantsEkle;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
-import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
@@ -126,16 +127,60 @@ public class EditProductActivity extends AppCompatActivity implements View.OnCli
         binding.btnBarcodeAra.setOnClickListener(view -> {
             String barcode = binding.edEditproductBarcode.getText().toString().trim();
             if (barcode.isEmpty()) {
-                Toast.makeText(EditProductActivity.this," Barkod boş olamaz", Toast.LENGTH_SHORT).show();
-            }else {
+                Toast.makeText(EditProductActivity.this, " Barkod boş olamaz", Toast.LENGTH_SHORT).show();
+            } else {
                 checkIfBarcodeExists(barcode);
             }
         });
 
+        initViews();
+    }
+
+    private void initViews(){
+        onBackPressedOlaylari();
     }
 
 
-    private void setProduct(){
+
+
+
+    private void onBackPressedOlaylari() {
+
+        // Geri tuşu için OnBackInvokedCallback ekle
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) { // API 33+
+            OnBackInvokedDispatcher dispatcher = getOnBackInvokedDispatcher();
+            dispatcher.registerOnBackInvokedCallback(OnBackInvokedDispatcher.PRIORITY_DEFAULT, () -> {
+                // Örnek: ViewModel'de veri değişti mi kontrol et
+                int varyantAdedi = varyantEkleMainListAdapter.getItemCount();
+                if (varyantAdedi > 0) { // Varsayılan bir kontrol metodu
+
+                    String message = "Değişiklikleriniz kaydedilmedi.\n\n Eklenmiş " + varyantAdedi + " adet varyant var. Çıkmak istediğinize emin misiniz?";
+
+                    new AlertDialog.Builder(EditProductActivity.this)
+                            .setTitle("Kaydedilmemiş Değişiklikler")
+                            .setMessage(message)
+                            .setPositiveButton("Evet Sil", (dialog, which) -> {
+                                runOnUiThread(() -> viewModel.deleteAllVaryants());
+                                finish();
+                            })
+                            .setNegativeButton("Hayır   ", (dialog, which) -> {
+                                dialog.dismiss();
+                            })
+                            .setCancelable(true)
+                            .show();
+                } else {
+                    // Değişiklik yoksa doğrudan geri dön
+                    finish();
+                }
+            });
+        }
+
+    }
+
+
+
+
+    private void setProduct() {
         binding.edEditproductProductname.setText(gProduct.getProductName());
         binding.edEditproductPlu.setText(gProduct.getPlu());
         binding.edEditproductOrigin.setText(gProduct.getOrigin());
@@ -214,10 +259,12 @@ public class EditProductActivity extends AppCompatActivity implements View.OnCli
             private boolean isEditing = false;
 
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
 
             @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {}
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
 
             @Override
             public void afterTextChanged(Editable s) {
@@ -279,20 +326,12 @@ public class EditProductActivity extends AppCompatActivity implements View.OnCli
         });
 
 
-
-
-
-
-
-
     }
+
     private void hideKeyboard() {
         InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(binding.edEditproductBarcode.getWindowToken(), 0);
     }
-
-
-
 
 
     /**
@@ -484,6 +523,34 @@ public class EditProductActivity extends AppCompatActivity implements View.OnCli
         }
     }
 
+
+    @Override
+    public void onBackPressed() {
+        // Örnek: ViewModel'de veri değişti mi kontrol et
+        int varyantAdedi = varyantEkleMainListAdapter.getItemCount();
+        if (varyantAdedi > 0) { // Varsayılan bir kontrol metodu
+
+            String message = "Değişiklikleriniz kaydedilmedi. Eklenmiş " + varyantAdedi + " varyant var. Çıkmak istediğinize emin misiniz?";
+
+            new AlertDialog.Builder(EditProductActivity.this)
+                    .setTitle("Kaydedilmemiş Değişiklikler")
+                    .setMessage(message)
+                    .setPositiveButton("Evet Sil", (dialog, which) -> {
+                        runOnUiThread(() -> viewModel.deleteAllVaryants());
+                        super.onBackPressed();
+                    })
+                    .setNegativeButton("Hayır   ", (dialog, which) -> {
+                        dialog.dismiss();
+                    })
+                    .setCancelable(true)
+                    .show();
+        } else {
+            // Değişiklik yoksa doğrudan geri dön
+            super.onBackPressed();
+        }
+    }
+
+
     /**
      * END: Add Varyants Button Click Events
      */
@@ -553,7 +620,7 @@ public class EditProductActivity extends AppCompatActivity implements View.OnCli
 
 
                             // ana Product
-                            if (binding.cbAnarunOlarakdaKaydet.isChecked()){
+                            if (binding.cbAnarunOlarakdaKaydet.isChecked()) {
                                 saveProduct();
                                 if (ProductDao.isThereNewOrUpdatedProduct())
                                     SendDao.sendProducts();

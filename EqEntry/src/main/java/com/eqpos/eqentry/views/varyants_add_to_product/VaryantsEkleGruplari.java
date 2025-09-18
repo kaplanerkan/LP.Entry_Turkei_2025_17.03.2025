@@ -1,6 +1,7 @@
 package com.eqpos.eqentry.views.varyants_add_to_product;
 
 import android.os.Bundle;
+import android.util.Log;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -55,6 +56,15 @@ public class VaryantsEkleGruplari extends AppCompatActivity {
         });
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        if (viewModel != null) {
+            viewModel.loadVaryants();
+            Log.e("VaryantsEkleGruplari", "onResume: viewModel refreshed" );
+        }
+    }
 
     private void getBundles() {
         /*

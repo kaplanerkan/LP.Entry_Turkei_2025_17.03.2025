@@ -31,6 +31,10 @@ public class VaryantEklenenlerViewModel extends AndroidViewModel {
         dbHelper.deleteAddedSelected(urunadi);
     }
 
+    public void deleteAllVaryants() {
+        dbHelper.deleteAllVaryands();
+    }
+
     public void updateVaryant(String urunadi, String barcode, int plu) {
         dbHelper.updateAddedVaryant(urunadi, barcode, plu);
     }

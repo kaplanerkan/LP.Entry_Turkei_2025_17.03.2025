@@ -263,6 +263,8 @@ public class Database extends SQLiteOpenHelper {
         return varyantsGruplarLiveDataWithBadget;
     }
 
+
+
     public LiveData<List<VaryantModelWithBadget>> getAllVaryantAltGruplarLiveData(int parentId) {
         loadVaryantsAltGruplar(parentId);
         return varyantsAltGruplarLiveData;
@@ -534,6 +536,20 @@ public class Database extends SQLiteOpenHelper {
         // Veri silindikten sonra LiveData'yı güncelle
         loadAddedVaryants();
     }
+
+    public void deleteAllVaryands() {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        db.beginTransaction();
+        db.delete("varyants_added", "",null );
+        db.setTransactionSuccessful();
+        db.endTransaction();
+        db.close();
+
+        // Veri silindikten sonra LiveData'yı güncelle
+        loadAddedVaryants();
+    }
+
 
     public void updateAddedVaryant(String urunadi, String barcode, int plu) {
 
