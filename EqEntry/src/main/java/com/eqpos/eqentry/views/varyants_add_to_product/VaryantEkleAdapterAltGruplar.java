@@ -3,7 +3,6 @@ package com.eqpos.eqentry.views.varyants_add_to_product;
 import android.animation.ArgbEvaluator;
 import android.animation.ValueAnimator;
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -11,17 +10,17 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.eqpos.eqentry.databinding.ItemVaryantEkleGruplarBinding;
-import com.eqpos.eqentry.models.VaryantModel;
+import com.eqpos.eqentry.models.VaryantModelWithBadget;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class VaryantEkleAdapterAltGruplar extends RecyclerView.Adapter<VaryantEkleAdapterAltGruplar.ViewHolder> {
-    private List<VaryantModel> varyantList;
+    private List<VaryantModelWithBadget> varyantList;
     private Context context;
     private String urunAdi = "";
 
-    public VaryantEkleAdapterAltGruplar(Context context, String urunadi, List<VaryantModel> varyantList) {
+    public VaryantEkleAdapterAltGruplar(Context context, String urunadi, List<VaryantModelWithBadget> varyantList) {
         this.context = context;
         this.varyantList = varyantList;
         this.urunAdi = urunadi;
@@ -38,7 +37,7 @@ public class VaryantEkleAdapterAltGruplar extends RecyclerView.Adapter<VaryantEk
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        VaryantModel varyant = varyantList.get(position);
+        VaryantModelWithBadget varyant = varyantList.get(position);
         // ID ve Aciklama'yı TextView'lara bağla
         holder.binding.tvGrupId.setText(String.valueOf(varyant.getId()));
 
@@ -76,8 +75,6 @@ public class VaryantEkleAdapterAltGruplar extends RecyclerView.Adapter<VaryantEk
             colorAnimator.start();
 
 
-
-
         });
     }
 
@@ -86,14 +83,14 @@ public class VaryantEkleAdapterAltGruplar extends RecyclerView.Adapter<VaryantEk
         return varyantList.size();
     }
 
-    public void updateList(List<VaryantModel> newList) {
+    public void updateList(List<VaryantModelWithBadget> newList) {
         this.varyantList = newList;
         notifyDataSetChanged();
     }
 
     // Tüm varyantları seç
     public void selectAll() {
-        for (VaryantModel varyant : varyantList) {
+        for (VaryantModelWithBadget varyant : varyantList) {
             varyant.setSelected(true);
         }
         notifyDataSetChanged(); // Tüm liste güncellendi
@@ -101,7 +98,7 @@ public class VaryantEkleAdapterAltGruplar extends RecyclerView.Adapter<VaryantEk
 
     // Tüm varyantların seçimini kaldır
     public void deselectAll() {
-        for (VaryantModel varyant : varyantList) {
+        for (VaryantModelWithBadget varyant : varyantList) {
             varyant.setSelected(false);
         }
         notifyDataSetChanged(); // Tüm liste güncellendi
@@ -109,9 +106,9 @@ public class VaryantEkleAdapterAltGruplar extends RecyclerView.Adapter<VaryantEk
 
 
     // Seçili varyantları döndüren metod
-    public List<VaryantModel> getSelectedVaryants() {
-        List<VaryantModel> selectedList = new ArrayList<>();
-        for (VaryantModel varyant : varyantList) {
+    public List<VaryantModelWithBadget> getSelectedVaryants() {
+        List<VaryantModelWithBadget> selectedList = new ArrayList<>();
+        for (VaryantModelWithBadget varyant : varyantList) {
             if (varyant.isSelected()) {
                 selectedList.add(varyant);
             }

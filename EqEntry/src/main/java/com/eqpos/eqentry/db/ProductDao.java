@@ -177,6 +177,29 @@ public class ProductDao {
         return isExists;
     }
 
+    public static boolean checUrunMevcutmu_ERKAN(String barcode) {
+        if (Db == null) {
+            Db = new Database();
+        }
+
+        SQLiteDatabase db = Db.getReadableDatabase();
+        Cursor cursor = null;
+
+        String sql = "";
+
+            cursor = db.rawQuery("SELECT  id FROM products WHERE barcode = ?",
+                    new String[]{barcode});
+
+        boolean isExists = false;
+        if (cursor.getCount() > 0) {
+            isExists = true;
+        }
+        cursor.close();
+        return isExists;
+    }
+
+
+
     /* Bu method serverdan gelen verileri kaydetmek için kullanılacaktır */
     public static void saveProduct(JsonArray value) {
         SQLiteDatabase db = getWritableDatabase();

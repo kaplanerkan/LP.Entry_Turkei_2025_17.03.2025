@@ -3,15 +3,23 @@ package com.eqpos.eqentry;
 import static com.eqpos.eqentry.printing.PrintLabel.printLabel;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Toast;
@@ -37,6 +45,7 @@ import com.eqpos.eqentry.views.varyants_add_to_product.VaryantsEkle;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
+import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
@@ -100,7 +109,33 @@ public class EditProductActivity extends AppCompatActivity implements View.OnCli
 
 
         listFields();
+        setProduct();
 
+        btnAddVaryantsClickOlaylari();
+
+
+        // Focus u barcode ye ver
+        edEditproductBarcodeTextWatcherOlaylari();
+        binding.edEditproductBarcode.requestFocus();
+
+        binding.btnClsBarcode.setOnClickListener(view -> {
+            binding.edEditproductBarcode.setText("");
+            binding.edEditproductBarcode.requestFocus();
+        });
+
+        binding.btnBarcodeAra.setOnClickListener(view -> {
+            String barcode = binding.edEditproductBarcode.getText().toString().trim();
+            if (barcode.isEmpty()) {
+                Toast.makeText(EditProductActivity.this," Barkod boş olamaz", Toast.LENGTH_SHORT).show();
+            }else {
+                checkIfBarcodeExists(barcode);
+            }
+        });
+
+    }
+
+
+    private void setProduct(){
         binding.edEditproductProductname.setText(gProduct.getProductName());
         binding.edEditproductPlu.setText(gProduct.getPlu());
         binding.edEditproductOrigin.setText(gProduct.getOrigin());
@@ -155,10 +190,110 @@ public class EditProductActivity extends AppCompatActivity implements View.OnCli
         } catch (ParseException e) {
             e.printStackTrace();
         }
-
-
-        btnAddVaryantsClickOlaylari();
     }
+
+
+    private void edEditproductBarcodeTextWatcherOlaylari() {
+
+        // Enter tuşu dinleyicisi
+        binding.edEditproductBarcode.setOnEditorActionListener((v, actionId, event) -> {
+            if (actionId == EditorInfo.IME_ACTION_DONE ||
+                    actionId == EditorInfo.IME_ACTION_SEARCH ||
+                    (event != null && event.getKeyCode() == KeyEvent.KEYCODE_ENTER)) {
+
+                String barcode = binding.edEditproductBarcode.getText().toString().trim();
+                if (!barcode.isEmpty()) {
+                    checkIfBarcodeExists(barcode);
+                    return true;
+                }
+            }
+            return false;
+        });
+
+        binding.edEditproductBarcode.addTextChangedListener(new TextWatcher() {
+            private boolean isEditing = false;
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {}
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (isEditing) return;
+
+                String barcode = s.toString().trim();
+
+                // Barkod tamamlandığında otomatik olarak enter yap
+                if (barcode.length() >= 8 && !isEditing) {
+                    isEditing = true;
+                    new Handler().postDelayed(() -> {
+                        //checkIfBarcodeExists(barcode);
+                        //binding.edEditproductBarcode.setText("");
+                        isEditing = false;
+                    }, 100); // Kısa gecikme
+                }
+            }
+        });
+    }
+
+    private void simulateEnterKeyAndSearch(String barcode) {
+        // Önce klavyeyi gizle (isteğe bağlı)
+        hideKeyboard();
+
+        // Barkod arama işlemini başlat
+        checkIfBarcodeExists(barcode);
+    }
+
+    private void checkIfBarcodeExists(String barcode) {
+
+        Handler handlerMain = new Handler(Looper.getMainLooper());
+        handlerMain.post(() -> {
+            try {
+                boolean barcodeExists = ProductDao.checUrunMevcutmu_ERKAN(barcode);
+
+                // Handler ile UI thread'ine mesaj gönder
+                Handler handler = new Handler(Looper.getMainLooper());
+                handler.post(() -> {
+                    if (barcodeExists) {
+                        // Ürün bulundu, düzenleme ekranını göster
+                        Toast.makeText(this, "Ürün bulundu", Toast.LENGTH_SHORT).show();
+                        gProduct = ProductDao.getProduct(0, barcode);
+                        setProduct();
+                        binding.edEditproductProductname.requestFocus();
+                    }
+//                    else {
+//                        showAddNewProductScreen(barcode);
+//                        Toast.makeText(this, "Yeni ürün ekleyin", Toast.LENGTH_SHORT).show();
+//                    }
+                    //binding.edEditproductBarcode.setText("");
+                });
+
+            } catch (Exception e) {
+                Handler handler = new Handler(Looper.getMainLooper());
+                handler.post(() -> {
+                    Toast.makeText(this, "Hata: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                });
+            }
+        });
+
+
+
+
+
+
+
+
+    }
+    private void hideKeyboard() {
+        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(binding.edEditproductBarcode.getWindowToken(), 0);
+    }
+
+
+
+
 
     /**
      * Add Varyants Button Click Events
@@ -364,6 +499,7 @@ public class EditProductActivity extends AppCompatActivity implements View.OnCli
                 String contents = data.getStringExtra("SCAN_RESULT");
                 binding.edEditproductBarcode.setText(contents);
                 binding.edEditproductProductname.performClick();
+                Log.e(TAG, "onActivityResult: Barkod Okundu: " + contents);
             }
         }
     }
@@ -401,9 +537,6 @@ public class EditProductActivity extends AppCompatActivity implements View.OnCli
                 openBarcode();
                 break;
             case R.id.bt_editproduct_save_and_send:
-                Log.e(TAG, "onClick: 1");
-                //saveProduct();
-                // LoadingDialog'u göster
 
 
                 loadingDialog = new LoadingDialog();
@@ -420,10 +553,13 @@ public class EditProductActivity extends AppCompatActivity implements View.OnCli
 
 
                             // ana Product
-                            saveProduct();
-                            if (ProductDao.isThereNewOrUpdatedProduct())
-                                SendDao.sendProducts();
-                            SendDao.sendChangedPrices();
+                            if (binding.cbAnarunOlarakdaKaydet.isChecked()){
+                                saveProduct();
+                                if (ProductDao.isThereNewOrUpdatedProduct())
+                                    SendDao.sendProducts();
+                                SendDao.sendChangedPrices();
+
+                            }
 
                             // Varyantlı Ürünler
                             List<AddedVaryantsModel> varyants = viewModel.getVaryantsAddedLiveData().getValue();

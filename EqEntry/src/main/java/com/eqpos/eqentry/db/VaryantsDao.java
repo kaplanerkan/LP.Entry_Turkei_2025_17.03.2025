@@ -6,7 +6,7 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
-import com.eqpos.eqentry.models.VaryantModel;
+import com.eqpos.eqentry.models.VaryantModelWithBadget;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,14 +34,14 @@ public class VaryantsDao {
     }
 
 
-    public static void saveVaryantsToDatabase(List<VaryantModel> varyantList) {
+    public static void saveVaryantsToDatabase(List<VaryantModelWithBadget> varyantList) {
         // SQLite veya Room gibi bir veritabanı yöneticisi kullanarak verileri kaydet
         // Örnek olarak SQLite kullanımı:
         SQLiteDatabase db = null;
         db = getWritableDatabase();
         db.beginTransaction();
         try {
-            for (VaryantModel varyant : varyantList) {
+            for (VaryantModelWithBadget varyant : varyantList) {
                 ContentValues values = new ContentValues();
                 values.put("id", varyant.getId());
                 values.put("sira", varyant.getSira());
@@ -89,8 +89,8 @@ public class VaryantsDao {
     }
 
     // parentid = 0 olan tüm varyantları çeken fonksiyon
-    public List<VaryantModel> getAllWithParentIdZero() {
-        List<VaryantModel> varyantList = new ArrayList<>();
+    public List<VaryantModelWithBadget> getAllWithParentIdZero() {
+        List<VaryantModelWithBadget> varyantList = new ArrayList<>();
 
         Database Db = new Database();
         SQLiteDatabase db = Db.getReadableDatabase();
@@ -111,10 +111,10 @@ public class VaryantsDao {
                     String aciklama = cursor.getString(cursor.getColumnIndexOrThrow("aciklama"));
                     int parentid = cursor.getInt(cursor.getColumnIndexOrThrow("parentid"));
 
-                    // VaryantModel nesnesi oluştur
+                    // VaryantModelWithBadget nesnesi oluştur
 
                     //int id, int sira, String tanim, int rowcell, String aciklama, int parentid
-                    VaryantModel varyant = new VaryantModel(id, sira, tanim, rowcell, aciklama, parentid);
+                    VaryantModelWithBadget varyant = new VaryantModelWithBadget(id, sira, tanim, rowcell, aciklama, parentid, 0);
                     varyantList.add(varyant);
                 } while (cursor.moveToNext());
             }

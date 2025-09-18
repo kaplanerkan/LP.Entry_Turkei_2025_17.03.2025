@@ -7,7 +7,6 @@ import androidx.lifecycle.LiveData;
 
 import com.eqpos.eqentry.db.Database;
 import com.eqpos.eqentry.models.AddedVaryantsModel;
-import com.eqpos.eqentry.models.VaryantModel;
 
 import java.util.List;
 

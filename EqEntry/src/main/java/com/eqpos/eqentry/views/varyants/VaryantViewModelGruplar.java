@@ -6,22 +6,23 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
 import com.eqpos.eqentry.db.Database;
-import com.eqpos.eqentry.models.VaryantModel;
+import com.eqpos.eqentry.models.VaryantModelWithBadget;
 
 import java.util.List;
 
 public class VaryantViewModelGruplar extends AndroidViewModel {
     private final Database dbHelper;
-    private final LiveData<List<VaryantModel>> varyantsGrupolarLiveData;
+    private final LiveData<List<VaryantModelWithBadget>> varyantsGrupolarLiveData;
+
 
 
     public VaryantViewModelGruplar(Application application, int parentid) {
         super(application);
         dbHelper = new Database(application);
-        varyantsGrupolarLiveData = dbHelper.getAllVaryantGruplarLiveData(parentid);
+        varyantsGrupolarLiveData = dbHelper.getAllVaryantGruplarLiveDataWithBadger(parentid);
     }
 
-    public LiveData<List<VaryantModel>> getVaryantsGruplarLiveData() {
+    public LiveData<List<VaryantModelWithBadget>> getVaryantsGruplarLiveData() {
         return varyantsGrupolarLiveData;
     }
 
@@ -29,5 +30,9 @@ public class VaryantViewModelGruplar extends AndroidViewModel {
         dbHelper.addNewGroupVaryant(tanim, sira, aciklama, parentid);
     }
 
+
+    public void getVaryantEklenenGroupCountLiveData(int anagrupId) {
+        dbHelper.getEklenGrupAdedLiveData(anagrupId);
+    }
 
 }

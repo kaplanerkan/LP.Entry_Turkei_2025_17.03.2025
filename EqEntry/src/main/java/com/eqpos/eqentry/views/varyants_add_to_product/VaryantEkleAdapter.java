@@ -13,17 +13,17 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.eqpos.eqentry.databinding.ItemVaryantMainBinding;
-import com.eqpos.eqentry.models.VaryantModel;
+import com.eqpos.eqentry.models.VaryantModelWithBadget;
 
 import java.util.List;
 
 public class VaryantEkleAdapter extends RecyclerView.Adapter<VaryantEkleAdapter.ViewHolder> {
-    private List<VaryantModel> varyantList;
+    private List<VaryantModelWithBadget> varyantList;
     private Context context;
-    private String urunAdi="";
+    private String urunAdi = "";
 
 
-    public VaryantEkleAdapter(Context context, String urunAdi,  List<VaryantModel> varyantList) {
+    public VaryantEkleAdapter(Context context, String urunAdi, List<VaryantModelWithBadget> varyantList) {
         this.context = context;
         this.varyantList = varyantList;
         this.urunAdi = urunAdi;
@@ -40,7 +40,7 @@ public class VaryantEkleAdapter extends RecyclerView.Adapter<VaryantEkleAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        VaryantModel varyant = varyantList.get(position);
+        VaryantModelWithBadget varyant = varyantList.get(position);
         // ID ve Aciklama'yı TextView'lara bağla
         holder.binding.tvId.setText(String.valueOf(varyant.getId()));
         holder.binding.tvAciklama.setText(String.valueOf(varyant.getAciklama()));
@@ -92,7 +92,7 @@ public class VaryantEkleAdapter extends RecyclerView.Adapter<VaryantEkleAdapter.
         return varyantList.size();
     }
 
-    public void updateList(List<VaryantModel> newList) {
+    public void updateList(List<VaryantModelWithBadget> newList) {
         this.varyantList = newList;
         notifyDataSetChanged();
     }

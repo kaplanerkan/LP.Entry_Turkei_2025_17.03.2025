@@ -10,7 +10,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.eqpos.eqentry.databinding.ActivityVaryantsEkleAltGruplariBinding;
-import com.eqpos.eqentry.models.VaryantModel;
+import com.eqpos.eqentry.models.VaryantModelWithBadget;
 import com.eqpos.eqentry.tools.SharedPrefUtil;
 import com.eqpos.eqentry.views.varyants.VaryantViewModelAltGruplar;
 
@@ -125,10 +125,10 @@ public class VaryantsEkleAltGruplari extends AppCompatActivity {
                     double varyatlarIcinFiyati = parsedNumber.doubleValue();
 
                     // Seçili varyantları al
-                    List<VaryantModel> selectedVaryants = adapter.getSelectedVaryants();
+                    List<VaryantModelWithBadget> selectedVaryants = adapter.getSelectedVaryants();
 
                     // Logcat'e yazdır
-                    for (VaryantModel varyant : selectedVaryants) {
+                    for (VaryantModelWithBadget varyant : selectedVaryants) {
                         String eklenecekUrunIsmi = String.format(Locale.getDefault(), "%s %s %s %s",
                                 urunAdi.toUpperCase(),
                                 oncekiAciklama,
@@ -141,7 +141,7 @@ public class VaryantsEkleAltGruplari extends AppCompatActivity {
                             plu = Integer.parseInt(generatePLU(edPrefix));
                         }
                         if (barcodeOlusturulsunMu) {
-                            barcode =  generateEAN13Barcode(edPrefix);
+                            barcode = generateEAN13Barcode(edPrefix);
                         }
 
                         viewmodel.addNewAddedSelected(0, barcode, eklenecekUrunIsmi, varyatlarIcinFiyati, anagrupId, varyant.getId(), plu);
@@ -248,7 +248,7 @@ public class VaryantsEkleAltGruplari extends AppCompatActivity {
 
         viewModel.getVaryantsAltGruplarLiveData().observe(this, varyants -> {
             // Varsayılan olarak tüm varyantları seçili değil yap (gerekirse)
-            for (VaryantModel varyant : varyants) {
+            for (VaryantModelWithBadget varyant : varyants) {
                 varyant.setSelected(false);
             }
             adapter = new VaryantEkleAdapterAltGruplar(this, urunAdi, varyants);

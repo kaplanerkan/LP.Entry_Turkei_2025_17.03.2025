@@ -12,18 +12,20 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.eqpos.eqentry.R;
 import com.eqpos.eqentry.databinding.ItemVaryantGruplarBinding;
-import com.eqpos.eqentry.models.VaryantModel;
-import com.eqpos.eqentry.views.varyants.VaryantAltGruplari;
+import com.eqpos.eqentry.models.VaryantModelWithBadget;
 
 import java.util.List;
+import java.util.Locale;
 
 public class VaryantEkleAdapterGruplar extends RecyclerView.Adapter<VaryantEkleAdapterGruplar.ViewHolder> {
-    private List<VaryantModel> varyantList;
+    private List<VaryantModelWithBadget> varyantList;
     private Context context;
     private String urunadi;
     private String mainGrupIsmi = "";
-    public VaryantEkleAdapterGruplar(Context context, String urunadi, String mainGrupIsmi, List<VaryantModel> varyantList) {
+
+    public VaryantEkleAdapterGruplar(Context context, String urunadi, String mainGrupIsmi, List<VaryantModelWithBadget> varyantList) {
         this.context = context;
         this.varyantList = varyantList;
         this.urunadi = urunadi;
@@ -41,7 +43,7 @@ public class VaryantEkleAdapterGruplar extends RecyclerView.Adapter<VaryantEkleA
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        VaryantModel varyant = varyantList.get(position);
+        VaryantModelWithBadget varyant = varyantList.get(position);
         // ID ve Aciklama'yı TextView'lara bağla
         holder.binding.tvGrupId.setText(String.valueOf(varyant.getId()));
 
@@ -49,10 +51,11 @@ public class VaryantEkleAdapterGruplar extends RecyclerView.Adapter<VaryantEkleA
         holder.binding.tvGrupTuru.setText(String.valueOf(varyant.getTanim()));
 
         holder.binding.tvGrupSira.setText(String.valueOf(varyant.getSira()));
+        holder.binding.tvBadge.setText(String.format(Locale.getDefault(), "%d", varyant.getKaydedilenGrupAdedi())); // BADGET icin lazim
 
         // Item tıklama: Model bilgilerini konsola yaz
         holder.itemView.setOnClickListener(v -> {
-            Log.d("VaryantSelected", "Seçilen Varyant: ID=" + varyant.getId() +
+            Log.e("VaryantSelected", "Seçilen Varyant: ID=" + varyant.getId() +
                     ", Sira=" + varyant.getSira() +
                     ", Tanim=" + varyant.getTanim() +
                     ", Rowcell=" + varyant.getRowcell() +
@@ -66,7 +69,12 @@ public class VaryantEkleAdapterGruplar extends RecyclerView.Adapter<VaryantEkleA
                     new ArgbEvaluator(), originalColor, highlightColor);
             colorAnimator.setDuration(300); // 300 ms animasyon süresi
             colorAnimator.addUpdateListener(animator -> {
-                holder.binding.getRoot().setCardBackgroundColor((int) animator.getAnimatedValue());
+                // En üst kisimda CArdView kullanirsaniz bu sekilde arka plan rengini degistirebilirsiniz
+                //holder.binding.getRoot().setCardBackgroundColor((int) animator.getAnimatedValue());
+                // FrameLayout yerine CardView'ın arka plan rengini değiştir
+                holder.binding.getRoot().findViewById(R.id.cardView)
+                        .setBackgroundColor((int) animator.getAnimatedValue());
+
             });
             colorAnimator.setRepeatCount(1);
             colorAnimator.setRepeatMode(ValueAnimator.REVERSE); // Geri dönerek orijinal renge döner
@@ -96,7 +104,7 @@ public class VaryantEkleAdapterGruplar extends RecyclerView.Adapter<VaryantEkleA
         return varyantList.size();
     }
 
-    public void updateList(List<VaryantModel> newList) {
+    public void updateList(List<VaryantModelWithBadget> newList) {
         this.varyantList = newList;
         notifyDataSetChanged();
     }

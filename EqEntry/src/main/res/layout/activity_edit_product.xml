@@ -13,9 +13,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:layout_marginTop="1dp"
-            android:layout_marginRight="5dp"
+            android:layout_margin="5dp"
             android:orientation="horizontal">
 
             <TextView
@@ -28,18 +26,47 @@
                 android:id="@+id/edEditproductBarcode"
                 style="@style/AppTheme.EditText"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="48dp"
                 android:layout_weight="0.7"
                 android:lines="1"
-                android:maxLength="50"
+                android:maxLength="13"
+
                 android:maxLines="1" />
 
             <Button
+                android:id="@+id/btnClsBarcode"
+                android:layout_width="10dp"
+                android:layout_height="50dp"
+                android:layout_weight="0.2"
+                android:background="@drawable/btn_rounded_red"
+                android:textColor="@color/colorWhite"
+                android:text="CLS" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|end"
+            android:layout_margin="10dp"
+            android:gravity="center|end"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btnBarcodeAra"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/std_button"
+                android:text="Ürün Ara" />
+
+            <Button
                 android:id="@+id/bt_editproduct_barcode"
-                style="@style/StdButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="right"
+
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="end"
+                android:layout_weight="1"
                 android:background="@drawable/std_button"
                 android:text="@string/barcode" />
         </LinearLayout>
@@ -300,6 +327,26 @@
                 android:maxLength="250"
                 android:maxLines="6" />
         </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginRight="5dp"
+        android:orientation="horizontal">
+
+        <CheckBox
+            android:id="@+id/cbAnarunOlarakdaKaydet"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:checked="true"
+            android:text="Ana ürünü de kaydet" />
+
+    </LinearLayout>
+
 
         <LinearLayout
             android:layout_width="match_parent"

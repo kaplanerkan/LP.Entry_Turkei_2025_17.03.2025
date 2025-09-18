@@ -1,6 +1,6 @@
 package com.eqpos.eqentry.models;
 
-public class VaryantModel {
+public class VaryantModelWithBadget {
 
     private int id;
     private int sira;
@@ -10,17 +10,19 @@ public class VaryantModel {
     private int parentid;
     private boolean isSelected = false; // Yeni alan: Seçili olup olmadığını tutar
 
+    private int kaydedilenGrupAdedi = 0;
 
-    public VaryantModel() {
+    public VaryantModelWithBadget() {
     }
 
-    public VaryantModel(int id, int sira, String tanim, int rowcell, String aciklama, int parentid) {
+    public VaryantModelWithBadget(int id, int sira, String tanim, int rowcell, String aciklama, int parentid, int kaydedilenGrupAdedi) {
         this.id = id;
         this.sira = sira;
         this.tanim = tanim;
         this.rowcell = rowcell;
         this.aciklama = aciklama;
         this.parentid = parentid;
+        this.kaydedilenGrupAdedi = kaydedilenGrupAdedi;
     }
 
     public int getId() {
@@ -77,5 +79,13 @@ public class VaryantModel {
 
     public void setSelected(boolean selected) {
         isSelected = selected;
+    }
+
+    public int getKaydedilenGrupAdedi() {
+        return kaydedilenGrupAdedi;
+    }
+
+    public void setKaydedilenGrupAdedi(int kaydedilenGrupAdedi) {
+        this.kaydedilenGrupAdedi = kaydedilenGrupAdedi;
     }
 }

@@ -12,11 +12,10 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.eqpos.eqentry.models.AddedVaryantsModel;
-import com.eqpos.eqentry.models.VaryantModel;
+import com.eqpos.eqentry.models.VaryantModelWithBadget;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 /**
  * Created by dursu on 22.02.2018.
@@ -26,15 +25,19 @@ public class Database extends SQLiteOpenHelper {
     public static final String VERITABANI = "entry_db_tr_13.db3";
     private static final int SURUM = 13;
     public static Context vtContext;
-
+    // LiveData için
+    private final MutableLiveData<List<VaryantModelWithBadget>> varyantsLiveData = new MutableLiveData<>();
+    private final MutableLiveData<List<VaryantModelWithBadget>> varyantsGruplarLiveData = new MutableLiveData<>();
+    private final MutableLiveData<List<VaryantModelWithBadget>> varyantsGruplarLiveDataWithBadget = new MutableLiveData<>();
+    private final MutableLiveData<List<VaryantModelWithBadget>> varyantsAltGruplarLiveData = new MutableLiveData<>();
+    private final MutableLiveData<List<AddedVaryantsModel>> addedVaryantsLiveData = new MutableLiveData<>();
+    private final MutableLiveData<Integer> eklenGrupAdediLiveData = new MutableLiveData<>();
     public Database() {
         super(vtContext, VERITABANI, null, SURUM);
     }
-
     public Database(Context context) {
         super(context, VERITABANI, null, SURUM);
     }
-
 
     @Override
     public void onCreate(SQLiteDatabase db) {
@@ -87,9 +90,6 @@ public class Database extends SQLiteOpenHelper {
                 "price numeric(12,2), " +
                 "anagrupid integer, " +
                 "altgrupid integer)");
-
-
-
 
 
 //        db.execSQL("CREATE TRIGGER if not exists trg_products before UPDATE ON products for each row  " +
@@ -232,14 +232,6 @@ public class Database extends SQLiteOpenHelper {
 
     }
 
-
-    // LiveData için
-    private final MutableLiveData<List<VaryantModel>> varyantsLiveData = new MutableLiveData<>();
-    private final MutableLiveData<List<VaryantModel>> varyantsGruplarLiveData = new MutableLiveData<>();
-    private final MutableLiveData<List<VaryantModel>> varyantsAltGruplarLiveData = new MutableLiveData<>();
-
-    private final MutableLiveData<List<AddedVaryantsModel>> addedVaryantsLiveData = new MutableLiveData<>();
-
     // Tüm eklenen varyantları LiveData olarak döndür
     public LiveData<List<AddedVaryantsModel>> getAllAddedVaryantsLiveData() {
         loadAddedVaryants(); // İlk yükleme
@@ -247,30 +239,48 @@ public class Database extends SQLiteOpenHelper {
     }
 
 
+    // Eklenen varyantların sayısını LiveData olarak döndür
+    public LiveData<Integer> getEklenGrupAdedLiveData(int anagrupId) {
+        loadAddedVaryantsEklenenGruplarinAdedi(anagrupId);
+        return eklenGrupAdediLiveData;
+    }
 
 
     // Tüm varyantları LiveData olarak döndür
-    public LiveData<List<VaryantModel>> getAllVaryantsLiveData() {
+    public LiveData<List<VaryantModelWithBadget>> getAllVaryantsLiveData() {
         loadVaryants(); // İlk yükleme
         return varyantsLiveData;
     }
 
-//
-    public LiveData<List<VaryantModel>> getAllVaryantGruplarLiveData(int parentId) {
-        loadVaryantsGruplar(parentId);
+    //
+    public LiveData<List<VaryantModelWithBadget>> getAllVaryantGruplarLiveData(int parentId) {
+        loadVaryantsGruplarWithBadget(parentId);
         return varyantsGruplarLiveData;
     }
 
-    public LiveData<List<VaryantModel>> getAllVaryantAltGruplarLiveData(int parentId) {
+    public LiveData<List<VaryantModelWithBadget>> getAllVaryantGruplarLiveDataWithBadger(int parentId) {
+        loadVaryantsGruplarWithBadget(parentId);
+        return varyantsGruplarLiveDataWithBadget;
+    }
+
+    public LiveData<List<VaryantModelWithBadget>> getAllVaryantAltGruplarLiveData(int parentId) {
         loadVaryantsAltGruplar(parentId);
         return varyantsAltGruplarLiveData;
     }
 
 
-    private void loadVaryantsGruplar(int parentId) {
-        List<VaryantModel> varyantList = new ArrayList<>();
+
+
+    private void loadVaryantsGruplarWithBadget(int parentId) {
+        List<VaryantModelWithBadget> varyantList = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
-        String query = "SELECT * FROM varyants WHERE rowcell= 1 AND parentid = "+ parentId +";"; // parentid'ye göre filtreleme yap
+//        String query = "SELECT * FROM varyants WHERE rowcell= 1 AND parentid = " + parentId + ";"; // parentid'ye göre filtreleme yap
+        String query = "SELECT v.*, " +
+                "(SELECT COUNT(*) FROM varyants_added va WHERE va.anagrupid = v.id) AS adet " +
+                "FROM varyants v " +
+                "WHERE v.rowcell = 1 AND v.parentid = " + parentId + ";";
+
+
         Cursor cursor = db.rawQuery(query, null);
 
         try {
@@ -283,8 +293,9 @@ public class Database extends SQLiteOpenHelper {
                     int rowcell = cursor.getInt(cursor.getColumnIndexOrThrow("rowcell"));
                     int parentid = cursor.getInt(cursor.getColumnIndexOrThrow("parentid"));
 
+                    int adet = cursor.getInt(cursor.getColumnIndexOrThrow("adet"));
                     //int id, int sira, String tanim, int rowcell, String aciklama, int parentid
-                    VaryantModel varyant = new VaryantModel(id, sira, tanim, rowcell,aciklama, parentid);
+                    VaryantModelWithBadget varyant = new VaryantModelWithBadget(id, sira, tanim, rowcell, aciklama, parentid, adet);
                     varyantList.add(varyant);
                 } while (cursor.moveToNext());
             }
@@ -294,12 +305,14 @@ public class Database extends SQLiteOpenHelper {
             cursor.close();
             db.close();
         }
-        varyantsGruplarLiveData.postValue(varyantList); // LiveData'yı güncelle
+        varyantsGruplarLiveDataWithBadget.postValue(varyantList); // LiveData'yı güncelle
     }
+
+
     private void loadVaryantsAltGruplar(int parentId) {
-        List<VaryantModel> varyantList = new ArrayList<>();
+        List<VaryantModelWithBadget> varyantList = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
-        String query = "SELECT * FROM varyants WHERE rowcell= 2 AND parentid = "+ parentId +";"; // parentid'ye göre filtreleme yap
+        String query = "SELECT * FROM varyants WHERE rowcell= 2 AND parentid = " + parentId + ";"; // parentid'ye göre filtreleme yap
         Cursor cursor = db.rawQuery(query, null);
 
         try {
@@ -313,7 +326,7 @@ public class Database extends SQLiteOpenHelper {
                     int parentid = cursor.getInt(cursor.getColumnIndexOrThrow("parentid"));
 
                     //int id, int sira, String tanim, int rowcell, String aciklama, int parentid
-                    VaryantModel varyant = new VaryantModel(id, sira, tanim, rowcell,aciklama, parentid);
+                    VaryantModelWithBadget varyant = new VaryantModelWithBadget(id, sira, tanim, rowcell, aciklama, parentid, 0);
                     varyantList.add(varyant);
                 } while (cursor.moveToNext());
             }
@@ -328,7 +341,7 @@ public class Database extends SQLiteOpenHelper {
 
     // Verileri yükle ve LiveData'yı güncelle
     private void loadVaryants() {
-        List<VaryantModel> varyantList = new ArrayList<>();
+        List<VaryantModelWithBadget> varyantList = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
         String query = "SELECT * FROM varyants WHERE parentid = 0;";
         Cursor cursor = db.rawQuery(query, null);
@@ -344,7 +357,7 @@ public class Database extends SQLiteOpenHelper {
                     int parentid = cursor.getInt(cursor.getColumnIndexOrThrow("parentid"));
 
                     //int id, int sira, String tanim, int rowcell, String aciklama, int parentid
-                    VaryantModel varyant = new VaryantModel(id, sira, tanim, rowcell, aciklama, parentid);
+                    VaryantModelWithBadget varyant = new VaryantModelWithBadget(id, sira, tanim, rowcell, aciklama, parentid, 0);
                     varyantList.add(varyant);
                 } while (cursor.moveToNext());
             }
@@ -389,7 +402,24 @@ public class Database extends SQLiteOpenHelper {
     }
 
 
+    private void loadAddedVaryantsEklenenGruplarinAdedi(int anagrupId) {
+        int grubunAdeti = 0;
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "SELECT COUNT(internid) AS adet FROM varyants_added WHERE anagrupid = ?";
+        Cursor cursor = db.rawQuery(query, new String[]{String.valueOf(anagrupId)});
 
+        try {
+            if (cursor.moveToFirst()) {
+                grubunAdeti = cursor.getInt(cursor.getColumnIndexOrThrow("adet"));
+            }
+        } catch (Exception e) {
+            Log.e("DatabaseHelper", "Veri çekme hatası: " + e.toString());
+        } finally {
+            cursor.close();
+            db.close();
+        }
+        eklenGrupAdediLiveData.postValue(grubunAdeti);
+    }
 
 
     // Yeni varyant ekle ve LiveData'yı güncelle
@@ -428,7 +458,7 @@ public class Database extends SQLiteOpenHelper {
         db.close();
 
         // Yeni veri eklendikten sonra LiveData'yı güncelle
-        loadVaryantsGruplar(parentid); // parentid'ye göre güncelleme yapılıyor
+        loadVaryantsGruplarWithBadget(parentid); // parentid'ye göre güncelleme yapılıyor
     }
 
 
@@ -520,7 +550,6 @@ public class Database extends SQLiteOpenHelper {
         // Veri güncellendikten sonra LiveData'yı güncelle
         loadAddedVaryants();
     }
-
 
 
 }

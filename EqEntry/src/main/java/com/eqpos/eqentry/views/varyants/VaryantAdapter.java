@@ -15,15 +15,15 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.eqpos.eqentry.databinding.ItemVaryantMainBinding;
-import com.eqpos.eqentry.models.VaryantModel;
+import com.eqpos.eqentry.models.VaryantModelWithBadget;
 
 import java.util.List;
 
 public class VaryantAdapter extends RecyclerView.Adapter<VaryantAdapter.ViewHolder> {
-    private List<VaryantModel> varyantList;
+    private List<VaryantModelWithBadget> varyantList;
     private Context context;
 
-    public VaryantAdapter(Context context, List<VaryantModel> varyantList) {
+    public VaryantAdapter(Context context, List<VaryantModelWithBadget> varyantList) {
         this.context = context;
         this.varyantList = varyantList;
     }
@@ -39,7 +39,7 @@ public class VaryantAdapter extends RecyclerView.Adapter<VaryantAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        VaryantModel varyant = varyantList.get(position);
+        VaryantModelWithBadget varyant = varyantList.get(position);
         // ID ve Aciklama'yı TextView'lara bağla
         holder.binding.tvId.setText(String.valueOf(varyant.getId()));
         holder.binding.tvAciklama.setText(String.valueOf(varyant.getAciklama()));
@@ -89,7 +89,7 @@ public class VaryantAdapter extends RecyclerView.Adapter<VaryantAdapter.ViewHold
         return varyantList.size();
     }
 
-    public void updateList(List<VaryantModel> newList) {
+    public void updateList(List<VaryantModelWithBadget> newList) {
         this.varyantList = newList;
         notifyDataSetChanged();
     }

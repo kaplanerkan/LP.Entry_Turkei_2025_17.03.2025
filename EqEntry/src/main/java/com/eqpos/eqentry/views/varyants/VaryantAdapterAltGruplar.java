@@ -10,16 +10,17 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.eqpos.eqentry.R;
 import com.eqpos.eqentry.databinding.ItemVaryantGruplarBinding;
-import com.eqpos.eqentry.models.VaryantModel;
+import com.eqpos.eqentry.models.VaryantModelWithBadget;
 
 import java.util.List;
 
 public class VaryantAdapterAltGruplar extends RecyclerView.Adapter<VaryantAdapterAltGruplar.ViewHolder> {
-    private List<VaryantModel> varyantList;
+    private List<VaryantModelWithBadget> varyantList;
     private Context context;
 
-    public VaryantAdapterAltGruplar(Context context, List<VaryantModel> varyantList) {
+    public VaryantAdapterAltGruplar(Context context, List<VaryantModelWithBadget> varyantList) {
         this.context = context;
         this.varyantList = varyantList;
     }
@@ -35,7 +36,7 @@ public class VaryantAdapterAltGruplar extends RecyclerView.Adapter<VaryantAdapte
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        VaryantModel varyant = varyantList.get(position);
+        VaryantModelWithBadget varyant = varyantList.get(position);
         // ID ve Aciklama'yı TextView'lara bağla
         holder.binding.tvGrupId.setText(String.valueOf(varyant.getId()));
 
@@ -60,7 +61,11 @@ public class VaryantAdapterAltGruplar extends RecyclerView.Adapter<VaryantAdapte
                     new ArgbEvaluator(), originalColor, highlightColor);
             colorAnimator.setDuration(300); // 300 ms animasyon süresi
             colorAnimator.addUpdateListener(animator -> {
-                holder.binding.getRoot().setCardBackgroundColor((int) animator.getAnimatedValue());
+                // En üst kisimda CArdView kullanirsaniz bu sekilde arka plan rengini degistirebilirsiniz
+//                holder.binding.getRoot().setCardBackgroundColor((int) animator.getAnimatedValue());
+                // FrameLayout yerine CardView'ın arka plan rengini değiştir
+                holder.binding.getRoot().findViewById(R.id.cardView)
+                        .setBackgroundColor((int) animator.getAnimatedValue());
             });
             colorAnimator.setRepeatCount(1);
             colorAnimator.setRepeatMode(ValueAnimator.REVERSE); // Geri dönerek orijinal renge döner
@@ -74,7 +79,7 @@ public class VaryantAdapterAltGruplar extends RecyclerView.Adapter<VaryantAdapte
         return varyantList.size();
     }
 
-    public void updateList(List<VaryantModel> newList) {
+    public void updateList(List<VaryantModelWithBadget> newList) {
         this.varyantList = newList;
         notifyDataSetChanged();
     }

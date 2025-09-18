@@ -6,13 +6,13 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
 import com.eqpos.eqentry.db.Database;
-import com.eqpos.eqentry.models.VaryantModel;
+import com.eqpos.eqentry.models.VaryantModelWithBadget;
 
 import java.util.List;
 
 public class VaryantViewModel extends AndroidViewModel {
     private final Database dbHelper;
-    private final LiveData<List<VaryantModel>> varyantsLiveData;
+    private final LiveData<List<VaryantModelWithBadget>> varyantsLiveData;
 
 
     public VaryantViewModel(Application application) {
@@ -21,7 +21,7 @@ public class VaryantViewModel extends AndroidViewModel {
         varyantsLiveData = dbHelper.getAllVaryantsLiveData();
     }
 
-    public LiveData<List<VaryantModel>> getVaryantsLiveData() {
+    public LiveData<List<VaryantModelWithBadget>> getVaryantsLiveData() {
         return varyantsLiveData;
     }
 

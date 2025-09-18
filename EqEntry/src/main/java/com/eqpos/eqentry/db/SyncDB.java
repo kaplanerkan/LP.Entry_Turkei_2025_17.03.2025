@@ -11,8 +11,8 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.eqpos.eqentry.BuildConfig;
-import com.eqpos.eqentry.models.VaryantModel;
 import com.eqpos.eqentry.R;
+import com.eqpos.eqentry.models.VaryantModelWithBadget;
 import com.eqpos.eqentry.tools.JSONProcess;
 import com.eqpos.eqentry.tools.SocketProcess;
 import com.eqpos.eqentry.tools.Variables;
@@ -399,10 +399,10 @@ public class SyncDB {
 
                         JsonArray lArr = parser.parse(rMsg).getAsJsonArray();
 
-                        // VaryantModel nesnelerini tutacak liste
-                        List<VaryantModel> varyantList = new ArrayList<>();
+                        // VaryantModelWithBadget nesnelerini tutacak liste
+                        List<VaryantModelWithBadget> varyantList = new ArrayList<>();
 
-                        // JsonArray içindeki her bir JsonObject'i VaryantModel'e çevir
+                        // JsonArray içindeki her bir JsonObject'i VaryantModelWithBadget'e çevir
                         int i = 0;
                         for (JsonElement element : lArr) {
                             JsonObject jsonObject = element.getAsJsonObject();
@@ -415,10 +415,10 @@ public class SyncDB {
                             String aciklama = jsonObject.get("aciklama").getAsString();
                             int parentid = jsonObject.get("parentid").getAsInt();
 
-                            // VaryantModel nesnesi oluştur
+                            // VaryantModelWithBadget nesnesi oluştur
                             //
                             //int id, int sira, String tanim, int rowcell, String aciklama, int parentid
-                            VaryantModel varyant = new VaryantModel(id, sira, tanim, rowcell, aciklama, parentid);
+                            VaryantModelWithBadget varyant = new VaryantModelWithBadget(id, sira, tanim, rowcell, aciklama, parentid, 0);
                             varyantList.add(varyant);
                             i ++;
                         }
