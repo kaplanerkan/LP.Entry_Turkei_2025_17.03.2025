@@ -22,8 +22,8 @@ import java.util.List;
  */
 
 public class Database extends SQLiteOpenHelper {
-    public static final String VERITABANI = "entry_db_tr_13.db3";
-    private static final int SURUM = 13;
+    public static final String VERITABANI = "entry_db_tr_14.db3";
+    private static final int SURUM = 14;
     public static Context vtContext;
     // LiveData için
     private final MutableLiveData<List<VaryantModelWithBadget>> varyantsLiveData = new MutableLiveData<>();
@@ -47,6 +47,7 @@ public class Database extends SQLiteOpenHelper {
         db.execSQL("create table productgroups (id integer primary key, groupname text)");
         db.execSQL("create table deposites (id integer primary key, depositename text, " +
                 "price numeric(12,2), taxpercent numeric(12,2), uniteid integer)");
+
         db.execSQL("CREATE TABLE products (id integer primary key, stockcode text, groupid integer, rownumber integer, " +
                 "barcode text, plu text, variantcode text, productname text, costprice numeric(12,3), " +
                 "taxid integer, depositeid integer, uniteid integer, ismanualprice integer, " +
@@ -121,11 +122,13 @@ public class Database extends SQLiteOpenHelper {
             suppliers: tedarikci
             suppliersid: tedarikciid
          */
-        db.execSQL("create table productprices (id INTEGER PRIMARY KEY AUTOINCREMENT,  productid integer, priceorder integer, " +
+        db.execSQL("create table productprices (iternid integer primary key,id integer,  productid integer, priceorder integer, " +
                 "description text, price numeric(12,2), newprice numeric(12,2) default 0, changed integer default 0, isnew integer default 0," +
                 "printlabel integer default 0, foreign key (productid) references products(id))");
 
-        db.execSQL("create unique index idx_productprices on productprices(productid,priceorder)");
+      //  db.execSQL("create unique index idx_productprices on productprices(productid,priceorder)");
+
+
         db.execSQL("CREATE TRIGGER if not exists trg_update_productrpice before UPDATE ON productprices for each row  " +
                 "BEGIN " +
                 " update productprices set changed=1 where id=NEW.id; " +
@@ -149,7 +152,7 @@ public class Database extends SQLiteOpenHelper {
         db.execSQL("create unique index idx_purchaseorder_productid on purchaseorder(productid)");
 
         db.execSQL("create table delivery (id integer primary key autoincrement, documentdate text, documenttime text, documentnumber text," +
-                "supplierid integer, receiver text) ");
+                "supplierid integer, receiver text, warehouseid integer default 0) ");
 
         db.execSQL("CREATE TABLE deliverydetail (id integer primary key autoincrement, deliveryid integer, productid integer not null, " +
                 "partnumber text, expirationdate text, amount numeric(12,3) default 0.0, costprice numeric(12,2) default 0.0, " +
@@ -159,20 +162,25 @@ public class Database extends SQLiteOpenHelper {
                 "BEGIN " +
                 " update deliverydetail set total=amount*costprice where id=NEW.id; " +
                 "END;");
+
+
         db.execSQL("create table inventur (productid integer primary key, currentquantity numeric(12,3), newquantity numeric(12, 3), " +
-                "difference numeric(12, 3), foreign key (productid) references products(id))");
+                "difference numeric(12, 3), warehouseid integer default 0, foreign key (productid) references products(id))");
         db.execSQL("CREATE TRIGGER if not exists trg_inventur before UPDATE ON inventur for each row  " +
                 "BEGIN " +
                 " update inventur set difference = newquantity - currentquantity where productid=NEW.productid; " +
                 "END;");
 
+
         db.execSQL("create table invoice (id integer primary key autoincrement, invoicenumber text, invoicedate text, invoicetime text, customerid integer, " +
-                "taxamount numeric(12, 2), total numeric(12,2), discount numeric(12,2), subtotal numeric(12,2), includetax int default 0, foreign key (customerid) references customers(id))");
+                "taxamount numeric(12, 2), total numeric(12,2), discount numeric(12,2), subtotal numeric(12,2), includetax int default 0, warehouseid int default 0, foreign key (customerid) references customers(id))");
+
         db.execSQL("create table invoicedetail(id integer primary key autoincrement, invoiceid integer, productid integer, unitprice numeric(12,2), " +
                 "packageamount int, amount numeric(12,3), total numeric(12, 2), discount1 numeric(12, 2), discount2 numeric(12, 2), discount3 numeric(12, 2), " +
                 "discount4 numeric(12, 2), subtotal numeric(12,2), taxrate numeric(12,2), tax numeric(12, 2),  " +
                 "foreign key(productid) references products(id)," +
                 "foreign key(invoiceid) references invoice(id)) ");
+
         db.execSQL("create index idx_invoicedetails_productid on invoicedetail(productid)");
 
         db.execSQL("CREATE TRIGGER if not exists trg_invoice before UPDATE ON invoice for each row  " +

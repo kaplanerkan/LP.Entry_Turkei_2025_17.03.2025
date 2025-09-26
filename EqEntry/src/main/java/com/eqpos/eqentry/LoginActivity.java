@@ -1,6 +1,7 @@
 package com.eqpos.eqentry;
 
 import static com.eqpos.eqentry.tools.SharedPrefUtil.KEY_BLE_PRINTER_STATUS;
+import static com.eqpos.eqentry.tools.SharedPrefUtil.KEY_SELECTED_DEPO_ID;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -76,6 +77,9 @@ public class LoginActivity extends Activity  {
         try {
 
             SharedPrefUtil.init(LoginActivity.this);
+
+            SharedPrefUtil.putInt(KEY_SELECTED_DEPO_ID, 0);
+
 
             Database.vtContext =  getApplicationContext();
             Variables.context =getApplicationContext();

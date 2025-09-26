@@ -12,10 +12,12 @@ import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.eqpos.eqentry.db.InventurDao;
 import com.eqpos.eqentry.models.InventurHolder;
 import com.eqpos.eqentry.R;
+import com.eqpos.eqentry.tools.SharedPrefUtil;
 import com.eqpos.eqentry.tools.Variables;
 
 import java.text.ParseException;
@@ -32,10 +34,15 @@ public class InventurAdapter extends BaseAdapter {
 
     private ArrayList<HashMap<String, String>> gList;
 
+    private final int selectedWarehouseId = SharedPrefUtil.getInt(SharedPrefUtil.KEY_SELECTED_DEPO_ID,0);
     public InventurAdapter(Context context, ArrayList<HashMap<String, String>> list) {
 
         this.context = context;
         this.gList = list;
+
+        if (selectedWarehouseId == 0){
+            Toast.makeText(context, "Lütfen depo seçiniz!", Toast.LENGTH_LONG).show();
+        }
     }
 
     @Override
@@ -105,40 +112,32 @@ public class InventurAdapter extends BaseAdapter {
         holder.lblDiff.setText(gList.get(position).get("difference"));
         holder.edNew.setText(gList.get(position).get("newquantity"));
 
-        holder.edNew.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (hasFocus) {
-                    double currQuantity = 0;
-                    try {
-                        currQuantity = Variables.strToDouble(gList.get(position).get("currentquantity"));
-                    } catch (ParseException e) {
-                        e.printStackTrace();
-                        currQuantity = 0.0;
-                    }
-                    double newQuantity = 0;
-                    try {
-                        newQuantity = Variables.strToDouble(gList.get(position).get("newquantity"));
-                    } catch (ParseException e) {
-                        e.printStackTrace();
-                        newQuantity = 0.0;
-                    }
-                    if (currQuantity == newQuantity) {
-                        holder.edNew.setText("");
-                    }
-                } else {
-                    if (holder.edNew.getText().toString().isEmpty())
-                        holder.edNew.setText(gList.get(position).get("currentquantity"));
+        holder.edNew.setOnFocusChangeListener((v, hasFocus) -> {
+            if (hasFocus) {
+                double currQuantity = 0;
+                try {
+                    currQuantity = Variables.strToDouble(gList.get(position).get("currentquantity"));
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                    currQuantity = 0.0;
                 }
+                double newQuantity = 0;
+                try {
+                    newQuantity = Variables.strToDouble(gList.get(position).get("newquantity"));
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                    newQuantity = 0.0;
+                }
+                if (currQuantity == newQuantity) {
+                    holder.edNew.setText("");
+                }
+            } else {
+                if (holder.edNew.getText().toString().isEmpty())
+                    holder.edNew.setText(gList.get(position).get("currentquantity"));
             }
         });
 
-        holder.btAdd.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                updateQuantity(position, row, holder.lblCurr, holder.lblDiff, holder.edNew, 1.0);
-            }
-        });
+        holder.btAdd.setOnClickListener(v -> updateQuantity(position, row, holder.lblCurr, holder.lblDiff, holder.edNew, 1.0));
         holder.btDecrease.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -180,7 +179,7 @@ public class InventurAdapter extends BaseAdapter {
                 gList.get(position).put("newquantity", Variables.doubleToStr(value, 0));
                 gList.get(position).put("difference", Variables.doubleToStr(diff,0));
 
-                InventurDao.changeNewStock(Integer.parseInt(gList.get(position).get("productid")), value);
+                InventurDao.changeNewStock(Integer.parseInt(gList.get(position).get("productid")), value, selectedWarehouseId);
             }
         });
         return row;
@@ -213,7 +212,8 @@ public class InventurAdapter extends BaseAdapter {
         gList.get(position).put("newquantity", Variables.doubleToStr(amount,2));
         gList.get(position).put("difference", Variables.doubleToStr(diff,2));
 
-        InventurDao.changeNewStock(Integer.parseInt(gList.get(position).get("productid")), amount);
+
+        InventurDao.changeNewStock(Integer.parseInt(gList.get(position).get("productid")), amount, selectedWarehouseId);
     }
 }
 

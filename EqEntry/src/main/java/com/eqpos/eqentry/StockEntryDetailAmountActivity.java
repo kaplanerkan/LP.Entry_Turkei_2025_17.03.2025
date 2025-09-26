@@ -130,16 +130,11 @@ public class StockEntryDetailAmountActivity extends AppCompatActivity implements
 
         btOk.setOnClickListener(this);
         edExpirationDate.setOnClickListener(this);
-        dateSetListener = new DatePickerDialog.OnDateSetListener() {
-
-            @Override
-            public void onDateSet(DatePicker view, int year, int monthOfYear,
-                                  int dayOfMonth) {
-                myCalendar.set(Calendar.YEAR, year);
-                myCalendar.set(Calendar.MONTH, monthOfYear);
-                myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-                updateEdit();
-            }
+        dateSetListener = (view, year, monthOfYear, dayOfMonth) -> {
+            myCalendar.set(Calendar.YEAR, year);
+            myCalendar.set(Calendar.MONTH, monthOfYear);
+            myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+            updateEdit();
         };
         btPackage.setChecked(false);
     }

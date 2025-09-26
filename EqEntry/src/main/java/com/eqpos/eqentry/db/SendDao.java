@@ -555,7 +555,7 @@ public class SendDao {
 
         SQLiteDatabase db = Db.getReadableDatabase();
         Cursor cursor = db.query("delivery",
-                new String[]{"documentdate", "documentnumber", "supplierid", "receiver", "documenttime"},
+                new String[]{"documentdate", "documentnumber", "supplierid", "receiver", "documenttime", "warehouseid"},
                 "id=?", new String[]{String.valueOf(deliveyId)}, "", "", "");
         if (cursor.getCount() > 0) {
             cursor.moveToNext();
@@ -563,6 +563,8 @@ public class SendDao {
             jHead.addProperty("documentnumber", cursor.getString(1));
             jHead.addProperty("supplierid", cursor.getInt(2));
             jHead.addProperty("receiver", cursor.getString(3));
+            jHead.addProperty("documenttime", cursor.getString(4));
+            jHead.addProperty("warehouseid", cursor.getInt(5));
             cursor.close();
         }
 
@@ -767,7 +769,7 @@ public class SendDao {
         Database Db = new Database();
 
         SQLiteDatabase db = Db.getReadableDatabase();
-        Cursor cursor = db.rawQuery("select productid, newquantity from inventur where difference<>0", null);
+        Cursor cursor = db.rawQuery("select productid, newquantity, warehouseid from inventur where difference<>0", null);
         JsonArray jArr = null;
         if (cursor.getCount() > 0) {
             while (cursor.moveToNext()) {
@@ -780,6 +782,7 @@ public class SendDao {
                 jElement = new JsonObject();
                 jElement.addProperty("productid", cursor.getInt(0));
                 jElement.addProperty("newquantity", cursor.getDouble(1));
+               // jElement.addProperty("warehouseid", cursor.getInt(2));
 
                 jArr.add(jElement);
 
@@ -788,6 +791,7 @@ public class SendDao {
 
                     JsonObject jHead = JSONProcess.getJSONHeader(Variables.ServerCommand.cmdSaveInventur.getValue());
                     jHead.addProperty("inventurid", lInventurId);
+                    jHead.addProperty("warehouseid", cursor.getInt(2));
 
                     JsonObject jData = new JsonObject();
                     jData.addProperty("datas", jArr.toString());
@@ -828,7 +832,7 @@ public class SendDao {
 
         SQLiteDatabase db = Db.getReadableDatabase();
         Cursor cursor = db.query("invoice",
-                new String[]{"invoicenumber", "invoicedate", "customerid", "total", "discount", "taxamount", "subtotal", "includetax", "invoicetime"},
+                new String[]{"invoicenumber", "invoicedate", "customerid", "total", "discount", "taxamount", "subtotal", "includetax", "invoicetime", "warehouseid"},
                 "id=?", new String[]{String.valueOf(invoiceId)}, "", "", "");
         if (cursor.getCount() > 0) {
             cursor.moveToNext();
@@ -840,6 +844,8 @@ public class SendDao {
             jHead.addProperty("taxamount", cursor.getDouble(5));
             jHead.addProperty("subtotal", cursor.getDouble(6));
             jHead.addProperty("includetax", cursor.getInt(7));
+            jHead.addProperty("invoicetime", cursor.getString(8));
+            jHead.addProperty("warehouseid", cursor.getInt(9));
             cursor.close();
         }
 

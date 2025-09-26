@@ -5,6 +5,7 @@ import android.content.Intent;
 import androidx.appcompat.app.AppCompatActivity;
 //import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
@@ -26,6 +27,7 @@ import com.eqpos.eqentry.db.ProductDao;
 import com.eqpos.eqentry.models.BarcodeSettings;
 import com.eqpos.eqentry.models.Product;
 import com.eqpos.eqentry.tools.CaptureActivityPortrait;
+import com.eqpos.eqentry.tools.SharedPrefUtil;
 import com.eqpos.eqentry.tools.Variables;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
@@ -108,7 +110,11 @@ public class NewInvoiceActivity extends AppCompatActivity implements View.OnClic
             if (gInvoiceId == 0) {
                 String invoiceNumber = InvoiceDao.getRandomInvoiceNumber();
                 edInvoiceNumber.setText(invoiceNumber);
-                gInvoiceId = InvoiceDao.createInvoice(invoiceNumber, edInvoiceDate.getText().toString(), 0, 0, 0, swIncludeTax.isChecked());
+
+                int selectedWarehouseId = SharedPrefUtil.getInt(SharedPrefUtil.KEY_SELECTED_DEPO_ID, 0);
+                gInvoiceId = InvoiceDao.createInvoice(invoiceNumber, edInvoiceDate.getText().toString(), 0, 0, 0,
+                        swIncludeTax.isChecked(), selectedWarehouseId);
+
             } else {
                 edInvoiceNumber.setText(extra.getString("invoicenumber", ""));
                 edInvoiceDate.setText(extra.getString("invoicedate", ""));
@@ -237,9 +243,16 @@ public class NewInvoiceActivity extends AppCompatActivity implements View.OnClic
 
         if (resultCode == RESULT_OK && requestCode == _SELECTCUSTOMER) {
             //Burada seçilen müşterinin bilgileri yazılacak
-            gCustomerId = data.getIntExtra("id", 0);
-            lblCustomer.setText(data.getStringExtra("customername"));
-            InvoiceDao.updateInvoiceAuto(gInvoiceId,gInvoiceOldAmount, gCustomerId, edInvoiceNumber.getText().toString(), edInvoiceDate.getText().toString());
+            try {
+                gCustomerId = data.getIntExtra("id", 0);
+                lblCustomer.setText(data.getStringExtra("customername"));
+                InvoiceDao.updateInvoiceAuto(gInvoiceId,gInvoiceOldAmount, gCustomerId, edInvoiceNumber.getText().toString(), edInvoiceDate.getText().toString());
+            }catch (Exception ex) {
+                Log.e("NewInvoiceActivity", "onActivityResult: " + ex.getMessage());
+            }
+
+
+
         } else if (resultCode == RESULT_OK && requestCode == _SELECTPRODUCT) {
             //Burada Eklenecek ürün için Birim Fiyat, Miktar, İndirim vs istenecek
             int lProductId;

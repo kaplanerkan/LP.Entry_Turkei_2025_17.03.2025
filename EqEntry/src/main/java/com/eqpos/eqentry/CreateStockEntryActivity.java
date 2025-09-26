@@ -14,6 +14,7 @@ import android.widget.EditText;
 
 import com.eqpos.eqentry.db.StockEntryDao;
 import com.eqpos.eqentry.models.Delivery;
+import com.eqpos.eqentry.tools.SharedPrefUtil;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -135,8 +136,11 @@ public class CreateStockEntryActivity extends AppCompatActivity implements View.
             edSupplier.requestFocus();
             return;
         }
+
+        int selectedWarehouseId = SharedPrefUtil.getInt(SharedPrefUtil.KEY_SELECTED_DEPO_ID, 0);
+
         gStockEntryId = StockEntryDao.saveDeliveryNote((int) gStockEntryId, edDocumentNumber.getText().toString(),
-                edDocumentDate.getText().toString(), lSupplierId, edReceiver.getText().toString());
+                edDocumentDate.getText().toString(), lSupplierId, edReceiver.getText().toString(), selectedWarehouseId);
 
         out.putExtra("deliveryid", gStockEntryId);
 

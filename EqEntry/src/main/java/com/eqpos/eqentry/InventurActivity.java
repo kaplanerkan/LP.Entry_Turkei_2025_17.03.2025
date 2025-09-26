@@ -188,27 +188,21 @@ public class InventurActivity extends AppCompatActivity implements View.OnClickL
                     input.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_VARIATION_PASSWORD);
                     builder.setView(input);
 
-                    builder.setPositiveButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            m_Text = input.getText().toString();
+                    builder.setPositiveButton(getString(R.string.ok), (dialog, which) -> {
+                        m_Text = input.getText().toString();
 
-                            if (m_Text.length() > 0) {
-                                if (isAdmin(m_Text)) {
+                        if (m_Text.length() > 0) {
+                            if (isAdmin(m_Text)) {
 
-                                    SendDao.sendInventur();
-                                    finish();
-                                }
-                                m_Text = "";
+                                SendDao.sendInventur();
+                                finish();
                             }
-                        }
-                    });
-                    builder.setNegativeButton(getString(R.string.cancel), new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.cancel();
                             m_Text = "";
                         }
+                    });
+                    builder.setNegativeButton(getString(R.string.cancel), (dialog, which) -> {
+                        dialog.cancel();
+                        m_Text = "";
                     });
 
                     builder.show();

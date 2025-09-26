@@ -53,7 +53,7 @@ public class InventurDao {
             HashMap<String, String> map;
 
             while (cursor.moveToNext()) {
-                map = new HashMap<String, String>();
+                map = new HashMap<>();
                 map.put("productid", String.valueOf(cursor.getInt(cursor.getColumnIndexOrThrow("productid"))));
                 map.put("plu", cursor.getString(cursor.getColumnIndexOrThrow("plu")));
                 map.put("productname", cursor.getString(cursor.getColumnIndexOrThrow("productname")));
@@ -68,12 +68,13 @@ public class InventurDao {
         return list;
     }
 
-    public static void changeNewStock(int productId, Double value) {
+    public static void changeNewStock(int productId, Double value, int warehouseid) {
         if (Db == null) {
             Db = new Database();
         }
         ContentValues values = new ContentValues();
         values.put("newquantity", value);
+        values.put("warehouseid", warehouseid);
         SQLiteDatabase db = Db.getWritableDatabase();
         int i = db.update("inventur", values, "productid=?", new String[]{ String.valueOf(productId)});
     }

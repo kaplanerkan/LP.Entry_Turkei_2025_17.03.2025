@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:scrollbars="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/btProducts"
+            style="@style/StdButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="3dp"
+            android:layout_weight="0.33"
+            android:background="@drawable/std_button"
+            android:drawableTop="@mipmap/img_products"
+            android:paddingTop="14dp"
+            android:text="@string/inventory"
+            android:visibility="visible" />
+
+
+        <Button
+            android:id="@+id/btSendDatas"
+            style="@style/StdButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="3dp"
+            android:layout_weight="0.33"
+            android:background="@drawable/std_button"
+            android:drawableTop="@mipmap/img_send"
+            android:paddingTop="14dp"
+            android:text="@string/senddatas"
+            android:visibility="visible" />
+
+        <Button
+            android:id="@+id/btInventory"
+            style="@style/StdButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="3dp"
+            android:layout_weight="0.33"
+            android:background="@drawable/std_button"
+            android:drawableTop="@mipmap/img_inventorycount"
+            android:paddingTop="14dp"
+            android:text="@string/inventorycount"
+            android:visibility="visible" />
+
+
+        <Button
+            android:id="@+id/btStockEntry"
+            style="@style/StdButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="3dp"
+            android:layout_weight="0.33"
+            android:background="@drawable/std_button"
+            android:drawableTop="@mipmap/img_inventory"
+            android:paddingTop="14dp"
+            android:text="@string/stockentry"
+            android:visibility="visible" />
+
+        <Button
+            android:id="@+id/btPurchaseOrder"
+            style="@style/StdButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="3dp"
+            android:layout_weight="0.33"
+            android:background="@drawable/std_button"
+            android:drawableTop="@mipmap/img_order"
+            android:paddingTop="14dp"
+            android:text="@string/purchaseorder"
+            android:visibility="visible" />
+
+        <Button
+            android:id="@+id/btPrintLabel"
+            style="@style/StdButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="3dp"
+            android:layout_weight="0.33"
+            android:background="@drawable/std_button"
+            android:drawableTop="@mipmap/img_label"
+            android:paddingTop="14dp"
+            android:text="@string/printlabel"
+            android:visibility="visible" />
+
+        <Button
+            android:id="@+id/btInvoices"
+            style="@style/StdButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="3dp"
+            android:layout_weight="0.33"
+            android:background="@drawable/std_button"
+            android:drawableTop="@mipmap/img_invoice"
+            android:paddingTop="14dp"
+            android:text="@string/invoice"
+            android:visibility="visible" />
+
+
+
+        <Button
+            android:id="@+id/btCustomers"
+            style="@style/StdButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="3dp"
+            android:layout_weight="0.33"
+            android:background="@drawable/std_button"
+            android:drawableTop="@mipmap/img_customers"
+            android:paddingTop="14dp"
+            android:text="@string/customers"
+            android:visibility="visible" />
+
+        <Button
+            android:id="@+id/btTransfers"
+            style="@style/StdButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="3dp"
+            android:layout_weight="0.33"
+            android:background="@drawable/std_button"
+            android:drawableTop="@mipmap/img_products_transfer"
+            android:paddingTop="14dp"
+            android:text="@string/stocktransfers" />
+
+        <Button
+            android:id="@+id/btChangePrice"
+            style="@style/StdButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="3dp"
+            android:layout_weight="0.33"
+            android:background="@drawable/std_button"
+            android:drawableTop="@mipmap/img_changeprice"
+            android:paddingTop="14dp"
+            android:text="@string/changeprice"
+            android:visibility="visible" />
+
+        <Button
+            android:id="@+id/btReports"
+            style="@style/StdButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="3dp"
+            android:layout_weight="0.33"
+            android:background="@drawable/std_button"
+            android:drawableTop="@mipmap/img_report"
+            android:paddingTop="14dp"
+            android:text="@string/reports"
+            android:visibility="gone" />
+
+        <Button
+            android:id="@+id/btManagement"
+            style="@style/StdButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="3dp"
+            android:layout_weight="0.33"
+            android:background="@drawable/std_button"
+            android:drawableTop="@mipmap/img_settings"
+            android:paddingTop="14dp"
+            android:text="@string/management"
+            android:visibility="gone" />
+
+
+
+        <Button
+            android:id="@+id/btnAddVaryants"
+            style="@style/StdButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="3dp"
+            android:layout_weight="0.33"
+            android:background="@drawable/std_button"
+            android:drawableTop="@drawable/varyants"
+            android:paddingTop="14dp"
+            android:text="Varyants"
+            android:visibility="visible" />
+
+
+    </LinearLayout>
+</ScrollView>
+

@@ -234,5 +234,9 @@
     <string name="product_already_exists">Product already exists</string>
     <string name="save_and_senden">Save + Senden</string>
     <string name="please_wait">Please wait…</string>
+    <string name="print_label" translatable="false">Etiket yazdir</string>
+    <string name="printlabel2" translatable="false">Etiket yazdır</string>
+
+    <string name="depo_bulunamadi" translatable="false">Depo bulunamadi</string>
 
 </resources>

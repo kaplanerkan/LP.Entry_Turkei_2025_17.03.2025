@@ -13,18 +13,25 @@ import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.view.View;
+import android.widget.Toast;
 
 import com.eqpos.eqentry.databinding.ActivityMainMenuBinding;
 import com.eqpos.eqentry.db.Dao;
 import com.eqpos.eqentry.db.Database;
+import com.eqpos.eqentry.db.WarehouseDao;
+import com.eqpos.eqentry.models.DepoModel;
 import com.eqpos.eqentry.tools.JSONProcess;
+import com.eqpos.eqentry.tools.SharedPrefUtil;
 import com.eqpos.eqentry.tools.SocketProcess;
 import com.eqpos.eqentry.tools.Variables;
+import com.eqpos.eqentry.views.depo_secimi.DepoDialogFragment;
 import com.eqpos.eqentry.views.varyants.Varyants;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
 import static android.view.View.GONE;
+
+import java.util.List;
 
 public class MainMenu extends AppCompatActivity implements View.OnClickListener {
     private String m_Text = "";
@@ -41,7 +48,7 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener 
         binding = ActivityMainMenuBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        this.setTitle(R.string.app_name);
+        setTitle(R.string.app_name);
 
         Database.vtContext = this;
         initViews();
@@ -108,12 +115,70 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener 
                 startActivity(stockEntryListIntent);
                 break;
             case R.id.btInventory:
-                Intent inventoryIntent = new Intent(this, InventurActivity.class);
-                startActivity(inventoryIntent);
+
+
+                // Depo listesini hazırla (örnek veri, sen DB'den çek)
+                List<DepoModel> depoList = WarehouseDao.getAllWarehouses();
+                if (depoList.size() == 1){
+                    SharedPrefUtil.putInt(SharedPrefUtil.KEY_SELECTED_DEPO_ID, depoList.get(0).getId());
+                    Intent inventoryIntent = new Intent(this, InventurActivity.class);
+                    startActivity(inventoryIntent);
+                } else if (depoList.size() > 1) {
+                    // Dialog'ı aç ve depo listesini geçir
+                    DepoDialogFragment dialog = new DepoDialogFragment((depoId, depoIsmi) -> {
+
+                        Log.e("DepoDialog", "Seçilen Depo ID: " + depoId + ", Depo İsmi: " + depoIsmi);
+                        SharedPrefUtil.putInt(SharedPrefUtil.KEY_SELECTED_DEPO_ID, depoId );
+                        Intent inventoryIntent = new Intent(this, InventurActivity.class);
+                        startActivity(inventoryIntent);
+
+                    }, depoList);
+
+                    dialog.setCancelable(false);
+                    dialog.show(getSupportFragmentManager(), "depo_dialog");
+                }else {
+                    Toast.makeText(MainMenu.this, R.string.depo_bulunamadi, Toast.LENGTH_SHORT).show();
+
+                }
+
+
+
+
+
+
+
                 break;
             case R.id.btInvoices:
-                Intent invoiceIntent = new Intent(this, InvoiceActivity.class);
-                startActivity(invoiceIntent);
+
+                // Depo listesini hazırla (örnek veri, sen DB'den çek)
+                List<DepoModel> depoList2 = WarehouseDao.getAllWarehouses();
+                if (depoList2.size() == 1){
+                    SharedPrefUtil.putInt(SharedPrefUtil.KEY_SELECTED_DEPO_ID, depoList2.get(0).getId());
+                    Intent invoiceIntent = new Intent(this, InvoiceActivity.class);
+                    startActivity(invoiceIntent);
+                } else if (depoList2.size() > 1) {
+                    // Dialog'ı aç ve depo listesini geçir
+                    DepoDialogFragment dialog = new DepoDialogFragment((depoId, depoIsmi) -> {
+
+                        Log.e("DepoDialog", "Seçilen Depo ID: " + depoId + ", Depo İsmi: " + depoIsmi);
+                        SharedPrefUtil.putInt(SharedPrefUtil.KEY_SELECTED_DEPO_ID, depoId );
+                        Intent invoiceIntent = new Intent(this, InvoiceActivity.class);
+                        startActivity(invoiceIntent);
+
+                    }, depoList2);
+
+                    dialog.setCancelable(false);
+                    dialog.show(getSupportFragmentManager(), "depo_dialog");
+                }else {
+                    Toast.makeText(MainMenu.this, R.string.depo_bulunamadi, Toast.LENGTH_SHORT).show();
+
+                }
+
+
+
+
+
+
                 break;
             case R.id.btCustomers:
                 Intent customersIntent = new Intent(this, CustomersActivity.class);

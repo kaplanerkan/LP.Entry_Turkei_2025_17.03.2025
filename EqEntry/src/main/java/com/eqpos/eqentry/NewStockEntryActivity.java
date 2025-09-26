@@ -35,6 +35,7 @@ import com.eqpos.eqentry.models.BarcodeSettings;
 import com.eqpos.eqentry.models.Delivery;
 import com.eqpos.eqentry.models.Product;
 import com.eqpos.eqentry.tools.CaptureActivityPortrait;
+import com.eqpos.eqentry.tools.SharedPrefUtil;
 import com.eqpos.eqentry.tools.Variables;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
@@ -105,41 +106,35 @@ public class NewStockEntryActivity extends AppCompatActivity implements View.OnC
 
         createSwipeListview();
 
-        lsList.setOnMenuItemClickListener(new SwipeMenuListView.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(int position, SwipeMenu menu, int index) {
-                int lId = Integer.parseInt(gList.get(position).get("id"));
+        lsList.setOnMenuItemClickListener((position, menu, index) -> {
+            int lId = Integer.parseInt(gList.get(position).get("id"));
 
-                lastPosition = position;
-                switch (index) {
-                    case 0:
-                        //changeprice
-                        editProduct(lId);
-                        break;
-                    case 1:
-                        //PrintLabel
-                        StockEntryDao.removeProductFromDelivery(lId);
-                        getDeliveryDetail();
-                        break;
+            lastPosition = position;
+            switch (index) {
+                case 0:
+                    //changeprice
+                    editProduct(lId);
+                    break;
+                case 1:
+                    //PrintLabel
+                    StockEntryDao.removeProductFromDelivery(lId);
+                    getDeliveryDetail();
+                    break;
 
-                }
-                // false : close the menu; true : not close the menu
-                return false;
             }
+            // false : close the menu; true : not close the menu
+            return false;
         });
 
 
 
-        edFind.setOnKeyListener(new View.OnKeyListener() {
-            @Override
-            public boolean onKey(View v, int keyCode, KeyEvent event) {
-                if ((event.getAction() == KeyEvent.ACTION_DOWN) &&
-                        (keyCode == KeyEvent.KEYCODE_ENTER) ) {
-                    btFind.performClick();
-                    return true;
-                }
-                return false;
+        edFind.setOnKeyListener((v, keyCode, event) -> {
+            if ((event.getAction() == KeyEvent.ACTION_DOWN) &&
+                    (keyCode == KeyEvent.KEYCODE_ENTER) ) {
+                btFind.performClick();
+                return true;
             }
+            return false;
         });
     }
 
@@ -434,6 +429,7 @@ public class NewStockEntryActivity extends AppCompatActivity implements View.OnC
         //gProduct = ProductDao.getProduct(0, edFind.getText().toString());
         if (amount > 0) {
             if (gProduct.getId() > 0) {
+                int selectedWarehouseId = SharedPrefUtil.getInt(SharedPrefUtil.KEY_SELECTED_DEPO_ID, 0);
                 StockEntryDao.addProductToDeliverNote(gStockEntryId, gProduct.getId(), partNumber,
                         expirationDate, amount, costPrice, ischange, isPackage);
                 getDeliveryDetail();

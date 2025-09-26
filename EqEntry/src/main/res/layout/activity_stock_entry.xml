@@ -2,7 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:padding="10dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -84,48 +85,66 @@
         <ImageButton
             android:id="@+id/bt_stockentry_editdocument"
             style="@style/StdButton"
-            android:background="@drawable/std_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@drawable/std_button"
             android:src="@mipmap/img_editproduct" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorWhite">
+        android:background="@color/colorWhite"
+        android:orientation="vertical">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="5dp"
-            android:text="@string/barcode"
-            android:textColor="@color/colorBlack" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:orientation="vertical">
 
-        <EditText
-            android:id="@+id/ed_stockentry_find"
-            style="@style/AppTheme.EditText"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:text="@string/barcode"
+                android:textColor="@color/colorBlack" />
 
-        <Button
-            android:id="@+id/bt_stockentry_find"
-            style="@style/StdButton"
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
-            android:background="@drawable/std_button"
-            android:text="@string/find"
-            android:textAppearance="@style/TextAppearance.AppCompat.Small" />
+            <EditText
+                android:id="@+id/ed_stockentry_find"
+                style="@style/AppTheme.EditText"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_weight="1" />
+        </LinearLayout>
 
-        <Button
-            android:id="@+id/bt_stockentry_barcode"
-            style="@style/StdButton"
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
-            android:background="@drawable/std_button"
-            android:text="@string/barcode"
-            android:textAppearance="@style/TextAppearance.AppCompat.Small" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/bt_stockentry_find"
+                style="@style/StdButton"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:background="@drawable/std_button"
+                android:text="@string/find"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small" />
+
+            <Button
+                android:id="@+id/bt_stockentry_barcode"
+                style="@style/StdButton"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:background="@drawable/std_button"
+                android:text="@string/barcode"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small" />
+        </LinearLayout>
+
     </LinearLayout>
 
 
@@ -133,12 +152,12 @@
         android:id="@+id/ls_stockentry_list"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"/>
+        android:layout_weight="1" />
 
     <TextView
         android:id="@+id/lbl_stockentry_total_amount"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"
-        android:gravity="center"/>
+        android:gravity="center"
+        android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium" />
 </LinearLayout>

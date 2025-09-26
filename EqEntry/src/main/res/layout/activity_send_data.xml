@@ -9,136 +9,180 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:padding="10dp">
 
-        <Button
-            android:id="@+id/bt_senddatas_alldatas"
-            style="@style/StdButton"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="3dp"
-            android:background="@drawable/std_button"
-            android:drawableLeft="@mipmap/img_send"
-            android:padding="20dp"
-            android:text="@string/sendall" />
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/bt_senddatas_productlist"
-            style="@style/StdButton"
+            <Button
+                android:id="@+id/bt_senddatas_alldatas"
+                style="@style/StdButton"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="3dp"
+                android:layout_weight="1"
+                android:background="@drawable/std_button"
+                android:drawableLeft="@mipmap/img_send"
+                android:padding="20dp"
+                android:text="@string/sendall" />
+
+            <Button
+                android:id="@+id/bt_senddatas_productlist"
+                style="@style/StdButton"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="3dp"
+                android:layout_weight="1"
+                android:background="@drawable/std_button"
+                android:drawableLeft="@mipmap/img_products"
+                android:padding="20dp"
+                android:text="@string/sendproducts" />
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="3dp"
-            android:background="@drawable/std_button"
-            android:drawableLeft="@mipmap/img_products"
-            android:padding="20dp"
-            android:text="@string/sendproducts" />
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
 
+            <Button
+                android:id="@+id/bt_senddatas_changeprice"
+                style="@style/StdButton"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="3dp"
+                android:layout_weight="1"
+                android:background="@drawable/std_button"
+                android:drawableLeft="@mipmap/img_changeprice"
+                android:padding="20dp"
+                android:text="@string/sendchangedprices" />
 
-        <Button
-            android:id="@+id/bt_senddatas_changeprice"
-            style="@style/StdButton"
+            <Button
+                android:id="@+id/bt_senddatas_printlabel"
+                style="@style/StdButton"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="3dp"
+                android:layout_weight="1"
+                android:background="@drawable/std_button"
+                android:drawableLeft="@mipmap/img_label"
+                android:padding="20dp"
+                android:text="@string/sendlabellist"
+                android:visibility="visible" />
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="3dp"
-            android:background="@drawable/std_button"
-            android:drawableLeft="@mipmap/img_changeprice"
-            android:padding="20dp"
-            android:text="@string/sendchangedprices" />
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/bt_senddatas_printlabel"
-            style="@style/StdButton"
+            <Button
+                android:id="@+id/bt_senddatas_purchaseorder"
+                style="@style/StdButton"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="3dp"
+                android:layout_weight="1"
+                android:background="@drawable/std_button"
+                android:drawableLeft="@mipmap/img_order"
+                android:padding="20dp"
+                android:text="@string/sendpurchaselist"
+                android:visibility="visible" />
+
+            <Button
+                android:id="@+id/bt_senddatas_stockentry"
+                style="@style/StdButton"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="3dp"
+                android:layout_weight="1"
+                android:background="@drawable/std_button"
+                android:drawableLeft="@mipmap/img_inventory"
+                android:padding="20dp"
+                android:text="@string/senddeliveynotes"
+                android:visibility="visible" />
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="3dp"
-            android:background="@drawable/std_button"
-            android:drawableLeft="@mipmap/img_label"
-            android:padding="20dp"
-            android:text="@string/sendlabellist"
-            android:visibility="visible" />
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/bt_senddatas_purchaseorder"
-            style="@style/StdButton"
+            <Button
+                android:id="@+id/bt_senddatas_invoice"
+                style="@style/StdButton"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="3dp"
+                android:layout_weight="1"
+                android:background="@drawable/std_button"
+                android:drawableLeft="@mipmap/img_invoice"
+                android:padding="20dp"
+                android:text="@string/sendinvoices" />
+
+            <Button
+                android:id="@+id/bt_senddatas_customers"
+                style="@style/StdButton"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="3dp"
+                android:layout_weight="1"
+                android:background="@drawable/std_button"
+                android:drawableLeft="@mipmap/img_customers"
+                android:padding="20dp"
+                android:text="@string/sendcustomers" />
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="3dp"
-            android:background="@drawable/std_button"
-            android:drawableLeft="@mipmap/img_order"
-            android:padding="20dp"
-            android:text="@string/sendpurchaselist"
-            android:visibility="visible" />
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
 
+            <Button
+                android:id="@+id/bt_senddatas_collects"
+                style="@style/StdButton"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="3dp"
+                android:layout_weight="1"
+                android:background="@drawable/std_button"
+                android:drawableLeft="@mipmap/img_collection"
+                android:padding="20dp"
+                android:text="@string/sendcollets" />
 
-        <Button
-            android:id="@+id/bt_senddatas_stockentry"
-            style="@style/StdButton"
+            <Button
+                android:id="@+id/bt_senddatas_inventur"
+                style="@style/StdButton"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="3dp"
+                android:layout_weight="1"
+                android:background="@drawable/std_button"
+                android:drawableLeft="@mipmap/img_inventorycount"
+                android:padding="20dp"
+                android:text="@string/sendstockcount"
+                android:visibility="visible" />
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="3dp"
-            android:background="@drawable/std_button"
-            android:drawableLeft="@mipmap/img_inventory"
-            android:padding="20dp"
-            android:text="@string/senddeliveynotes"
-            android:visibility="visible" />
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/bt_senddatas_invoice"
-            style="@style/StdButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="3dp"
-            android:background="@drawable/std_button"
-            android:drawableLeft="@mipmap/img_invoice"
-            android:padding="20dp"
-            android:text="@string/sendinvoices" />
-
-
-        <Button
-            android:id="@+id/bt_senddatas_customers"
-            style="@style/StdButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="3dp"
-            android:background="@drawable/std_button"
-            android:drawableLeft="@mipmap/img_customers"
-            android:padding="20dp"
-            android:text="@string/sendcustomers" />
-
-        <Button
-            android:id="@+id/bt_senddatas_collects"
-            style="@style/StdButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="3dp"
-            android:background="@drawable/std_button"
-            android:drawableLeft="@mipmap/img_collection"
-            android:padding="20dp"
-            android:text="@string/sendcollets" />
-
-        <Button
-            android:id="@+id/bt_senddatas_inventur"
-            style="@style/StdButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="3dp"
-            android:background="@drawable/std_button"
-            android:drawableLeft="@mipmap/img_inventorycount"
-            android:padding="20dp"
-            android:text="@string/sendstockcount"
-            android:visibility="visible" />
-
-        <Button
-            android:id="@+id/bt_senddatas_transfers"
-            style="@style/StdButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="3dp"
-            android:background="@drawable/std_button"
-            android:drawableLeft="@mipmap/img_products_transfer"
-            android:padding="20dp"
-            android:text="@string/sendtransfers"
-            android:visibility="visible" />
+            <Button
+                android:id="@+id/bt_senddatas_transfers"
+                style="@style/StdButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="3dp"
+                android:background="@drawable/std_button"
+                android:drawableLeft="@mipmap/img_products_transfer"
+                android:padding="20dp"
+                android:text="@string/sendtransfers"
+                android:visibility="visible" />
+        </LinearLayout>
 
 
     </LinearLayout>

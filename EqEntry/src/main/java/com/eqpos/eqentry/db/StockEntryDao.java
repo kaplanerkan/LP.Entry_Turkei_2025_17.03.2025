@@ -79,7 +79,7 @@ public class StockEntryDao {
         }
     }
 
-    public static long saveDeliveryNote(int id, String documentnumber, String documentdate, int supplierId, String receiver) {
+    public static long saveDeliveryNote(int id, String documentnumber, String documentdate, int supplierId, String receiver, int warehouseId) {
         if (Db == null)
             Db = new Database();
 
@@ -92,6 +92,7 @@ public class StockEntryDao {
         values.put("documenttime", Variables.getCurrentTime());
         values.put("supplierid", supplierId);
         values.put("receiver", receiver);
+        values.put("warehouseid", warehouseId);
 
         long lId = id;
         try {

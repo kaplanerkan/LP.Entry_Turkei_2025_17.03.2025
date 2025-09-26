@@ -130,7 +130,7 @@ public class InvoiceDao {
 
     }
 
-    public static long createInvoice(String invoiceNumber, String invoiceDate, int customerId, double total, double discount, boolean includeTax) {
+    public static long createInvoice(String invoiceNumber, String invoiceDate, int customerId, double total, double discount, boolean includeTax, int warehouseId) {
 
         if (Db == null) {
             Db = new Database();
@@ -150,6 +150,7 @@ public class InvoiceDao {
         values.put("discount", discount);
         values.put("subtotal", total - discount);
         values.put("includetax", includeTax ? 1 : 0);
+        values.put("warehouseid", warehouseId);
 
         long lId = db.insert("invoice", null, values);
 

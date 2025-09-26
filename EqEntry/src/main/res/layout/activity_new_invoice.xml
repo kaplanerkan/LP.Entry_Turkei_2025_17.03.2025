@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:padding="10dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -23,19 +24,18 @@
             android:id="@+id/sw_newinvoice_includetax"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:textOn="Dahil"
-            android:textOff="Hariç"
+            android:checked="false"
             android:showText="true"
-            android:checked="false"/>
+            android:textOff="Hariç"
+            android:textOn="Dahil" />
 
         <Button
-            style="@style/StdButton"
-            android:background="@drawable/std_button"
             android:id="@+id/bt_newinvoice_select_customer"
+            style="@style/StdButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/customer"
-            />
+            android:background="@drawable/std_button"
+            android:text="@string/customer" />
     </LinearLayout>
 
     <LinearLayout
@@ -50,10 +50,10 @@
             android:text="@string/number" />
 
         <EditText
-            style="@style/AppTheme.EditText"
             android:id="@+id/ed_newinvoice_number"
+            style="@style/AppTheme.EditText"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:layout_weight="0.3" />
 
         <TextView
@@ -62,62 +62,81 @@
             android:text="@string/date" />
 
         <EditText
-            style="@style/AppTheme.EditText"
             android:id="@+id/ed_newinvoice_date"
+            style="@style/AppTheme.EditText"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:inputType="none"
+            android:layout_height="50dp"
+            android:layout_weight="0.4"
             android:focusable="false"
-            android:layout_weight="0.4" />
+            android:inputType="none" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorWhite">
+        android:background="@color/colorWhite"
+        android:orientation="vertical">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="3dp"
-            android:text="@string/search" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:orientation="horizontal">
 
-        <EditText
-            android:id="@+id/ed_newinvoice_search"
-            style="@style/AppTheme.EditText"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:focusable="true"
-            android:focusableInTouchMode="true"
-            android:singleLine="true" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="3dp"
+                android:text="@string/search" />
 
-        <Button
-            android:id="@+id/bt_newinvoice_search"
-            style="@style/StdButton"
-            android:layout_width="60dp"
-            android:layout_height="42dp"
-            android:background="@drawable/std_button"
-            android:text="@string/search"
-            android:textAppearance="@style/TextAppearance.AppCompat.Small" />
+            <EditText
+                android:id="@+id/ed_newinvoice_search"
+                style="@style/AppTheme.EditText"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:singleLine="true" />
 
-        <Button
-            android:id="@+id/bt_newinvoice_origin"
-            style="@style/StdButton"
-            android:layout_width="60dp"
-            android:layout_height="42dp"
-            android:background="@drawable/std_button"
-            android:text="@string/origin"
-            android:textAppearance="@style/TextAppearance.AppCompat.Small" />
+        </LinearLayout>
 
-        <Button
-            android:id="@+id/bt_newinvoice_barcode"
-            style="@style/StdButton"
-            android:layout_width="wrap_content"
-            android:layout_height="42dp"
-            android:background="@drawable/std_button"
-            android:text="@string/barcode"
-            android:textAppearance="@style/TextAppearance.AppCompat.Small" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/bt_newinvoice_search"
+                style="@style/StdButton"
+                android:layout_width="match_parent"
+                android:layout_height="42dp"
+                android:layout_weight="1"
+                android:background="@drawable/std_button"
+                android:text="@string/search"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small" />
+
+            <Button
+                android:id="@+id/bt_newinvoice_origin"
+                style="@style/StdButton"
+                android:layout_width="match_parent"
+                android:layout_height="42dp"
+                android:layout_weight="1"
+                android:background="@drawable/std_button"
+                android:text="@string/origin"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small" />
+
+            <Button
+                android:id="@+id/bt_newinvoice_barcode"
+                style="@style/StdButton"
+                android:layout_width="match_parent"
+                android:layout_height="42dp"
+                android:layout_weight="1"
+                android:background="@drawable/std_button"
+                android:text="@string/barcode"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small" />
+        </LinearLayout>
 
     </LinearLayout>
 
@@ -125,50 +144,51 @@
         android:id="@+id/lv_newinvoice_list"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"/>
+        android:layout_weight="1" />
 
 
     <TextView
         android:id="@+id/lbl_newinvoice_total_amount"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"
-        android:gravity="center"/>
+        android:gravity="center"
+        android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
+
         <TextView
             android:id="@+id/lbl_newinvoice_total"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="0.3"
             android:gravity="right"
-            android:textColor="@color/colorAqua"
-            android:layout_weight="0.3"/>
+            android:textColor="@color/colorAqua" />
 
         <TextView
             android:id="@+id/lbl_newinvoice_discount"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="0.2"
             android:gravity="right"
-            android:textColor="@color/colorAqua"
-            android:layout_weight="0.2"/>
+            android:textColor="@color/colorAqua" />
 
         <TextView
             android:id="@+id/lbl_newinvoice_taxamount"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="0.2"
             android:gravity="right"
-            android:textColor="@color/colorAqua"
-            android:layout_weight="0.2"/>
+            android:textColor="@color/colorAqua" />
 
         <TextView
             android:id="@+id/lbl_newinvoice_subtotal"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="0.3"
             android:gravity="right"
-            android:textColor="@color/colorAqua"
-            android:layout_weight="0.3"/>
+            android:textColor="@color/colorAqua" />
     </LinearLayout>
 </LinearLayout>
