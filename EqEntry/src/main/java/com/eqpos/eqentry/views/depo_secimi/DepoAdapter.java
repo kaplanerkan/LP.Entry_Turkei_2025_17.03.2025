@@ -59,6 +59,19 @@ public class DepoAdapter extends RecyclerView.Adapter<DepoAdapter.ViewHolder> {
                 }
             }
         });
+
+        holder.binding.rbSelect.setOnClickListener(v -> {
+            int currentPosition = holder.getAdapterPosition();
+            if (currentPosition != RecyclerView.NO_POSITION) {
+                DepoModel currentDepo = depoList.get(currentPosition);
+                if (selectedDepoId != currentDepo.getId()) {
+                    selectedDepoId = currentDepo.getId();
+                    notifyDataSetChanged();
+                }
+            }
+        });
+
+
     }
 
     @Override

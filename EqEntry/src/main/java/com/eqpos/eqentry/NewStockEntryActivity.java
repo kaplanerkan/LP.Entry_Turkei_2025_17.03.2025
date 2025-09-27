@@ -68,6 +68,12 @@ public class NewStockEntryActivity extends AppCompatActivity implements View.OnC
     private BarcodeSettings barcodeSettings;
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        getDeliveryDetail();
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stock_entry);
@@ -136,6 +142,11 @@ public class NewStockEntryActivity extends AppCompatActivity implements View.OnC
             }
             return false;
         });
+
+
+        edFind.requestFocus();
+
+
     }
 
     private void fillFields() {

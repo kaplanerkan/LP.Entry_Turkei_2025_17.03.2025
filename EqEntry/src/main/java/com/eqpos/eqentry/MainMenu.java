@@ -39,6 +39,11 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener 
 
     private ActivityMainMenuBinding binding;
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        SharedPrefUtil.putInt(SharedPrefUtil.KEY_SELECTED_DEPO_ID, 0);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

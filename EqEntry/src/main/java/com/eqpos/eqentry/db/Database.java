@@ -157,7 +157,9 @@ public class Database extends SQLiteOpenHelper {
         db.execSQL("CREATE TABLE deliverydetail (id integer primary key autoincrement, deliveryid integer, productid integer not null, " +
                 "partnumber text, expirationdate text, amount numeric(12,3) default 0.0, costprice numeric(12,2) default 0.0, " +
                 "packageamount int, total numeric(12,2) default 0.0, foreign key (deliveryid) references delivery(id))");
-        db.execSQL("create unique index idx_deliverydetail_productid on deliverydetail(productid)");
+
+        db.execSQL("create unique index idx_deliverydetail_id on deliverydetail(id)");
+
         db.execSQL("CREATE TRIGGER if not exists trg_deliverydetail before UPDATE ON deliverydetail for each row  " +
                 "BEGIN " +
                 " update deliverydetail set total=amount*costprice where id=NEW.id; " +
