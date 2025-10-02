@@ -38,7 +38,7 @@ android {
         testInstrumentationRunner = "android.support.test.runner.AndroidJUnitRunner"
 
         versionCode = 4
-        versionName = "1.3.25"
+        versionName = "1.3.26"
         versionNameSuffix = "_tr"
     }
 

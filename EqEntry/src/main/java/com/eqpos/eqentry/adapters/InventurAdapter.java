@@ -5,6 +5,7 @@ import android.graphics.Color;
 //import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,7 +32,7 @@ import java.util.HashMap;
 public class InventurAdapter extends BaseAdapter {
 
     private Context context;
-
+    private boolean isUpdating = false;
     private ArrayList<HashMap<String, String>> gList;
 
     private final int selectedWarehouseId = SharedPrefUtil.getInt(SharedPrefUtil.KEY_SELECTED_DEPO_ID,0);
@@ -113,6 +114,7 @@ public class InventurAdapter extends BaseAdapter {
         holder.edNew.setText(gList.get(position).get("newquantity"));
 
         holder.edNew.setOnFocusChangeListener((v, hasFocus) -> {
+            Log.e("focus", String.valueOf(hasFocus));
             if (hasFocus) {
                 double currQuantity = 0;
                 try {
@@ -159,7 +161,16 @@ public class InventurAdapter extends BaseAdapter {
 
             @Override
             public void afterTextChanged(Editable s) {
-                Double value = 0.0;
+
+                if (!holder.edNew.hasFocus()) return;
+
+                holder.edNew.removeTextChangedListener(this);
+
+                if (isUpdating) return;
+                isUpdating = true;
+
+                Log.e("afterTextChanged", s.toString());
+                double value = 0.0;
                 try {
                     value = Variables.strToDouble(s.toString());
                 } catch (ParseException e) {
@@ -180,6 +191,11 @@ public class InventurAdapter extends BaseAdapter {
                 gList.get(position).put("difference", Variables.doubleToStr(diff,0));
 
                 InventurDao.changeNewStock(Integer.parseInt(gList.get(position).get("productid")), value, selectedWarehouseId);
+
+                holder.edNew.addTextChangedListener(this);
+
+                isUpdating = false;
+
             }
         });
         return row;

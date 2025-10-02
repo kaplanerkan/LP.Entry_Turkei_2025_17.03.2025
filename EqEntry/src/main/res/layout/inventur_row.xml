@@ -68,6 +68,9 @@
             android:layout_height="wrap_content"
             android:inputType="numberDecimal"
             android:layout_gravity="center_vertical"
+            android:selectAllOnFocus="true"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
             android:layout_weight="1" />
         <ImageButton
             android:id="@+id/bt_inventur_addstock"
