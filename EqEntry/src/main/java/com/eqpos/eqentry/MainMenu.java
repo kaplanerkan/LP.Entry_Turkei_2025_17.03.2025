@@ -1,6 +1,5 @@
 package com.eqpos.eqentry;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 
 import androidx.appcompat.app.AlertDialog;
@@ -10,7 +9,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.InputType;
 import android.util.Log;
-import android.widget.Button;
 import android.widget.EditText;
 import android.view.View;
 import android.widget.Toast;
@@ -25,6 +23,7 @@ import com.eqpos.eqentry.tools.SharedPrefUtil;
 import com.eqpos.eqentry.tools.SocketProcess;
 import com.eqpos.eqentry.tools.Variables;
 import com.eqpos.eqentry.views.depo_secimi.DepoDialogFragment;
+import com.eqpos.eqentry.views.inventur.InventurActivity;
 import com.eqpos.eqentry.views.varyants.Varyants;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -143,13 +142,7 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener 
                     dialog.show(getSupportFragmentManager(), "depo_dialog");
                 }else {
                     Toast.makeText(MainMenu.this, R.string.depo_bulunamadi, Toast.LENGTH_SHORT).show();
-
                 }
-
-
-
-
-
 
 
                 break;

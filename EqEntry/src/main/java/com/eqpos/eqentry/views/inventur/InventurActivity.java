@@ -1,4 +1,4 @@
-package com.eqpos.eqentry;
+package com.eqpos.eqentry.views.inventur;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -17,6 +17,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.eqpos.eqentry.R;
 import com.eqpos.eqentry.adapters.InventurAdapter;
 import com.eqpos.eqentry.db.SendDao;
 import com.eqpos.eqentry.tools.CaptureActivityPortrait;

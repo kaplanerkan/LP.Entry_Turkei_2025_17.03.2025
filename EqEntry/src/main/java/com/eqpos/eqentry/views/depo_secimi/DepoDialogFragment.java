@@ -1,5 +1,6 @@
 package com.eqpos.eqentry.views.depo_secimi;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +13,9 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 import com.eqpos.eqentry.databinding.DialogDepoBinding;
 import com.eqpos.eqentry.models.DepoModel;
+import com.eqpos.eqentry.views.inventur.InventurActivity;
+import com.eqpos.eqentry.views.inventur.SayimlarimiGoster;
+
 import java.util.List;
 
 public class DepoDialogFragment extends DialogFragment {
@@ -43,6 +47,23 @@ public class DepoDialogFragment extends DialogFragment {
         // Adapter'ı set et
         adapter = new DepoAdapter(depoList);
         binding.rvDepoList.setAdapter(adapter);
+
+
+        //Sayimlarimi Göster
+        binding.btnSayimlarimiGoster.setOnClickListener(view1 -> {
+//            int selectedDepoId = adapter.getSelectedDepoId();
+//            if (selectedDepoId == -1) {
+//                Toast.makeText(getContext(), "Lütfen bir depo seçin!", Toast.LENGTH_SHORT).show();
+//            } else {
+                Bundle bundle = new Bundle();
+                bundle.putInt("selectedDepoId", 0);
+                Intent sayimlarimiGoster = new Intent(getContext(), SayimlarimiGoster.class);
+                sayimlarimiGoster.putExtras(bundle);
+                startActivity(sayimlarimiGoster);
+                dismiss();
+//            }
+        });
+
 
         // TAMAM butonu click
         binding.btnTamam.setOnClickListener(v -> {

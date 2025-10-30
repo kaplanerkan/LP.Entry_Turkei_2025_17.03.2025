@@ -25,6 +25,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".views.inventur.SayimlarimiGoster"
+            android:exported="false" />
+        <activity
             android:name=".views.varyants_add_to_product.VaryantsEkleAltGruplari"
             android:exported="false" />
         <activity
@@ -137,10 +140,10 @@
             android:label="@string/title_activity_select_product"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".InventurActivity"
+            android:name=".views.inventur.InventurActivity"
             android:label="@string/title_activity_inventur"
-            android:windowSoftInputMode="stateVisible|adjustResize"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateVisible|adjustResize" />
         <activity
             android:name=".InvoiceActivity"
             android:label="@string/invoice"

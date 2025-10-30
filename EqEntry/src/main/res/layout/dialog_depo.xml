@@ -41,31 +41,50 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal">
+                android:gravity="center"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:orientation="vertical">
 
                 <Button
-                    android:id="@+id/btnIptal"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="end"
+                    android:id="@+id/btnSayimlarimiGoster"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginBottom="16dp"
-                    android:background="@drawable/btn_rounded_red"
-                    android:textColor="@color/colorWhite"
-                    android:text="IPTAL" />
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp"
+                    android:text="Sayımlarımı Göster" />
 
-                <Button
-                    android:id="@+id/btnTamam"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="end"
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginBottom="16dp"
-                    android:background="@drawable/btn_rounded_blue"
-                    android:textColor="@color/colorWhite"
-                    android:text="TAMAM" />
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/btnIptal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginBottom="16dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/btn_rounded_red"
+                        android:text="IPTAL"
+                        android:textColor="@color/colorWhite" />
+
+                    <Button
+                        android:id="@+id/btnTamam"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginBottom="16dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/btn_rounded_blue"
+                        android:text="TAMAM"
+                        android:textColor="@color/colorWhite" />
+                </LinearLayout>
 
 
             </LinearLayout>

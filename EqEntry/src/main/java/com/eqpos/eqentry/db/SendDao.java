@@ -55,7 +55,7 @@ public class SendDao {
             db = Db.getReadableDatabase();
             String lSql = "select p.id, groupid, priceorder, stockcode, barcode, plu, productname, costprice, " +
                     "taxid, depositeid, uniteid, p.isnew, f.newprice, p.description, p.unitamount, p.amountunite, p.origin " +
-                    ",p.varyant_anagrupid AS variant_anagrupid, p.varyant_altgrupid AS variant_altgrupid "+
+                    ",p.varyant_anagrupid AS variant_anagrupid, p.varyant_altgrupid AS variant_altgrupid " +
                     "from products p " +
                     "left join productprices f on f.productid=p.id and f.priceorder=1 " +
                     "where p.changed=1 or p.isnew=1 order by p.id limit " + String.valueOf(limit);// + " offset " + String.valueOf(offset);
@@ -168,7 +168,6 @@ public class SendDao {
             offset += 100;
 
 
-
         } while (cursor.getCount() > 0);
 
         //       db = Db.getWritableDatabase();
@@ -179,7 +178,6 @@ public class SendDao {
         jHead = null;
         jArr = null;
     }
-
 
 
     public static boolean sendProductsVaryants() {
@@ -307,10 +305,6 @@ public class SendDao {
     }
 
 
-
-
-
-
     public static void sendChangedPrices() {
         JsonObject jHead = JSONProcess.getJSONHeader(Variables.ServerCommand.cmdChangePrice.getValue());
         JsonObject jData = new JsonObject();
@@ -357,8 +351,8 @@ public class SendDao {
                         cursor.moveToFirst();
                         do {
                             db.execSQL("update productprices set price=newprice, changed=0 " +
-                                    "where changed=1 and productid="+ cursor.getString(0) +" and " +
-                                    "priceorder="+ cursor.getString(1));
+                                    "where changed=1 and productid=" + cursor.getString(0) + " and " +
+                                    "priceorder=" + cursor.getString(1));
                         } while (cursor.moveToNext());
                     }
                 } else {
@@ -412,7 +406,7 @@ public class SendDao {
                     if (cursor.getCount() > 0) {
                         cursor.moveToFirst();
                         do {
-                            db.execSQL("update products set printlabel=0 where printlabel=1 and id="+ cursor.getString(0));
+                            db.execSQL("update products set printlabel=0 where printlabel=1 and id=" + cursor.getString(0));
                         } while (cursor.moveToNext());
                     }
                 } else {
@@ -782,7 +776,7 @@ public class SendDao {
                 jElement = new JsonObject();
                 jElement.addProperty("productid", cursor.getInt(0));
                 jElement.addProperty("newquantity", cursor.getDouble(1));
-               // jElement.addProperty("warehouseid", cursor.getInt(2));
+                // jElement.addProperty("warehouseid", cursor.getInt(2));
 
                 jArr.add(jElement);
 
@@ -802,8 +796,6 @@ public class SendDao {
                         rMsg = SocketProcess.sendMessage(msg);
                         if (rMsg.contains(Variables._RETURNOK)) {
                             lInventurId = Integer.parseInt(rMsg.replace(Variables._RETURNOK + "-", ""));
-                        } else {
-
                         }
                     }
                     jData = null;
@@ -813,12 +805,126 @@ public class SendDao {
             }
             cursor.close();
         }
-        if (rMsg.contains(Variables._RETURNOK)) {
-            db = Db.getWritableDatabase();
-            db.delete("inventur", "", null);
-        } else {
 
+        // 30.10.2025: Sonerin istegi uzerine gönderimden sonra delete olayi kaldirildi
+//        if (rMsg.contains(Variables._RETURNOK)) {
+//            db = Db.getWritableDatabase();
+//            db.delete("inventur", "", null);
+//        }
+
+
+    }
+
+
+    public static boolean sendInventurSayimdakini(int productId) {
+        boolean result = false;
+        int lInventurId = 0;
+        int lCount = 0;
+        String rMsg = "";
+        Database Db = new Database();
+
+        SQLiteDatabase db = Db.getReadableDatabase();
+        String sql = "select productid, newquantity, warehouseid from inventur where difference<>0 AND productid='" + productId + "';";
+        Cursor cursor = db.rawQuery(sql, null);
+        JsonArray jArr = null;
+        if (cursor.getCount() > 0) {
+            while (cursor.moveToNext()) {
+
+                JsonObject jElement;
+                if (jArr == null) {
+                    jArr = new JsonArray();
+                }
+
+                jElement = new JsonObject();
+                jElement.addProperty("productid", cursor.getInt(0));
+                jElement.addProperty("newquantity", cursor.getDouble(1));
+                // jElement.addProperty("warehouseid", cursor.getInt(2));
+
+                jArr.add(jElement);
+
+                lCount += 1;
+                if (lCount % 200 == 0 || lCount >= cursor.getCount()) {
+
+                    JsonObject jHead = JSONProcess.getJSONHeader(Variables.ServerCommand.cmdSaveInventur.getValue());
+                    jHead.addProperty("inventurid", lInventurId);
+                    jHead.addProperty("warehouseid", cursor.getInt(2));
+
+                    JsonObject jData = new JsonObject();
+                    jData.addProperty("datas", jArr.toString());
+
+                    String msg = JSONProcess.jsonPack(jHead, jData);
+
+                    if (jHead != null) {
+                        rMsg = SocketProcess.sendMessage(msg);
+                        if (rMsg.contains(Variables._RETURNOK)) {
+                            lInventurId = Integer.parseInt(rMsg.replace(Variables._RETURNOK + "-", ""));
+                            result = true;
+                        }
+                    }
+                    jData = null;
+                    jHead = null;
+                    jArr = null;
+                }
+            }
+            cursor.close();
         }
+
+        return result;
+    }
+
+    public static boolean sendInventur2_SayimdaKullaniyim() {
+        boolean result = false;
+        int lInventurId = 0;
+        int lCount = 0;
+        String rMsg = "";
+        Database Db = new Database();
+
+        SQLiteDatabase db = Db.getReadableDatabase();
+        Cursor cursor = db.rawQuery("select productid, newquantity, warehouseid from inventur where difference<>0", null);
+        JsonArray jArr = null;
+        if (cursor.getCount() > 0) {
+            while (cursor.moveToNext()) {
+
+                JsonObject jElement;
+                if (jArr == null) {
+                    jArr = new JsonArray();
+                }
+
+                jElement = new JsonObject();
+                jElement.addProperty("productid", cursor.getInt(0));
+                jElement.addProperty("newquantity", cursor.getDouble(1));
+                // jElement.addProperty("warehouseid", cursor.getInt(2));
+
+                jArr.add(jElement);
+
+                lCount += 1;
+                if (lCount % 200 == 0 || lCount >= cursor.getCount()) {
+
+                    JsonObject jHead = JSONProcess.getJSONHeader(Variables.ServerCommand.cmdSaveInventur.getValue());
+                    jHead.addProperty("inventurid", lInventurId);
+                    jHead.addProperty("warehouseid", cursor.getInt(2));
+
+                    JsonObject jData = new JsonObject();
+                    jData.addProperty("datas", jArr.toString());
+
+                    String msg = JSONProcess.jsonPack(jHead, jData);
+
+                    if (jHead != null) {
+                        rMsg = SocketProcess.sendMessage(msg);
+                        if (rMsg.contains(Variables._RETURNOK)) {
+                            lInventurId = Integer.parseInt(rMsg.replace(Variables._RETURNOK + "-", ""));
+                            result = true;
+                        }
+                    }
+                    jData = null;
+                    jHead = null;
+                    jArr = null;
+                }
+            }
+            cursor.close();
+        }
+
+        return result;
     }
 
 
