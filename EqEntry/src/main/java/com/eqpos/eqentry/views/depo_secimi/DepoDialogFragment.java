@@ -8,22 +8,23 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
+
 import com.eqpos.eqentry.databinding.DialogDepoBinding;
 import com.eqpos.eqentry.models.DepoModel;
-import com.eqpos.eqentry.views.inventur.InventurActivity;
 import com.eqpos.eqentry.views.inventur.SayimlarimiGoster;
 
 import java.util.List;
 
 public class DepoDialogFragment extends DialogFragment {
 
-    private DialogDepoBinding binding;
-    private DepoAdapter adapter;
     private final DepoSelectionCallback callback;
     private final List<DepoModel> depoList; // Constructor'dan alınacak liste
+    private DialogDepoBinding binding;
+    private DepoAdapter adapter;
 
     public DepoDialogFragment(DepoSelectionCallback callback, List<DepoModel> depoList) {
         this.callback = callback;
@@ -55,12 +56,12 @@ public class DepoDialogFragment extends DialogFragment {
 //            if (selectedDepoId == -1) {
 //                Toast.makeText(getContext(), "Lütfen bir depo seçin!", Toast.LENGTH_SHORT).show();
 //            } else {
-                Bundle bundle = new Bundle();
-                bundle.putInt("selectedDepoId", 0);
-                Intent sayimlarimiGoster = new Intent(getContext(), SayimlarimiGoster.class);
-                sayimlarimiGoster.putExtras(bundle);
-                startActivity(sayimlarimiGoster);
-                dismiss();
+            Bundle bundle = new Bundle();
+            bundle.putInt("selectedDepoId", 0);
+            Intent sayimlarimiGoster = new Intent(getContext(), SayimlarimiGoster.class);
+            sayimlarimiGoster.putExtras(bundle);
+            startActivity(sayimlarimiGoster);
+            dismiss();
 //            }
         });
 

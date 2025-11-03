@@ -33,12 +33,12 @@ android {
 
     defaultConfig {
         applicationId = "com.eqpos.eqentry"
-        minSdk = 26
+        minSdk = 24
         targetSdk = 36
         testInstrumentationRunner = "android.support.test.runner.AndroidJUnitRunner"
 
         versionCode = 4
-        versionName = "1.3.27"
+        versionName = "1.3.28"
         versionNameSuffix = "_tr"
     }
 

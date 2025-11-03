@@ -1,17 +1,17 @@
 package com.eqpos.eqentry;
 
-import android.content.Intent;
+import static android.view.View.GONE;
 
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-//import android.support.v7.app.AlertDialog;
-//import android.support.v7.app.AppCompatActivity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputType;
 import android.util.Log;
-import android.widget.EditText;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.eqpos.eqentry.databinding.ActivityMainMenuBinding;
 import com.eqpos.eqentry.db.Dao;
@@ -28,13 +28,11 @@ import com.eqpos.eqentry.views.varyants.Varyants;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
-import static android.view.View.GONE;
-
 import java.util.List;
 
 public class MainMenu extends AppCompatActivity implements View.OnClickListener {
     private String m_Text = "";
-    private int _SELECTUSER=100;
+    private final int  _SELECTUSER = 100;
 
     private ActivityMainMenuBinding binding;
 
@@ -59,18 +57,18 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener 
 
         binding.btTransfers.setEnabled(Dao.Language == "tr");
 
-        binding.btProducts.setVisibility((Variables.showbtProducts) ? View.VISIBLE  : GONE );
-        binding.btChangePrice.setVisibility((Variables.showbtChangePrice) ? View.VISIBLE  : GONE );
-        binding.btPrintLabel.setVisibility((Variables.showbtPrintLabel) ? View.VISIBLE  : GONE );
-        binding.btPurchaseOrder.setVisibility((Variables.showbtPurchaseOrder) ? View.VISIBLE  : GONE );
-        binding.btStockEntry.setVisibility((Variables.showbtStockEntry) ? View.VISIBLE  : GONE );
-        binding.btSendDatas.setVisibility((Variables.showbtSendDatas) ? View.VISIBLE  : GONE );
-        binding.btInventory.setVisibility((Variables.showbtInventory) ? View.VISIBLE  : GONE );
-        binding.btInvoices.setVisibility((Variables.showbtInvoices) ? View.VISIBLE  : GONE );
-        binding.btCustomers.setVisibility((Variables.showbtCustomers) ? View.VISIBLE  : GONE );
-        binding.btTransfers.setVisibility((Variables.showbtTransfers) ? View.VISIBLE  : GONE );
-        binding.btManagement.setVisibility((Variables.showbtManagement) ? View.VISIBLE  : GONE );
-        binding.btReports.setVisibility((Variables.showbtReports) ? View.VISIBLE  : GONE );
+        binding.btProducts.setVisibility((Variables.showbtProducts) ? View.VISIBLE : GONE);
+        binding.btChangePrice.setVisibility((Variables.showbtChangePrice) ? View.VISIBLE : GONE);
+        binding.btPrintLabel.setVisibility((Variables.showbtPrintLabel) ? View.VISIBLE : GONE);
+        binding.btPurchaseOrder.setVisibility((Variables.showbtPurchaseOrder) ? View.VISIBLE : GONE);
+        binding.btStockEntry.setVisibility((Variables.showbtStockEntry) ? View.VISIBLE : GONE);
+        binding.btSendDatas.setVisibility((Variables.showbtSendDatas) ? View.VISIBLE : GONE);
+        binding.btInventory.setVisibility((Variables.showbtInventory) ? View.VISIBLE : GONE);
+        binding.btInvoices.setVisibility((Variables.showbtInvoices) ? View.VISIBLE : GONE);
+        binding.btCustomers.setVisibility((Variables.showbtCustomers) ? View.VISIBLE : GONE);
+        binding.btTransfers.setVisibility((Variables.showbtTransfers) ? View.VISIBLE : GONE);
+        binding.btManagement.setVisibility((Variables.showbtManagement) ? View.VISIBLE : GONE);
+        binding.btReports.setVisibility((Variables.showbtReports) ? View.VISIBLE : GONE);
 
     }
 
@@ -123,34 +121,37 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener 
 
                 // Depo listesini hazırla (örnek veri, sen DB'den çek)
                 List<DepoModel> depoList = WarehouseDao.getAllWarehouses();
-                if (depoList.size() == 1){
-                    SharedPrefUtil.putInt(SharedPrefUtil.KEY_SELECTED_DEPO_ID, depoList.get(0).getId());
+//                if (depoList.size() == 1) {
+//                    SharedPrefUtil.putInt(SharedPrefUtil.KEY_SELECTED_DEPO_ID, depoList.get(0).getId());
+//                    Intent inventoryIntent = new Intent(this, InventurActivity.class);
+//                    startActivity(inventoryIntent);
+//                } else if (depoList.size() > 1) {
+                // Dialog'ı aç ve depo listesini geçir
+                DepoDialogFragment depoDialog = new DepoDialogFragment((depoId, depoIsmi) -> {
+
+                    Log.e("DepoDialog", "Seçilen Depo ID: " + depoId + ", Depo İsmi: " + depoIsmi);
+                    SharedPrefUtil.putInt(SharedPrefUtil.KEY_SELECTED_DEPO_ID, depoId);
                     Intent inventoryIntent = new Intent(this, InventurActivity.class);
                     startActivity(inventoryIntent);
-                } else if (depoList.size() > 1) {
-                    // Dialog'ı aç ve depo listesini geçir
-                    DepoDialogFragment dialog = new DepoDialogFragment((depoId, depoIsmi) -> {
 
-                        Log.e("DepoDialog", "Seçilen Depo ID: " + depoId + ", Depo İsmi: " + depoIsmi);
-                        SharedPrefUtil.putInt(SharedPrefUtil.KEY_SELECTED_DEPO_ID, depoId );
-                        Intent inventoryIntent = new Intent(this, InventurActivity.class);
-                        startActivity(inventoryIntent);
+                }, depoList);
 
-                    }, depoList);
+                depoDialog.setCancelable(false);
+                depoDialog.show(getSupportFragmentManager(), "depo_dialog");
 
-                    dialog.setCancelable(false);
-                    dialog.show(getSupportFragmentManager(), "depo_dialog");
-                }else {
-                    Toast.makeText(MainMenu.this, R.string.depo_bulunamadi, Toast.LENGTH_SHORT).show();
-                }
+//                } else {
+//                    Toast.makeText(MainMenu.this, R.string.depo_bulunamadi, Toast.LENGTH_SHORT).show();
+//                }
 
 
                 break;
+
+
             case R.id.btInvoices:
 
                 // Depo listesini hazırla (örnek veri, sen DB'den çek)
                 List<DepoModel> depoList2 = WarehouseDao.getAllWarehouses();
-                if (depoList2.size() == 1){
+                if (depoList2.size() == 1) {
                     SharedPrefUtil.putInt(SharedPrefUtil.KEY_SELECTED_DEPO_ID, depoList2.get(0).getId());
                     Intent invoiceIntent = new Intent(this, InvoiceActivity.class);
                     startActivity(invoiceIntent);
@@ -159,7 +160,7 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener 
                     DepoDialogFragment dialog = new DepoDialogFragment((depoId, depoIsmi) -> {
 
                         Log.e("DepoDialog", "Seçilen Depo ID: " + depoId + ", Depo İsmi: " + depoIsmi);
-                        SharedPrefUtil.putInt(SharedPrefUtil.KEY_SELECTED_DEPO_ID, depoId );
+                        SharedPrefUtil.putInt(SharedPrefUtil.KEY_SELECTED_DEPO_ID, depoId);
                         Intent invoiceIntent = new Intent(this, InvoiceActivity.class);
                         startActivity(invoiceIntent);
 
@@ -167,14 +168,10 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener 
 
                     dialog.setCancelable(false);
                     dialog.show(getSupportFragmentManager(), "depo_dialog");
-                }else {
+                } else {
                     Toast.makeText(MainMenu.this, R.string.depo_bulunamadi, Toast.LENGTH_SHORT).show();
 
                 }
-
-
-
-
 
 
                 break;
@@ -193,7 +190,7 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener 
                 builder.setTitle(getString(R.string.prompt_password));
 
                 final EditText input = new EditText(this);
-                input.setInputType(InputType.TYPE_CLASS_NUMBER| InputType.TYPE_NUMBER_VARIATION_PASSWORD);
+                input.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_VARIATION_PASSWORD);
                 builder.setView(input);
 
                 builder.setPositiveButton(getString(R.string.ok), (dialog, which) -> {
@@ -215,7 +212,6 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener 
 
                 builder.show();
                 break;
-
 
 
         }
