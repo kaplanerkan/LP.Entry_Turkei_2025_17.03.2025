@@ -1,10 +1,8 @@
 package com.eqpos.eqentry.views.inventur;
 
 import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import androidx.appcompat.app.AppCompatActivity;
-//import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.InputType;
@@ -19,6 +17,7 @@ import android.widget.Toast;
 
 import com.eqpos.eqentry.R;
 import com.eqpos.eqentry.adapters.InventurAdapter;
+import com.eqpos.eqentry.adapters.InventurAdapter2;
 import com.eqpos.eqentry.db.SendDao;
 import com.eqpos.eqentry.tools.CaptureActivityPortrait;
 import com.eqpos.eqentry.tools.JSONProcess;
@@ -42,7 +41,7 @@ public class InventurActivity extends AppCompatActivity implements View.OnClickL
     private Button btSend;
     private EditText edFind;
     private ListView lvList;
-    private InventurAdapter adp;
+    private InventurAdapter2 adp;
     private Toast msg;
 
     private ArrayList<HashMap<String, String>> gList;
@@ -66,12 +65,9 @@ public class InventurActivity extends AppCompatActivity implements View.OnClickL
         btBarcode.setOnClickListener(this);
         btSend.setOnClickListener(this);
         edFind.performClick();
-        edFind.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (hasFocus){
-                    edFind.setText("");
-                }
+        edFind.setOnFocusChangeListener((v, hasFocus) -> {
+            if (hasFocus){
+                edFind.setText("");
             }
         });
         edFind.addTextChangedListener(new TextWatcher() {
@@ -92,15 +88,12 @@ public class InventurActivity extends AppCompatActivity implements View.OnClickL
             }
         });
 
-        edFind.setOnKeyListener(new View.OnKeyListener() {
-            @Override
-            public boolean onKey(View v, int keyCode, KeyEvent event) {
-                if (keyCode == KeyEvent.KEYCODE_ENTER && event.getAction()==KeyEvent.ACTION_DOWN) {
-                    btFind.performClick();
-                    return true;
-                } else
-                    return false;
-            }
+        edFind.setOnKeyListener((v, keyCode, event) -> {
+            if (keyCode == KeyEvent.KEYCODE_ENTER && event.getAction()==KeyEvent.ACTION_DOWN) {
+                btFind.performClick();
+                return true;
+            } else
+                return false;
         });
         listProducts();
     }
@@ -123,7 +116,7 @@ public class InventurActivity extends AppCompatActivity implements View.OnClickL
         gList = getInventurList(edFind.getText().toString());
 
         if (gList.size()>0) {
-            adp = new InventurAdapter(this, gList);
+            adp = new InventurAdapter2(this, gList);
             lvList.setAdapter(adp);
         } else {
             lvList.setAdapter(null);
@@ -152,11 +145,7 @@ public class InventurActivity extends AppCompatActivity implements View.OnClickL
                 builder1.setMessage(getString(R.string.error_incorrect_password));
                 builder1.setCancelable(true);
                 builder1.setPositiveButton("Ok",
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                dialog.cancel();
-                            }
-                        });
+                        (dialog, id) -> dialog.cancel());
                 AlertDialog alert11 = builder1.create();
                 alert11.show();
                 Log.e("admin password ", e.getMessage());

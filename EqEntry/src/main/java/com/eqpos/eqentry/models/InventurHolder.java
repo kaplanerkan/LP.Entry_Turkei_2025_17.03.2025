@@ -20,4 +20,5 @@ public class InventurHolder {
     public ImageButton btDecrease;
     public ImageButton btAdd;
     public LinearLayout lyMain;
+    public TextView yeniAdet;
 }

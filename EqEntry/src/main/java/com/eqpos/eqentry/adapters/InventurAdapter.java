@@ -2,7 +2,6 @@ package com.eqpos.eqentry.adapters;
 
 import android.content.Context;
 import android.graphics.Color;
-//import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -15,9 +14,9 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.eqpos.eqentry.R;
 import com.eqpos.eqentry.db.InventurDao;
 import com.eqpos.eqentry.models.InventurHolder;
-import com.eqpos.eqentry.R;
 import com.eqpos.eqentry.tools.SharedPrefUtil;
 import com.eqpos.eqentry.tools.Variables;
 
@@ -31,17 +30,17 @@ import java.util.HashMap;
 
 public class InventurAdapter extends BaseAdapter {
 
+    private final int selectedWarehouseId = SharedPrefUtil.getInt(SharedPrefUtil.KEY_SELECTED_DEPO_ID, 0);
     private Context context;
     private boolean isUpdating = false;
     private ArrayList<HashMap<String, String>> gList;
 
-    private final int selectedWarehouseId = SharedPrefUtil.getInt(SharedPrefUtil.KEY_SELECTED_DEPO_ID,0);
     public InventurAdapter(Context context, ArrayList<HashMap<String, String>> list) {
 
         this.context = context;
         this.gList = list;
 
-        if (selectedWarehouseId == 0){
+        if (selectedWarehouseId == 0) {
             Toast.makeText(context, "Lütfen depo seçiniz!", Toast.LENGTH_LONG).show();
         }
     }
@@ -89,6 +88,8 @@ public class InventurAdapter extends BaseAdapter {
             holder.edNew = (EditText) row.findViewById(R.id.ed_inventur_newstock);
             holder.btDecrease = (ImageButton) row.findViewById(R.id.bt_inventur_decrease);
             holder.btAdd = (ImageButton) row.findViewById(R.id.bt_inventur_addstock);
+            holder.yeniAdet = (TextView) row.findViewById(R.id.lblYeniAdet);
+
 
             row.setTag(holder);
         } else {
@@ -112,6 +113,7 @@ public class InventurAdapter extends BaseAdapter {
         holder.lblCurr.setText(gList.get(position).get("currentquantity"));
         holder.lblDiff.setText(gList.get(position).get("difference"));
         holder.edNew.setText(gList.get(position).get("newquantity"));
+        holder.yeniAdet.setText(gList.get(position).get("newquantity"));
 
         holder.edNew.setOnFocusChangeListener((v, hasFocus) -> {
             Log.e("focus", String.valueOf(hasFocus));
@@ -140,13 +142,8 @@ public class InventurAdapter extends BaseAdapter {
         });
 
         holder.btAdd.setOnClickListener(v -> updateQuantity(position, row, holder.lblCurr, holder.lblDiff, holder.edNew, 1.0));
-        holder.btDecrease.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-                updateQuantity(position, row, holder.lblCurr, holder.lblDiff, holder.edNew, -1.0);
-            }
-        });
+        holder.btDecrease.setOnClickListener(v -> updateQuantity(position, row, holder.lblCurr, holder.lblDiff, holder.edNew, -1.0));
 
         holder.edNew.addTextChangedListener(new TextWatcher() {
             @Override
@@ -180,7 +177,7 @@ public class InventurAdapter extends BaseAdapter {
                 try {
                     diff = Variables.strToDouble(gList.get(position).get("currentquantity"));
                 } catch (ParseException e) {
-                    e.printStackTrace();
+                    Log.e("afterTextChanged", "HATA : " + e.getMessage());
                 }
                 diff = value - diff;
                 if (diff != 0.0) {
@@ -188,7 +185,7 @@ public class InventurAdapter extends BaseAdapter {
                 }
                 holder.lblDiff.setText(String.valueOf(diff));
                 gList.get(position).put("newquantity", Variables.doubleToStr(value, 0));
-                gList.get(position).put("difference", Variables.doubleToStr(diff,0));
+                gList.get(position).put("difference", Variables.doubleToStr(diff, 0));
 
                 InventurDao.changeNewStock(Integer.parseInt(gList.get(position).get("productid")), value, selectedWarehouseId);
 
@@ -225,8 +222,8 @@ public class InventurAdapter extends BaseAdapter {
             row.setBackgroundColor(Color.LTGRAY);
         }
         lblDiff.setText(String.valueOf(diff));
-        gList.get(position).put("newquantity", Variables.doubleToStr(amount,2));
-        gList.get(position).put("difference", Variables.doubleToStr(diff,2));
+        gList.get(position).put("newquantity", Variables.doubleToStr(amount, 2));
+        gList.get(position).put("difference", Variables.doubleToStr(diff, 2));
 
 
         InventurDao.changeNewStock(Integer.parseInt(gList.get(position).get("productid")), amount, selectedWarehouseId);

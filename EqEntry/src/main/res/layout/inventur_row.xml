@@ -30,53 +30,107 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_marginBottom="3dp">
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.3"
-            android:text="@string/shortcurrent"/>
-        <TextView
-            android:id="@+id/lbl_inventur_row_currentstock"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:layout_weight="0.3"
-            android:text="0"/>
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:layout_weight="0.3"
-            android:text="@string/shortdifference"/>
-        <TextView
-            android:id="@+id/lbl_inventur_row_difference"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:layout_weight="0.3"
-            android:maxLines="1"
-            android:text="0"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="0.8"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.3"
+                    android:text="@string/shortcurrent" />
+
+                <TextView
+                    android:id="@+id/lbl_inventur_row_currentstock"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_weight="0.3"
+                    android:text="0" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_weight="0.3"
+                    android:text="@string/shortdifference" />
+
+                <TextView
+                    android:id="@+id/lbl_inventur_row_difference"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_weight="0.3"
+                    android:maxLines="1"
+                    android:text="0" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_weight="0.3"
+                    android:text="Yeni Adet" />
+
+                <TextView
+                    android:id="@+id/lblYeniAdet"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_weight="0.3"
+                    android:maxLines="1"
+                    android:text="0" />
+            </LinearLayout>
+
+        </LinearLayout>
+
         <ImageButton
             android:id="@+id/bt_inventur_decrease"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/img_decrease"/>
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:src="@mipmap/img_decrease" />
+
         <EditText
-            style="@style/AppTheme.EditText"
             android:id="@+id/ed_inventur_newstock"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:inputType="numberDecimal"
+            style="@style/AppTheme.EditText"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_gravity="center_vertical"
-            android:selectAllOnFocus="true"
+            android:layout_weight="1"
             android:focusable="true"
             android:focusableInTouchMode="true"
-            android:layout_weight="1" />
+            android:inputType="numberDecimal"
+            android:selectAllOnFocus="true" />
+
         <ImageButton
             android:id="@+id/bt_inventur_addstock"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/img_add"/>
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:src="@mipmap/img_add" />
 
     </LinearLayout>
 
