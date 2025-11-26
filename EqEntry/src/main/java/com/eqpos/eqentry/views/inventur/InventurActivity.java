@@ -16,7 +16,6 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.eqpos.eqentry.R;
-import com.eqpos.eqentry.adapters.InventurAdapter;
 import com.eqpos.eqentry.adapters.InventurAdapter2;
 import com.eqpos.eqentry.db.SendDao;
 import com.eqpos.eqentry.tools.CaptureActivityPortrait;

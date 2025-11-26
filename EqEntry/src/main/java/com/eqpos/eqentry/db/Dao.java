@@ -64,6 +64,7 @@ public class Dao {
                         jData.get("slogan").getAsString()
                         );
             }
+            Log.e("saveFirmInfo", "saveFirmInfo: " + value.toString()) ;
         } catch (Exception e) {
             Log.e("Unite Save Error 2", e.toString());
         }

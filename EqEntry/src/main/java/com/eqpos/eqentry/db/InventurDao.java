@@ -73,7 +73,7 @@ public class InventurDao {
         return list;
     }
 
-    public static void changeNewStock(int productId, Double value, int warehouseid) {
+    public static void changeNewStock_orj(int productId, Double value, int warehouseid) {
         if (Db == null) {
             Db = new Database();
         }
@@ -83,6 +83,65 @@ public class InventurDao {
         SQLiteDatabase db = Db.getWritableDatabase();
         int i = db.update("inventur", values, "productid=?", new String[]{String.valueOf(productId)});
     }
+    public static void changeNewStock(int productId, Double value, int warehouseId) {
+        if (Db == null) {
+            Db = new Database();
+        }
+
+        ContentValues values = new ContentValues();
+        values.put("newquantity", value);
+        values.put("warehouseid", warehouseId);
+
+        SQLiteDatabase db = null;
+        try {
+            db = Db.getWritableDatabase();
+            int rowsAffected = db.update("inventur", values, "productid =?",
+                    new String[]{String.valueOf(productId)});
+
+            if (rowsAffected == 0) {
+                // Eğer update yapılamazsa, yeni kayıt ekle
+                values.put("productid", productId);
+                db.insert("inventur", null, values);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (db != null && db.isOpen()) {
+                db.close();
+            }
+        }
+    }
+
+    public static void changeNewStock_Erkan(int productId, Double value, int warehouseId, int difference) {
+        if (Db == null) {
+            Db = new Database();
+        }
+
+        ContentValues values = new ContentValues();
+        values.put("newquantity", value);
+        values.put("difference", difference);
+        values.put("warehouseid", warehouseId);
+
+        SQLiteDatabase db = null;
+        try {
+            db = Db.getWritableDatabase();
+            int rowsAffected = db.update("inventur", values, "productid =?",
+                    new String[]{String.valueOf(productId)});
+
+            if (rowsAffected == 0) {
+                // Eğer update yapılamazsa, yeni kayıt ekle
+                values.put("productid", productId);
+                db.insert("inventur", null, values);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (db != null && db.isOpen()) {
+                db.close();
+            }
+        }
+    }
+
 
 
     public static List<SayimModel> getSayimListem(int depoId) {
@@ -104,7 +163,8 @@ public class InventurDao {
                 query = "SELECT p.productname, i.productid, i.newquantity, i.warehouseid " +
                         "FROM inventur i " +
                         " INNER JOIN  products p ON p.id = i.productid " +
-                        " WHERE i.difference<>0 AND i.warehouseid =" + depoId;
+                        " WHERE  i.warehouseid<> 0 ";
+            // " WHERE i.difference<>0 AND i.warehouseid =" + depoId;
             }
 
 

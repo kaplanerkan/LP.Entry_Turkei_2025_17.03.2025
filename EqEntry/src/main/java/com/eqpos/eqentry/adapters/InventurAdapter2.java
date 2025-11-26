@@ -23,9 +23,14 @@ import com.eqpos.eqentry.tools.Variables;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
+
+/**
+ * Created by e.Kaplan on 25.11.2025.
+ */
+
 public class InventurAdapter2 extends BaseAdapter {
 
-    private final int selectedWarehouseId = SharedPrefUtil.getInt(SharedPrefUtil.KEY_SELECTED_DEPO_ID, 0);
+    private int selectedWarehouseId = SharedPrefUtil.getInt(SharedPrefUtil.KEY_SELECTED_DEPO_ID, 0);
     private Context context;
     private ArrayList<HashMap<String, String>> gList;
 
@@ -33,6 +38,7 @@ public class InventurAdapter2 extends BaseAdapter {
         this.context = context;
         this.gList = list;
 
+        selectedWarehouseId = SharedPrefUtil.getInt(SharedPrefUtil.KEY_SELECTED_DEPO_ID, 0);
         if (selectedWarehouseId == 0) {
             Toast.makeText(context, "Lütfen depo seçiniz!", Toast.LENGTH_LONG).show();
         }
@@ -192,10 +198,14 @@ public class InventurAdapter2 extends BaseAdapter {
                 gList.get(position).put("newquantity", Variables.doubleToStr(newQuantity, 0));
                 gList.get(position).put("difference", Variables.doubleToStr(diff, 0));
 
-                InventurDao.changeNewStock(
+                if (diff < 0){
+                    diff = 0 ;
+                }
+                InventurDao.changeNewStock_Erkan(
                         Integer.parseInt(gList.get(position).get("productid")),
                         newQuantity,
-                        selectedWarehouseId
+                        selectedWarehouseId,
+                        (int) diff
                 );
 
             } catch (ParseException e) {

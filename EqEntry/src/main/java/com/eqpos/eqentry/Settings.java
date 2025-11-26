@@ -2,6 +2,8 @@ package com.eqpos.eqentry;
 
 import static android.Manifest.permission.BLUETOOTH_CONNECT;
 import static android.Manifest.permission.BLUETOOTH_SCAN;
+import static com.eqpos.eqentry.tools.Bluetooth.closeSocket;
+import static com.eqpos.eqentry.tools.Bluetooth.connectToPrinter;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -9,18 +11,9 @@ import android.bluetooth.BluetoothAdapter;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-//import android.support.annotation.NonNull;
-//import android.support.v4.app.ActivityCompat;
-//import android.support.v4.content.ContextCompat;
-//import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -30,6 +23,11 @@ import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import com.eqpos.eqentry.db.BarcodeDao;
 import com.eqpos.eqentry.db.SettingsDao;
@@ -46,10 +44,8 @@ import com.google.gson.JsonObject;
 
 import java.io.IOException;
 
-import static com.eqpos.eqentry.tools.Bluetooth.closeSocket;
-import static com.eqpos.eqentry.tools.Bluetooth.connectToPrinter;
-
 public class Settings extends AppCompatActivity implements Runnable {
+    final public int PERMISSION_REQUEST_CODE = 1011;
     Button btSync, btRegisterDevice, btConnect, btSelectPrinter;
     EditText edServerIp, edPort, edPricePrefix, edPricePlu, edPriceValue,
             edQuantityPrefix, edQuantityPlu, edQuantityValue;
@@ -61,21 +57,24 @@ public class Settings extends AppCompatActivity implements Runnable {
     BarcodeSettings barcodeSettings;
     Switch chPrintTaxOnInvoice;
     Switch chUnitPrice;
-
-    Switch chshowbtChangePrice ;
-    Switch chshowbtCustomers ;
-    Switch chshowbtInventory ;
-    Switch chshowbtInvoices ;
+    Switch chshowbtChangePrice;
+    Switch chshowbtCustomers;
+    Switch chshowbtInventory;
+    Switch chshowbtInvoices;
     Switch chshowbtPrintLabel;
-    Switch chshowbtPurchaseOrder ;
+    Switch chshowbtPurchaseOrder;
     Switch chshowbtSendDatas;
-    Switch chshowbtStockEntry ;
-    Switch chshowbtTransfers ;
+    Switch chshowbtStockEntry;
+    Switch chshowbtTransfers;
     Switch chshowbtProducts;
-
-
-
     boolean isTestSuccess = false;
+    private Handler mHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            mBluetoothConnectProgressDialog.dismiss();
+            Toast.makeText(Settings.this, "DeviceConnected", Toast.LENGTH_SHORT).show();
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -102,16 +101,16 @@ public class Settings extends AppCompatActivity implements Runnable {
         chPrintTaxOnInvoice = (Switch) findViewById(R.id.ch_settings_printtaxoninvoice);
         chUnitPrice = (Switch) findViewById(R.id.ch_settings_unitprice);
 
-        chshowbtChangePrice= (Switch) findViewById(R.id.ch_settings_bt_menu_changeprice);
-        chshowbtCustomers= (Switch) findViewById(R.id.ch_settings_bt_menu_customers);
-        chshowbtInventory= (Switch) findViewById(R.id.ch_settings_bt_menu_inventory);
-        chshowbtInvoices= (Switch) findViewById(R.id.ch_settings_bt_menu_invoice);
-        chshowbtPrintLabel= (Switch) findViewById(R.id.ch_settings_bt_menu_printlabel);
-        chshowbtProducts= (Switch) findViewById(R.id.ch_settings_bt_menu_productlist);
-        chshowbtPurchaseOrder= (Switch) findViewById(R.id.ch_settings_bt_menu_purchaseorder);
-        chshowbtSendDatas= (Switch) findViewById(R.id.ch_settings_bt_menu_send);
-        chshowbtStockEntry= (Switch) findViewById(R.id.ch_settings_bt_menu_stockentry);
-        chshowbtTransfers= (Switch) findViewById(R.id.ch_settings_bt_menu_stocktransfer);
+        chshowbtChangePrice = (Switch) findViewById(R.id.ch_settings_bt_menu_changeprice);
+        chshowbtCustomers = (Switch) findViewById(R.id.ch_settings_bt_menu_customers);
+        chshowbtInventory = (Switch) findViewById(R.id.ch_settings_bt_menu_inventory);
+        chshowbtInvoices = (Switch) findViewById(R.id.ch_settings_bt_menu_invoice);
+        chshowbtPrintLabel = (Switch) findViewById(R.id.ch_settings_bt_menu_printlabel);
+        chshowbtProducts = (Switch) findViewById(R.id.ch_settings_bt_menu_productlist);
+        chshowbtPurchaseOrder = (Switch) findViewById(R.id.ch_settings_bt_menu_purchaseorder);
+        chshowbtSendDatas = (Switch) findViewById(R.id.ch_settings_bt_menu_send);
+        chshowbtStockEntry = (Switch) findViewById(R.id.ch_settings_bt_menu_stockentry);
+        chshowbtTransfers = (Switch) findViewById(R.id.ch_settings_bt_menu_stocktransfer);
 
         lblSerialNumber.setText(Variables.serialNumber);
         SocketProcess.context = this;
@@ -168,32 +167,27 @@ public class Settings extends AppCompatActivity implements Runnable {
 
         });
 
-        btSelectPrinter.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View mView) {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+        btSelectPrinter.setOnClickListener(mView -> {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
 
-                    if(!checkPermission(new String[]{BLUETOOTH_CONNECT,BLUETOOTH_SCAN},PERMISSION_REQUEST_CODE)){
-                        return;
-                    }
-
+                if (!checkPermission(new String[]{BLUETOOTH_CONNECT, BLUETOOTH_SCAN}, PERMISSION_REQUEST_CODE)) {
+                    Toast.makeText(Settings.this, "Bluetooth Erisim izni yok !", Toast.LENGTH_SHORT).show();
+                    return;
                 }
+            }
 
-                    Variables.mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-                    if (Variables.mBluetoothAdapter == null) {
-                        Toast.makeText(Settings.this, "Bluetooth Error", Toast.LENGTH_SHORT).show();
-                    } else {
-                        if (!Variables.mBluetoothAdapter.isEnabled()) {
-                            Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
-                            startActivityForResult(enableBtIntent, Variables.REQUEST_ENABLE_BT);
-                        } else {
-                            Bluetooth.ListPairedDevices();
-                            Intent connectIntent = new Intent(Settings.this, DeviceListActivity.class);
-                            startActivityForResult(connectIntent, Variables.REQUEST_CONNECT_DEVICE);
-                        }
-                    }
-
-
-
+            Variables.mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+            if (Variables.mBluetoothAdapter == null) {
+                Toast.makeText(Settings.this, "Bluetooth cihazi bulunamadi", Toast.LENGTH_SHORT).show();
+            } else {
+                if (!Variables.mBluetoothAdapter.isEnabled()) {
+                    Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
+                    startActivityForResult(enableBtIntent, Variables.REQUEST_ENABLE_BT);
+                } else {
+                    Bluetooth.ListPairedDevices();
+                    Intent connectIntent = new Intent(Settings.this, DeviceListActivity.class);
+                    startActivityForResult(connectIntent, Variables.REQUEST_CONNECT_DEVICE);
+                }
             }
         });
 
@@ -238,7 +232,6 @@ public class Settings extends AppCompatActivity implements Runnable {
         }
     }
 
-
     @Override
     protected void onDestroy() {
         if (!isTestSuccess)
@@ -281,19 +274,19 @@ public class Settings extends AppCompatActivity implements Runnable {
 
             cmbLanguage.setSelection(SettingsDao.getIntValue("Language"));
             cmbCurrency.setSelection(SettingsDao.getIntValue("Currency", 1));
-            chPrintTaxOnInvoice.setChecked(SettingsDao.getIntValue("PrintTaxOnInvoice", 1)>0);
-            chUnitPrice.setChecked(SettingsDao.getIntValue("ShowUnitPrice", 1)>0);
+            chPrintTaxOnInvoice.setChecked(SettingsDao.getIntValue("PrintTaxOnInvoice", 1) > 0);
+            chUnitPrice.setChecked(SettingsDao.getIntValue("ShowUnitPrice", 1) > 0);
 
-            chshowbtPrintLabel.setChecked(SettingsDao.getIntValue("showbtPrintLabel", 1)>0);
-            chshowbtPurchaseOrder.setChecked(SettingsDao.getIntValue("showbtPurchaseOrder", 1)>0);
-            chshowbtSendDatas.setChecked(SettingsDao.getIntValue("showbtSendDatas", 1)>0);
-            chshowbtStockEntry.setChecked(SettingsDao.getIntValue("showbtStockEntry", 1)>0);
-            chshowbtTransfers.setChecked(SettingsDao.getIntValue("showbtTransfers", 1)>0);
-            chshowbtProducts.setChecked(SettingsDao.getIntValue("showbtProducts", 1)>0);
-            chshowbtInvoices.setChecked(SettingsDao.getIntValue("showbtInvoices", 1)>0);
-            chshowbtInventory.setChecked(SettingsDao.getIntValue("showbtInventory", 1)>0);
-            chshowbtCustomers.setChecked(SettingsDao.getIntValue("showbtCustomers", 1)>0);
-            chshowbtChangePrice.setChecked(SettingsDao.getIntValue("showbtChangePrice", 1)>0);
+            chshowbtPrintLabel.setChecked(SettingsDao.getIntValue("showbtPrintLabel", 1) > 0);
+            chshowbtPurchaseOrder.setChecked(SettingsDao.getIntValue("showbtPurchaseOrder", 1) > 0);
+            chshowbtSendDatas.setChecked(SettingsDao.getIntValue("showbtSendDatas", 1) > 0);
+            chshowbtStockEntry.setChecked(SettingsDao.getIntValue("showbtStockEntry", 1) > 0);
+            chshowbtTransfers.setChecked(SettingsDao.getIntValue("showbtTransfers", 1) > 0);
+            chshowbtProducts.setChecked(SettingsDao.getIntValue("showbtProducts", 1) > 0);
+            chshowbtInvoices.setChecked(SettingsDao.getIntValue("showbtInvoices", 1) > 0);
+            chshowbtInventory.setChecked(SettingsDao.getIntValue("showbtInventory", 1) > 0);
+            chshowbtCustomers.setChecked(SettingsDao.getIntValue("showbtCustomers", 1) > 0);
+            chshowbtChangePrice.setChecked(SettingsDao.getIntValue("showbtChangePrice", 1) > 0);
 
 
             gPrinterName = SettingsDao.getStrValue("PrinterName");
@@ -306,7 +299,7 @@ public class Settings extends AppCompatActivity implements Runnable {
                 try {
                     connectToPrinter(gPrinterAddress);
                 } catch (Exception e) {
-                   //Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
+                    //Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
                     Log.e("error", e.getMessage());
                 }
             }
@@ -329,31 +322,31 @@ public class Settings extends AppCompatActivity implements Runnable {
     private void testConnection() {
         //if (SocketProcess.isConnectWiFiNetwork(this, false)) {
 
-            try {
-                Variables.hostIp = edServerIp.getText().toString().trim();
-                Variables.hostPort = Integer.parseInt(edPort.getText().toString());
+        try {
+            Variables.hostIp = edServerIp.getText().toString().trim();
+            Variables.hostPort = Integer.parseInt(edPort.getText().toString());
 
-                try {
-                    if (SocketProcess.connectToServer()) {
-                        btSync.setEnabled(true);
-                        btRegisterDevice.setEnabled(true);
-                        isTestSuccess = true;
-                        saveSettings();
-                    }
-                } catch (Exception e) {
-                    Toast.makeText(this, getString(R.string.cannot_connect_to_the_server), Toast.LENGTH_LONG).show();
-                    Log.e("error", e.getMessage());
+            try {
+                if (SocketProcess.connectToServer()) {
+                    btSync.setEnabled(true);
+                    btRegisterDevice.setEnabled(true);
+                    isTestSuccess = true;
+                    saveSettings();
                 }
             } catch (Exception e) {
-                if (edServerIp.getText().equals("")) {
-                    edServerIp.requestFocus();
-                    return;
-                }
-                if (edPort.getText().equals("")) {
-                    edPort.requestFocus();
-                    return;
-                }
+                Toast.makeText(this, getString(R.string.cannot_connect_to_the_server), Toast.LENGTH_LONG).show();
+                Log.e("error", e.getMessage());
             }
+        } catch (Exception e) {
+            if (edServerIp.getText().equals("")) {
+                edServerIp.requestFocus();
+                return;
+            }
+            if (edPort.getText().equals("")) {
+                edPort.requestFocus();
+                return;
+            }
+        }
         //}
     }
 
@@ -456,7 +449,6 @@ public class Settings extends AppCompatActivity implements Runnable {
         }
 
 
-
         int plu = 0;
         int value = 0;
         try {
@@ -485,21 +477,12 @@ public class Settings extends AppCompatActivity implements Runnable {
 
     }
 
-
-    private Handler mHandler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            mBluetoothConnectProgressDialog.dismiss();
-            Toast.makeText(Settings.this, "DeviceConnected", Toast.LENGTH_SHORT).show();
-        }
-    };
-    final public int PERMISSION_REQUEST_CODE = 1011;
-    private boolean checkPermission(String[] permissions,int requestCode) {
+    private boolean checkPermission(String[] permissions, int requestCode) {
         //String[] permissions = new String[]{permission};
-        boolean result=true;
-        for (int i=0;i<permissions.length;i++){
+        boolean result = true;
+        for (int i = 0; i < permissions.length; i++) {
             if (ContextCompat.checkSelfPermission(this, permissions[i]) == PackageManager.PERMISSION_DENIED) {
-                result =false;
+                result = false;
             }
 
         }
@@ -516,7 +499,7 @@ public class Settings extends AppCompatActivity implements Runnable {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 //Toast.makeText(this, "Bluetooth Permission Granted", Toast.LENGTH_SHORT).show();
             } else {
-               // Toast.makeText(this, "Bluetooth Permission Denied", Toast.LENGTH_SHORT).show();
+                // Toast.makeText(this, "Bluetooth Permission Denied", Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -543,7 +526,6 @@ public class Settings extends AppCompatActivity implements Runnable {
             return;
         }
     }
-
 
 
 }

@@ -42,6 +42,7 @@ public class ProductDao {
         db.delete("warehouses", "", null);
         db.delete("urunbarcodes", "", null);
         db.delete("varyants", "", null);
+        db.delete("firm", "", null);
 
     }
 

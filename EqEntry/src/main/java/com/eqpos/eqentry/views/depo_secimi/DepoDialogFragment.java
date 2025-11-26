@@ -15,6 +15,7 @@ import androidx.fragment.app.DialogFragment;
 
 import com.eqpos.eqentry.databinding.DialogDepoBinding;
 import com.eqpos.eqentry.models.DepoModel;
+import com.eqpos.eqentry.tools.SharedPrefUtil;
 import com.eqpos.eqentry.views.inventur.SayimlarimiGoster;
 
 import java.util.List;
@@ -52,12 +53,12 @@ public class DepoDialogFragment extends DialogFragment {
 
         //Sayimlarimi Göster
         binding.btnSayimlarimiGoster.setOnClickListener(view1 -> {
-//            int selectedDepoId = adapter.getSelectedDepoId();
+            int selectedDepoId = adapter.getSelectedDepoId();
 //            if (selectedDepoId == -1) {
 //                Toast.makeText(getContext(), "Lütfen bir depo seçin!", Toast.LENGTH_SHORT).show();
 //            } else {
             Bundle bundle = new Bundle();
-            bundle.putInt("selectedDepoId", 0);
+            bundle.putInt("selectedDepoId", selectedDepoId);
             Intent sayimlarimiGoster = new Intent(getContext(), SayimlarimiGoster.class);
             sayimlarimiGoster.putExtras(bundle);
             startActivity(sayimlarimiGoster);
@@ -82,6 +83,8 @@ public class DepoDialogFragment extends DialogFragment {
                     break;
                 }
             }
+
+            SharedPrefUtil.putInt(SharedPrefUtil.KEY_SELECTED_DEPO_ID, selectedDepoId);
             dismiss(); // Dialog'u kapat
         });
 

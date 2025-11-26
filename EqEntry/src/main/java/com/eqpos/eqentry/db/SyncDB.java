@@ -149,16 +149,13 @@ public class SyncDB {
                         syncDeposites();
                         syncProductGroups();
                         syncProductPrices();
-
                         syncProducts();
-
                         syncSuppliers();
                         syncCustomers();
                         syncSettings();
                         syncFirmInfo();
                         syncWarehouses();
                         syncUrunBarcodes();
-
                         syncVaryants();
 
                     }
